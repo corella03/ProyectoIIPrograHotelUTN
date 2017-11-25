@@ -4,13 +4,13 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
-
 import proyectoiiprograhotelutn.bo.AgenciaDeViajesBO;
 import proyectoiiprograhotelutn.bo.PuestoBO;
+import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
 import proyectoiiprograhotelutn.entities.AgenciaDeViajes;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;
-
+import proyectoiiprograhotelutn.entities.TipoHabitacion;
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -45,7 +45,7 @@ public class FrmRegistro extends javax.swing.JFrame {
             nuevoPuesto.setNombre(txtNombrePuesto.getText().trim().toLowerCase());
             nuevoPuesto.setDescripcion(txtDescripcionPuesto.getText().trim());
             PuestoBO pbo = new PuestoBO();
-            if (pbo.registrar(nuevoPuesto)) {
+            if (pbo.registrarPuesto(nuevoPuesto)) {
                 lblErrorPuesto.setText("Puesto registrado con éxito.");
             } else {
                 lblErrorPuesto.setText("Intente nuevamente.");
@@ -60,11 +60,11 @@ public class FrmRegistro extends javax.swing.JFrame {
         lblErrorAgencia.setText("");
         try {
             AgenciaDeViajes nuevaAgencia = new AgenciaDeViajes();
-            nuevaAgencia.setId(txtIdAgencia.getText().trim());
+            nuevaAgencia.setId(txtIdAgencia.getText().trim().toLowerCase());
             nuevaAgencia.setNombre(txtNombreAgencia.getText().trim().toLowerCase());
             nuevaAgencia.setComision(sldPorcentajeComisionAgencia.getValue());
             AgenciaDeViajesBO abo = new AgenciaDeViajesBO();
-            if (abo.registrar(nuevaAgencia)) {
+            if (abo.registrarAgencia(nuevaAgencia)) {
                 lblErrorAgencia.setText("Agencia registrada con éxito.");
             } else {
                 lblErrorAgencia.setText("Intente nuevamente.");
@@ -73,6 +73,25 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorAgencia.setText(ex.getMessage());
         } catch (Exception ex) {
             lblErrorAgencia.setText("Llamar a TI ...xD");
+        }
+    }
+    public void registrarTipoHabitacio(){
+        lblErrorTipoHabitacion.setText("");
+        try {
+            TipoHabitacion tipoHabitacion = new TipoHabitacion();
+            tipoHabitacion.setId(txtIdTipoHabitacion.getText().trim());
+            tipoHabitacion.setPrecio(Integer.parseInt(txtPrecioTipoHabitacion.getText().trim().toLowerCase()));
+            tipoHabitacion.setDescripcion(txtDescripcionTipoHabitacion.getText().trim());
+            TipoHabitacionBO tipobo = new TipoHabitacionBO();
+            if (tipobo.registrar(tipoHabitacion)) {
+                lblErrorTipoHabitacion.setText("Tipo de habitación registrada con éxito.");
+            } else {
+                lblErrorTipoHabitacion.setText("Intente nuevamente.");
+            }
+        } catch (MiError ex) {
+            lblErrorTipoHabitacion.setText(ex.getMessage());
+        } catch (Exception ex) {
+            lblErrorTipoHabitacion.setText("Llamar a TI ...xD");
         }
     }
     /**
@@ -111,6 +130,16 @@ public class FrmRegistro extends javax.swing.JFrame {
         lblPorcentajeComision = new javax.swing.JLabel();
         lblIdAgencia = new javax.swing.JLabel();
         txtIdAgencia = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        lblIdTipoHabitacion = new javax.swing.JLabel();
+        txtIdTipoHabitacion = new javax.swing.JTextField();
+        lblErrorTipoHabitacion = new javax.swing.JLabel();
+        lblDescripcionTipoHabitacion = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDescripcionTipoHabitacion = new javax.swing.JTextArea();
+        txtPrecioTipoHabitacion = new javax.swing.JTextField();
+        lblPrecio = new javax.swing.JLabel();
+        btnRegistrarTipoHabitacion = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -125,7 +154,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 50, 30));
 
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         pnlCliente.setBackground(new java.awt.Color(0, 102, 51));
@@ -308,7 +340,9 @@ public class FrmRegistro extends javax.swing.JFrame {
 
         sldPorcentajeComisionAgencia.setBackground(new java.awt.Color(0, 102, 102));
         sldPorcentajeComisionAgencia.setForeground(new java.awt.Color(0, 102, 102));
+        sldPorcentajeComisionAgencia.setMaximum(25);
         sldPorcentajeComisionAgencia.setPaintLabels(true);
+        sldPorcentajeComisionAgencia.setValue(1);
         sldPorcentajeComisionAgencia.setValueIsAdjusting(true);
         sldPorcentajeComisionAgencia.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -317,6 +351,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
 
         lblPorcentajeComision.setBackground(new java.awt.Color(0, 102, 102));
+        lblPorcentajeComision.setForeground(new java.awt.Color(0, 102, 102));
         lblPorcentajeComision.setText("%");
 
         lblIdAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -332,37 +367,40 @@ public class FrmRegistro extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombreAgencia)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblDescripcionAgencia)
-                                .addComponent(txtNombreAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRegistrarAgencia))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(lblIdAgencia)
-                            .addGap(491, 491, 491))
-                        .addComponent(lblErrorAgencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblErrorAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(85, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreAgencia)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(lblDescripcionAgencia)
+                                        .addComponent(txtNombreAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(42, 42, 42))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(lblIdAgencia)
+                                    .addGap(243, 243, 243))))
+                        .addGap(167, 167, 167)
+                        .addComponent(btnRegistrarAgencia)))
+                .addGap(58, 85, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblErrorAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblIdAgencia)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
+                        .addGap(154, 154, 154)
                         .addComponent(btnRegistrarAgencia))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblIdAgencia)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -370,15 +408,111 @@ public class FrmRegistro extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNombreAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblDescripcionAgencia)))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblDescripcionAgencia)
+                        .addGap(23, 23, 23)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Agencia de Viajes", jPanel1);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel2.setOpaque(false);
+
+        lblIdTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblIdTipoHabitacion.setForeground(new java.awt.Color(0, 102, 102));
+        lblIdTipoHabitacion.setText("Id:");
+
+        txtIdTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        lblErrorTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblErrorTipoHabitacion.setForeground(new java.awt.Color(0, 153, 153));
+        lblErrorTipoHabitacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorTipoHabitacion.setToolTipText("");
+
+        lblDescripcionTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblDescripcionTipoHabitacion.setForeground(new java.awt.Color(0, 153, 153));
+        lblDescripcionTipoHabitacion.setText("Descripción.");
+
+        txtDescripcionTipoHabitacion.setColumns(20);
+        txtDescripcionTipoHabitacion.setRows(5);
+        jScrollPane2.setViewportView(txtDescripcionTipoHabitacion);
+
+        txtPrecioTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        lblPrecio.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblPrecio.setForeground(new java.awt.Color(0, 102, 102));
+        lblPrecio.setText("Precio:");
+
+        btnRegistrarTipoHabitacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarTipoHabitacion.setText("Registar");
+        btnRegistrarTipoHabitacion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarTipoHabitacion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarTipoHabitacionActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addComponent(lblErrorTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDescripcionTipoHabitacion)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtIdTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblIdTipoHabitacion)
+                                        .addGap(201, 201, 201)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnRegistrarTipoHabitacion)
+                                .addGap(31, 31, 31))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPrecio)
+                            .addComponent(txtPrecioTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(93, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblErrorTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblIdTipoHabitacion)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(1, 1, 1)
+                        .addComponent(lblPrecio)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPrecioTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnRegistrarTipoHabitacion)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblDescripcionTipoHabitacion)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Tipo Habitación", jPanel2);
 
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 650, 370));
 
@@ -390,18 +524,18 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         irALogin();
     }//GEN-LAST:event_btnSalirActionPerformed
-
     private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
         registrarPuesto();
     }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
-
     private void btnRegistrarAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAgenciaActionPerformed
         registrarAgencia();
     }//GEN-LAST:event_btnRegistrarAgenciaActionPerformed
-
     private void sldPorcentajeComisionAgenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldPorcentajeComisionAgenciaStateChanged
        lblPorcentajeComision.setText(sldPorcentajeComisionAgencia.getValue() + "%");
     }//GEN-LAST:event_sldPorcentajeComisionAgenciaStateChanged
+    private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed
+        registrarTipoHabitacio();
+    }//GEN-LAST:event_btnRegistrarTipoHabitacionActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -438,20 +572,27 @@ public class FrmRegistro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarAgencia;
     private javax.swing.JButton btnRegistrarPuesto;
+    private javax.swing.JButton btnRegistrarTipoHabitacion;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblDescripcionAgencia;
+    private javax.swing.JLabel lblDescripcionTipoHabitacion;
     private javax.swing.JLabel lblErrorAgencia;
     private javax.swing.JLabel lblErrorPuesto;
+    private javax.swing.JLabel lblErrorTipoHabitacion;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblIdAgencia;
+    private javax.swing.JLabel lblIdTipoHabitacion;
     private javax.swing.JLabel lblNombreAgencia;
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblPorcentajeComision;
+    private javax.swing.JLabel lblPrecio;
     private javax.swing.JPanel pnlCliente;
     private javax.swing.JPanel pnlHabitaciones;
     private javax.swing.JPanel pnlPuestos;
@@ -460,9 +601,12 @@ public class FrmRegistro extends javax.swing.JFrame {
     private javax.swing.JTextField txtApellidoCliente;
     private javax.swing.JTextField txtCliente;
     private javax.swing.JTextArea txtDescripcionPuesto;
+    private javax.swing.JTextArea txtDescripcionTipoHabitacion;
     private javax.swing.JTextField txtIdAgencia;
+    private javax.swing.JTextField txtIdTipoHabitacion;
     private javax.swing.JTextField txtNombreAgencia;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombrePuesto;
+    private javax.swing.JTextField txtPrecioTipoHabitacion;
     // End of variables declaration//GEN-END:variables
 }

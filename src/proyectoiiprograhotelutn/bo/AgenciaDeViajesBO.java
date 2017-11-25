@@ -15,7 +15,7 @@ import proyectoiiprograhotelutn.entities.MiError;
  ** 24/11/2017
  **/
 public class AgenciaDeViajesBO {
-    public boolean registrar(AgenciaDeViajes agencia) {
+    public boolean registrarAgencia(AgenciaDeViajes agencia) {
         if (agencia.getId().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el Id de la agencia.");
         }

@@ -31,13 +31,13 @@ public class AgenciaDeViajesDAO {
     }
     public boolean verificarExistenciaAgencia(String id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select nombre from agencia_de_viajes where id = ?";
+            String sql = "select id from agencia_de_viajes where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, id.toLowerCase());
             ResultSet rs = stmt.executeQuery();
             return rs.next();
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar, favor intente nuevamente");
+            throw new MiError("Problemas al cargar, favor intente nuevamente.");
         }
     }
 }

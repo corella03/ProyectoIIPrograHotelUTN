@@ -15,7 +15,7 @@ import proyectoiiprograhotelutn.entities.Puesto;
  ** 24/11/2017
  **/
 public class PuestoBO {
-    public boolean registrar(Puesto puesto) {
+    public boolean registrarPuesto(Puesto puesto) {
         if (puesto.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre del puesto.");
         }
@@ -23,7 +23,7 @@ public class PuestoBO {
             throw new MiError("Se Requiere que ingrese la descripcion del puesto.");
         }
         PuestoDAO udao = new PuestoDAO();
-        if(udao.verificarExistenciaPuesto(puesto.getNombre())){
+        if(udao.verificarExistenciaAgencia(puesto.getNombre())){
             throw new MiError("Ya existe el puesto ingresado.");
         }
         return udao.insertarAgencia(puesto);
