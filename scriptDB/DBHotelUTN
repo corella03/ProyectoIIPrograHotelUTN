@@ -19,6 +19,8 @@ create table puesto(
     descripcion text not null,
     constraint pk_puesto primary key (id)
 );
+alter table puesto
+	add constraint unq_id_agencia_de_viajes unique (id);
 select * from puesto;
 drop table puesto;
 ---
@@ -144,6 +146,7 @@ create table agencia_de_viajes(
 alter table agencia_de_viajes
 	add constraint unq_id_agencia_de_viajes unique (id);
 select * from agencia_de_viajes;
+select nombre from agencia_de_viajes;
 ---
 ---
 create table telefono_agencia_de_viajes(

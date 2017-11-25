@@ -5,7 +5,9 @@
  */
 package proyectoiiprograhotelutn.gui;
 
+import proyectoiiprograhotelutn.bo.AgenciaDeViajesBO;
 import proyectoiiprograhotelutn.bo.PuestoBO;
+import proyectoiiprograhotelutn.entities.AgenciaDeViajes;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;
 
@@ -19,11 +21,16 @@ public class FrmRegistro extends javax.swing.JFrame {
      * Creates new form FrmMenuPrincipal
      */
     private Puesto puesto;
+    private AgenciaDeViajes agencia;
     public FrmRegistro() {
         initComponents();
         setLocationRelativeTo(null);
         puesto = new Puesto();
+        agencia = new AgenciaDeViajes();
         btnSalir.setContentAreaFilled(false);
+        btnRegistrarPuesto.setContentAreaFilled(false);
+        btnRegistrarAgencia.setContentAreaFilled(false);
+        lblPorcentajeComision.setText(sldPorcentajeComisionAgencia.getValue() + "%");
     }
     public void irALogin(){
         FrmLogin login = new FrmLogin();
@@ -49,6 +56,25 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorPuesto.setText("Llamar a TI ...xD");
         }
     }
+    public void registrarAgencia(){
+        lblErrorAgencia.setText("");
+        try {
+            AgenciaDeViajes nuevaAgencia = new AgenciaDeViajes();
+            nuevaAgencia.setId(txtIdAgencia.getText().trim());
+            nuevaAgencia.setNombre(txtNombreAgencia.getText().trim().toLowerCase());
+            nuevaAgencia.setComision(sldPorcentajeComisionAgencia.getValue());
+            AgenciaDeViajesBO abo = new AgenciaDeViajesBO();
+            if (abo.registrar(nuevaAgencia)) {
+                lblErrorAgencia.setText("Agencia registrada con éxito.");
+            } else {
+                lblErrorAgencia.setText("Intente nuevamente.");
+            }
+        } catch (MiError ex) {
+            lblErrorAgencia.setText(ex.getMessage());
+        } catch (Exception ex) {
+            lblErrorAgencia.setText("Llamar a TI ...xD");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,11 +87,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlCliente = new javax.swing.JPanel();
-        txtNombre = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        txtNombreCliente = new javax.swing.JTextField();
+        txtApellidoCliente = new javax.swing.JTextField();
+        txtCliente = new javax.swing.JTextField();
+        lblNombreCliente = new javax.swing.JLabel();
         pnlUsuario = new javax.swing.JPanel();
         pnlHabitaciones = new javax.swing.JPanel();
         pnlPuestos = new javax.swing.JPanel();
@@ -76,6 +101,16 @@ public class FrmRegistro extends javax.swing.JFrame {
         txtDescripcionPuesto = new javax.swing.JTextArea();
         lblErrorPuesto = new javax.swing.JLabel();
         btnRegistrarPuesto = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        lblErrorAgencia = new javax.swing.JLabel();
+        lblNombreAgencia = new javax.swing.JLabel();
+        txtNombreAgencia = new javax.swing.JTextField();
+        lblDescripcionAgencia = new javax.swing.JLabel();
+        btnRegistrarAgencia = new javax.swing.JButton();
+        sldPorcentajeComisionAgencia = new javax.swing.JSlider();
+        lblPorcentajeComision = new javax.swing.JLabel();
+        lblIdAgencia = new javax.swing.JLabel();
+        txtIdAgencia = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,7 +123,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 50, 30));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 10, 50, 30));
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -98,51 +133,39 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         pnlCliente.setOpaque(false);
 
-        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
-        jTextField2.setText("jTextField1");
-
-        jTextField3.setText("jTextField1");
-
-        jTextField4.setText("jTextField1");
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
-        jLabel1.setText("Nombre:");
+        lblNombreCliente.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblNombreCliente.setForeground(new java.awt.Color(0, 153, 153));
+        lblNombreCliente.setText("Nombre:");
 
         javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
         pnlCliente.setLayout(pnlClienteLayout);
         pnlClienteLayout.setHorizontalGroup(
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlClienteLayout.createSequentialGroup()
-                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(23, 23, 23)
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pnlClienteLayout.createSequentialGroup()
-                        .addGap(123, 123, 123)
-                        .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pnlClienteLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1)
+                        .addComponent(lblNombreCliente)
                         .addGap(18, 18, 18)
-                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(228, Short.MAX_VALUE))
+                        .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(323, Short.MAX_VALUE))
         );
         pnlClienteLayout.setVerticalGroup(
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlClienteLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNombreCliente)
+                    .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addComponent(txtApellidoCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(173, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cliente", pnlCliente);
@@ -154,11 +177,11 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlUsuario.setLayout(pnlUsuarioLayout);
         pnlUsuarioLayout.setHorizontalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
         );
         pnlUsuarioLayout.setVerticalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 284, Short.MAX_VALUE)
+            .addGap(0, 334, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Usuario", pnlUsuario);
@@ -170,11 +193,11 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlHabitaciones.setLayout(pnlHabitacionesLayout);
         pnlHabitacionesLayout.setHorizontalGroup(
             pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGap(0, 641, Short.MAX_VALUE)
         );
         pnlHabitacionesLayout.setVerticalGroup(
             pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 284, Short.MAX_VALUE)
+            .addGap(0, 334, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Habitación", pnlHabitaciones);
@@ -202,7 +225,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         lblErrorPuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorPuesto.setToolTipText("");
 
-        btnRegistrarPuesto.setText("Registar.");
+        btnRegistrarPuesto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarPuesto.setText("Registar");
+        btnRegistrarPuesto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarPuesto.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRegistrarPuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarPuestoActionPerformed(evt);
@@ -216,18 +242,17 @@ public class FrmRegistro extends javax.swing.JFrame {
             .addGroup(pnlPuestosLayout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPuestosLayout.createSequentialGroup()
-                        .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblErrorPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(40, Short.MAX_VALUE))
-                    .addGroup(pnlPuestosLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRegistrarPuesto)
-                        .addGap(82, 82, 82))))
+                    .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pnlPuestosLayout.createSequentialGroup()
+                            .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel3)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(92, 92, 92)
+                            .addComponent(btnRegistrarPuesto))
+                        .addComponent(lblErrorPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlPuestosLayout.setVerticalGroup(
             pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,21 +263,127 @@ public class FrmRegistro extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(btnRegistrarPuesto))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPuestosLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlPuestosLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(btnRegistrarPuesto)))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Puestos", pnlPuestos);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 580, 320));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.setOpaque(false);
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/img_Registro.jpg"))); // NOI18N
-        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 450));
+        lblErrorAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblErrorAgencia.setForeground(new java.awt.Color(0, 153, 153));
+        lblErrorAgencia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorAgencia.setToolTipText("");
+
+        lblNombreAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblNombreAgencia.setForeground(new java.awt.Color(0, 102, 102));
+        lblNombreAgencia.setText("Nombre:");
+
+        txtNombreAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        lblDescripcionAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblDescripcionAgencia.setForeground(new java.awt.Color(0, 102, 102));
+        lblDescripcionAgencia.setText("Comisión:");
+
+        btnRegistrarAgencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarAgencia.setText("Registar");
+        btnRegistrarAgencia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarAgencia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarAgenciaActionPerformed(evt);
+            }
+        });
+
+        sldPorcentajeComisionAgencia.setBackground(new java.awt.Color(0, 102, 102));
+        sldPorcentajeComisionAgencia.setForeground(new java.awt.Color(0, 102, 102));
+        sldPorcentajeComisionAgencia.setPaintLabels(true);
+        sldPorcentajeComisionAgencia.setValueIsAdjusting(true);
+        sldPorcentajeComisionAgencia.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sldPorcentajeComisionAgenciaStateChanged(evt);
+            }
+        });
+
+        lblPorcentajeComision.setBackground(new java.awt.Color(0, 102, 102));
+        lblPorcentajeComision.setText("%");
+
+        lblIdAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblIdAgencia.setForeground(new java.awt.Color(0, 102, 102));
+        lblIdAgencia.setText("Id:");
+
+        txtIdAgencia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreAgencia)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblDescripcionAgencia)
+                                .addComponent(txtNombreAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRegistrarAgencia))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblIdAgencia)
+                            .addGap(491, 491, 491))
+                        .addComponent(lblErrorAgencia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(85, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblErrorAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblIdAgencia)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btnRegistrarAgencia))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtIdAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNombreAgencia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtNombreAgencia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblDescripcionAgencia)))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblPorcentajeComision, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sldPorcentajeComisionAgencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Agencia de Viajes", jPanel1);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 650, 370));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgRegistro.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 790, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -263,6 +394,14 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
         registrarPuesto();
     }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
+
+    private void btnRegistrarAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAgenciaActionPerformed
+        registrarAgencia();
+    }//GEN-LAST:event_btnRegistrarAgenciaActionPerformed
+
+    private void sldPorcentajeComisionAgenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldPorcentajeComisionAgenciaStateChanged
+       lblPorcentajeComision.setText(sldPorcentajeComisionAgencia.getValue() + "%");
+    }//GEN-LAST:event_sldPorcentajeComisionAgenciaStateChanged
     /**
      * @param args the command line arguments
      */
@@ -297,24 +436,33 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarAgencia;
     private javax.swing.JButton btnRegistrarPuesto;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblDescripcionAgencia;
+    private javax.swing.JLabel lblErrorAgencia;
     private javax.swing.JLabel lblErrorPuesto;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblIdAgencia;
+    private javax.swing.JLabel lblNombreAgencia;
+    private javax.swing.JLabel lblNombreCliente;
+    private javax.swing.JLabel lblPorcentajeComision;
     private javax.swing.JPanel pnlCliente;
     private javax.swing.JPanel pnlHabitaciones;
     private javax.swing.JPanel pnlPuestos;
     private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JSlider sldPorcentajeComisionAgencia;
+    private javax.swing.JTextField txtApellidoCliente;
+    private javax.swing.JTextField txtCliente;
     private javax.swing.JTextArea txtDescripcionPuesto;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtIdAgencia;
+    private javax.swing.JTextField txtNombreAgencia;
+    private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtNombrePuesto;
     // End of variables declaration//GEN-END:variables
 }
