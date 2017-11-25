@@ -4,18 +4,50 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
+
+import proyectoiiprograhotelutn.bo.PuestoBO;
+import proyectoiiprograhotelutn.entities.MiError;
+import proyectoiiprograhotelutn.entities.Puesto;
+
 /**
  **
  ** @author Luis Alonso Corella Chaves
- ** 17/11/2017
+ ** 20/11/2017
  **/
 public class FrmRegistro extends javax.swing.JFrame {
     /**
-     * Creates new form FrmRegistro
+     * Creates new form FrmMenuPrincipal
      */
+    private Puesto puesto;
     public FrmRegistro() {
         initComponents();
         setLocationRelativeTo(null);
+        puesto = new Puesto();
+        btnSalir.setContentAreaFilled(false);
+    }
+    public void irALogin(){
+        FrmLogin login = new FrmLogin();
+        login.setVisible(true);
+        dispose();
+    }
+    public void registrarPuesto(){
+        lblErrorPuesto.setText("");
+        try {
+            Puesto nuevoPuesto = new Puesto();
+            nuevoPuesto.setId(this.puesto.getId());
+            nuevoPuesto.setNombre(txtNombrePuesto.getText().trim().toLowerCase());
+            nuevoPuesto.setDescripcion(txtDescripcionPuesto.getText().trim());
+            PuestoBO pbo = new PuestoBO();
+            if (pbo.registrar(nuevoPuesto)) {
+                lblErrorPuesto.setText("Puesto registrado con éxito.");
+            } else {
+                lblErrorPuesto.setText("Intente nuevamente.");
+            }
+        } catch (MiError ex) {
+            lblErrorPuesto.setText(ex.getMessage());
+        } catch (Exception ex) {
+            lblErrorPuesto.setText("Llamar a TI ...xD");
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +58,211 @@ public class FrmRegistro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        btnSalir = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        pnlCliente = new javax.swing.JPanel();
+        txtNombre = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        pnlUsuario = new javax.swing.JPanel();
+        pnlHabitaciones = new javax.swing.JPanel();
+        pnlPuestos = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtNombrePuesto = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtDescripcionPuesto = new javax.swing.JTextArea();
+        lblErrorPuesto = new javax.swing.JLabel();
+        btnRegistrarPuesto = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 10, 50, 30));
+
+        jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        pnlCliente.setBackground(new java.awt.Color(0, 102, 51));
+        pnlCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        pnlCliente.setOpaque(false);
+
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        jTextField2.setText("jTextField1");
+
+        jTextField3.setText("jTextField1");
+
+        jTextField4.setText("jTextField1");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel1.setText("Nombre:");
+
+        javax.swing.GroupLayout pnlClienteLayout = new javax.swing.GroupLayout(pnlCliente);
+        pnlCliente.setLayout(pnlClienteLayout);
+        pnlClienteLayout.setHorizontalGroup(
+            pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClienteLayout.createSequentialGroup()
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pnlClienteLayout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        pnlClienteLayout.setVerticalGroup(
+            pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlClienteLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
+
+        jTabbedPane1.addTab("Cliente", pnlCliente);
+
+        pnlUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlUsuario.setOpaque(false);
+
+        javax.swing.GroupLayout pnlUsuarioLayout = new javax.swing.GroupLayout(pnlUsuario);
+        pnlUsuario.setLayout(pnlUsuarioLayout);
+        pnlUsuarioLayout.setHorizontalGroup(
+            pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 571, Short.MAX_VALUE)
+        );
+        pnlUsuarioLayout.setVerticalGroup(
+            pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 284, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Usuario", pnlUsuario);
+
+        pnlHabitaciones.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlHabitaciones.setOpaque(false);
+
+        javax.swing.GroupLayout pnlHabitacionesLayout = new javax.swing.GroupLayout(pnlHabitaciones);
+        pnlHabitaciones.setLayout(pnlHabitacionesLayout);
+        pnlHabitacionesLayout.setHorizontalGroup(
+            pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 571, Short.MAX_VALUE)
+        );
+        pnlHabitacionesLayout.setVerticalGroup(
+            pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 284, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("Habitación", pnlHabitaciones);
+
+        pnlPuestos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlPuestos.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        pnlPuestos.setOpaque(false);
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel2.setText("Nombre:");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel3.setText("Descripción.");
+
+        txtNombrePuesto.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        txtDescripcionPuesto.setColumns(20);
+        txtDescripcionPuesto.setRows(5);
+        jScrollPane1.setViewportView(txtDescripcionPuesto);
+
+        lblErrorPuesto.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblErrorPuesto.setForeground(new java.awt.Color(0, 153, 153));
+        lblErrorPuesto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorPuesto.setToolTipText("");
+
+        btnRegistrarPuesto.setText("Registar.");
+        btnRegistrarPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarPuestoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlPuestosLayout = new javax.swing.GroupLayout(pnlPuestos);
+        pnlPuestos.setLayout(pnlPuestosLayout);
+        pnlPuestosLayout.setHorizontalGroup(
+            pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPuestosLayout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPuestosLayout.createSequentialGroup()
+                        .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblErrorPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(pnlPuestosLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnRegistrarPuesto)
+                        .addGap(82, 82, 82))))
+        );
+        pnlPuestosLayout.setVerticalGroup(
+            pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPuestosLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(lblErrorPuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(btnRegistrarPuesto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Puestos", pnlPuestos);
+
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 580, 320));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/img_Registro.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        irALogin();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
+        registrarPuesto();
+    }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -75,5 +297,24 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegistrarPuesto;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblErrorPuesto;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JPanel pnlCliente;
+    private javax.swing.JPanel pnlHabitaciones;
+    private javax.swing.JPanel pnlPuestos;
+    private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JTextArea txtDescripcionPuesto;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombrePuesto;
     // End of variables declaration//GEN-END:variables
 }
