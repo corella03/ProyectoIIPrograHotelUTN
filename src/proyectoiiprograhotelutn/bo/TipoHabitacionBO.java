@@ -5,7 +5,6 @@
  */
 package proyectoiiprograhotelutn.bo;
 
-import proyectoiiprograhotelutn.dao.PuestoDAO;
 import proyectoiiprograhotelutn.dao.TipoHabitacionDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;
@@ -16,7 +15,7 @@ import proyectoiiprograhotelutn.entities.TipoHabitacion;
  ** 24/11/2017
  **/
 public class TipoHabitacionBO {
-    public boolean registrar(TipoHabitacion tipo) {
+    public boolean registrarTipoHabitacion(TipoHabitacion tipo) {
         if (tipo.getId().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el id del tipo de la habitación.");
         }
@@ -28,7 +27,7 @@ public class TipoHabitacionBO {
         }
         TipoHabitacionDAO tipodao = new TipoHabitacionDAO();
         if(tipodao.verificarExistenciaTipoHabitacion(tipo.getId())){
-            throw new MiError("Ya existe el tipo de habotación ingresada.");
+            throw new MiError("Ya existe el tipo de habitación ingresada.");
         }
         return tipodao.insertarTipoHabitacion(tipo);
     }

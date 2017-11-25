@@ -36,7 +36,7 @@ select * from telefono_usuario;
 ---
 create table distrito(
     id serial,
-    descripcion text not null,
+    nombre text not null,
     id_canton int not null,
     constraint pk_distrito primary key (id)
 );
@@ -45,7 +45,7 @@ select * from distrito;
 ---
 create table canton(
     id serial,
-    descripcion text not null,
+    nombre text not null,
     id_provincia int not null,
     constraint pk_canton primary key (id)
 );
@@ -54,7 +54,7 @@ select * from canton;
 ---
 create table provincia(
     id serial,
-    descripcion text not null,
+    nombre text not null,
     id_pais int not null,
     constraint pk_provincia primary key (id)
 );
@@ -63,7 +63,7 @@ select * from provincia;
 ---
 create table pais(
     id serial,
-    descripcion text not null,
+    nombre text not null,
     constraint pk_pais primary key (id)
 );
 select * from pais;
