@@ -31,6 +31,8 @@ public class FrmRegistro extends javax.swing.JFrame {
         puesto = new Puesto();
         agencia = new AgenciaDeViajes();
         pais = new Pais();
+        cargarPaises();
+        rdPais.setSelected(true);
         btnSalir.setContentAreaFilled(false);
         btnRegistrarPuesto.setContentAreaFilled(false);
         btnRegistrarAgencia.setContentAreaFilled(false);
@@ -118,6 +120,64 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorLugar.setText("Llamar a TI ...xD");
         }
     }
+    public void cargarPaises(){
+        PaisBO paisbo = new PaisBO();
+        for (int i = 0; i < paisbo.cargarPaises().size(); i++) {
+            cbxProvinca.addItem(paisbo.cargarPaises().get(i).getNombre());
+        }
+    }
+    public void vistaLugar(){
+        
+        if(rdPais.isSelected()){
+            txtNombrePais.setEnabled(true);
+            btnRegistrarPais.setEnabled(true);
+            txtNombreProvincia.setEnabled(false);
+            cbxProvinca.setEnabled(false);
+            btnRegistrarProvincia.setEnabled(false);
+            txtNombreCanton.setEnabled(false);
+            cbxCanton.setEnabled(false);
+            btnRegistrarCanton.setEnabled(false);
+            txtNombreDistrito.setEnabled(false);
+            cbxDistrito.setEnabled(false);
+            btnRegistrarDistrito.setVisible(false);
+        }else if(rdProvincia.isSelected()){
+            txtNombrePais.setEnabled(false);
+            btnRegistrarPais.setEnabled(false);
+            txtNombreProvincia.setEnabled(true);
+            cbxProvinca.setEnabled(true);
+            btnRegistrarProvincia.setEnabled(true);
+            txtNombreCanton.setEnabled(false);
+            cbxCanton.setEnabled(false);
+            btnRegistrarCanton.setEnabled(false);
+            txtNombreDistrito.setEnabled(false);
+            cbxDistrito.setEnabled(false);
+            btnRegistrarDistrito.setVisible(false);
+        }else if(rdCanton.isSelected()){
+            txtNombrePais.setEnabled(false);
+            btnRegistrarPais.setEnabled(false);
+            txtNombreProvincia.setEnabled(false);
+            cbxProvinca.setEnabled(false);
+            btnRegistrarProvincia.setEnabled(false);
+            txtNombreCanton.setEnabled(true);
+            cbxCanton.setEnabled(true);
+            btnRegistrarCanton.setEnabled(true);
+            txtNombreDistrito.setEnabled(false);
+            cbxDistrito.setEnabled(false);
+            btnRegistrarDistrito.setVisible(false);
+        }else if(rdDistrito.isSelected()){
+            txtNombrePais.setEnabled(false);
+            btnRegistrarPais.setEnabled(false);
+            txtNombreProvincia.setEnabled(false);
+            cbxProvinca.setEnabled(false);
+            btnRegistrarProvincia.setEnabled(false);
+            txtNombreCanton.setEnabled(false);
+            cbxCanton.setEnabled(false);
+            btnRegistrarCanton.setEnabled(false);
+            txtNombreDistrito.setEnabled(true);
+            cbxDistrito.setEnabled(true);
+            btnRegistrarDistrito.setVisible(true);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -127,6 +187,7 @@ public class FrmRegistro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupLugares = new javax.swing.ButtonGroup();
         btnSalir = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         pnlCliente = new javax.swing.JPanel();
@@ -165,11 +226,30 @@ public class FrmRegistro extends javax.swing.JFrame {
         lblPrecio = new javax.swing.JLabel();
         btnRegistrarTipoHabitacion = new javax.swing.JButton();
         pnlLugar = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        pnlPais = new javax.swing.JPanel();
         lblNombrePais = new javax.swing.JLabel();
         txtNombrePais = new javax.swing.JTextField();
         btnRegistrarPais = new javax.swing.JButton();
         lblErrorLugar = new javax.swing.JLabel();
+        rdPais = new javax.swing.JRadioButton();
+        rdProvincia = new javax.swing.JRadioButton();
+        rdCanton = new javax.swing.JRadioButton();
+        rdDistrito = new javax.swing.JRadioButton();
+        pnlDistrito = new javax.swing.JPanel();
+        lblNombrePais2 = new javax.swing.JLabel();
+        txtNombreDistrito = new javax.swing.JTextField();
+        btnRegistrarDistrito = new javax.swing.JButton();
+        cbxDistrito = new javax.swing.JComboBox<>();
+        pnlProvincia = new javax.swing.JPanel();
+        lblNombrePais1 = new javax.swing.JLabel();
+        txtNombreProvincia = new javax.swing.JTextField();
+        btnRegistrarProvincia = new javax.swing.JButton();
+        cbxProvinca = new javax.swing.JComboBox<>();
+        pnlCanton = new javax.swing.JPanel();
+        lblNombrePais3 = new javax.swing.JLabel();
+        txtNombreCanton = new javax.swing.JTextField();
+        btnRegistrarCanton = new javax.swing.JButton();
+        cbxCanton = new javax.swing.JComboBox<>();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -214,7 +294,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                         .addComponent(lblNombreCliente)
                         .addGap(18, 18, 18)
                         .addComponent(txtNombreCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addContainerGap(343, Short.MAX_VALUE))
         );
         pnlClienteLayout.setVerticalGroup(
             pnlClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +319,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlUsuario.setLayout(pnlUsuarioLayout);
         pnlUsuarioLayout.setHorizontalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
+            .addGap(0, 661, Short.MAX_VALUE)
         );
         pnlUsuarioLayout.setVerticalGroup(
             pnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -255,7 +335,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlHabitaciones.setLayout(pnlHabitacionesLayout);
         pnlHabitacionesLayout.setHorizontalGroup(
             pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 641, Short.MAX_VALUE)
+            .addGap(0, 661, Short.MAX_VALUE)
         );
         pnlHabitacionesLayout.setVerticalGroup(
             pnlHabitacionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +394,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                                 .addComponent(txtNombrePuesto, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnRegistrarPuesto))))
-                .addGap(118, 118, Short.MAX_VALUE))
+                .addGap(130, 130, Short.MAX_VALUE))
         );
         pnlPuestosLayout.setVerticalGroup(
             pnlPuestosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -415,7 +495,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                                     .addGap(243, 243, 243))))
                         .addGap(167, 167, 167)
                         .addComponent(btnRegistrarAgencia)))
-                .addGap(58, 85, Short.MAX_VALUE))
+                .addGap(58, 105, Short.MAX_VALUE))
         );
         pnlAgenciaLayout.setVerticalGroup(
             pnlAgenciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -513,7 +593,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                         .addGroup(pnlTipoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPrecio)
                             .addComponent(txtPrecioTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         pnlTipoHabitacionLayout.setVerticalGroup(
             pnlTipoHabitacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,9 +626,9 @@ public class FrmRegistro extends javax.swing.JFrame {
         pnlLugar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         pnlLugar.setOpaque(false);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setOpaque(false);
+        pnlPais.setBackground(new java.awt.Color(255, 255, 255));
+        pnlPais.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlPais.setOpaque(false);
 
         lblNombrePais.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lblNombrePais.setForeground(new java.awt.Color(0, 102, 102));
@@ -566,32 +646,32 @@ public class FrmRegistro extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlPaisLayout = new javax.swing.GroupLayout(pnlPais);
+        pnlPais.setLayout(pnlPaisLayout);
+        pnlPaisLayout.setHorizontalGroup(
+            pnlPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPaisLayout.createSequentialGroup()
+                .addGroup(pnlPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPaisLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblNombrePais)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
+                    .addGroup(pnlPaisLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addComponent(btnRegistrarPais)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlPaisLayout.setVerticalGroup(
+            pnlPaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlPaisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNombrePais)
                 .addGap(18, 18, 18)
                 .addComponent(txtNombrePais, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnRegistrarPais)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         lblErrorLugar.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -599,32 +679,267 @@ public class FrmRegistro extends javax.swing.JFrame {
         lblErrorLugar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblErrorLugar.setToolTipText("");
 
+        btnGroupLugares.add(rdPais);
+        rdPais.setForeground(new java.awt.Color(255, 255, 255));
+        rdPais.setText("Pais");
+        rdPais.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdPaisItemStateChanged(evt);
+            }
+        });
+
+        btnGroupLugares.add(rdProvincia);
+        rdProvincia.setText("Provincia");
+        rdProvincia.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdProvinciaItemStateChanged(evt);
+            }
+        });
+
+        btnGroupLugares.add(rdCanton);
+        rdCanton.setText("Cantón");
+        rdCanton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdCantonItemStateChanged(evt);
+            }
+        });
+
+        btnGroupLugares.add(rdDistrito);
+        rdDistrito.setText("Distrito");
+        rdDistrito.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                rdDistritoItemStateChanged(evt);
+            }
+        });
+
+        pnlDistrito.setBackground(new java.awt.Color(255, 255, 255));
+        pnlDistrito.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlDistrito.setOpaque(false);
+
+        lblNombrePais2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblNombrePais2.setForeground(new java.awt.Color(0, 102, 102));
+        lblNombrePais2.setText("Nombre:");
+
+        txtNombreDistrito.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        btnRegistrarDistrito.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarDistrito.setText("Registar");
+        btnRegistrarDistrito.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarDistrito.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarDistrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarDistritoActionPerformed(evt);
+            }
+        });
+
+        cbxDistrito.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout pnlDistritoLayout = new javax.swing.GroupLayout(pnlDistrito);
+        pnlDistrito.setLayout(pnlDistritoLayout);
+        pnlDistritoLayout.setHorizontalGroup(
+            pnlDistritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDistritoLayout.createSequentialGroup()
+                .addGroup(pnlDistritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlDistritoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtNombreDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNombrePais2)
+                    .addGroup(pnlDistritoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbxDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlDistritoLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(btnRegistrarDistrito)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        pnlDistritoLayout.setVerticalGroup(
+            pnlDistritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlDistritoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNombrePais2)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombreDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbxDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrarDistrito)
+                .addGap(31, 31, 31))
+        );
+
+        pnlProvincia.setBackground(new java.awt.Color(255, 255, 255));
+        pnlProvincia.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlProvincia.setOpaque(false);
+
+        lblNombrePais1.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblNombrePais1.setForeground(new java.awt.Color(0, 102, 102));
+        lblNombrePais1.setText("Nombre:");
+
+        txtNombreProvincia.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        btnRegistrarProvincia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarProvincia.setText("Registar");
+        btnRegistrarProvincia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarProvincia.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarProvincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarProvinciaActionPerformed(evt);
+            }
+        });
+
+        cbxProvinca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProvincaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlProvinciaLayout = new javax.swing.GroupLayout(pnlProvincia);
+        pnlProvincia.setLayout(pnlProvinciaLayout);
+        pnlProvinciaLayout.setHorizontalGroup(
+            pnlProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProvinciaLayout.createSequentialGroup()
+                .addGroup(pnlProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlProvinciaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombrePais1)))
+                    .addGroup(pnlProvinciaLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnRegistrarProvincia))
+                    .addGroup(pnlProvinciaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbxProvinca, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        pnlProvinciaLayout.setVerticalGroup(
+            pnlProvinciaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProvinciaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNombrePais1)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombreProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cbxProvinca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(btnRegistrarProvincia)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlCanton.setBackground(new java.awt.Color(255, 255, 255));
+        pnlCanton.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        pnlCanton.setOpaque(false);
+
+        lblNombrePais3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lblNombrePais3.setForeground(new java.awt.Color(0, 102, 102));
+        lblNombrePais3.setText("Nombre:");
+
+        txtNombreCanton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+
+        btnRegistrarCanton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/registrar.png"))); // NOI18N
+        btnRegistrarCanton.setText("Registar");
+        btnRegistrarCanton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarCanton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistrarCanton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarCantonActionPerformed(evt);
+            }
+        });
+
+        cbxCanton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout pnlCantonLayout = new javax.swing.GroupLayout(pnlCanton);
+        pnlCanton.setLayout(pnlCantonLayout);
+        pnlCantonLayout.setHorizontalGroup(
+            pnlCantonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCantonLayout.createSequentialGroup()
+                .addGroup(pnlCantonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlCantonLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(pnlCantonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtNombreCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNombrePais3)))
+                    .addGroup(pnlCantonLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cbxCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlCantonLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(btnRegistrarCanton)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        pnlCantonLayout.setVerticalGroup(
+            pnlCantonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCantonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblNombrePais3)
+                .addGap(18, 18, 18)
+                .addComponent(txtNombreCanton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(cbxCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrarCanton)
+                .addGap(31, 31, 31))
+        );
+
         javax.swing.GroupLayout pnlLugarLayout = new javax.swing.GroupLayout(pnlLugar);
         pnlLugar.setLayout(pnlLugarLayout);
         pnlLugarLayout.setHorizontalGroup(
             pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLugarLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(lblErrorLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pnlLugarLayout.createSequentialGroup()
                 .addGroup(pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlLugarLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addComponent(pnlPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlLugarLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(lblErrorLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                        .addGap(36, 36, 36)
+                        .addComponent(rdPais)))
+                .addGroup(pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnlLugarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlLugarLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(rdProvincia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdCanton)
+                        .addGap(42, 42, 42)))
+                .addGroup(pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlLugarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 23, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLugarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(rdDistrito)
+                        .addGap(86, 86, 86))))
         );
         pnlLugarLayout.setVerticalGroup(
             pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLugarLayout.createSequentialGroup()
                 .addComponent(lblErrorLugar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addGap(9, 9, 9)
+                .addGroup(pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rdPais)
+                    .addComponent(rdProvincia)
+                    .addComponent(rdCanton)
+                    .addComponent(rdDistrito))
+                .addGap(18, 18, 18)
+                .addGroup(pnlLugarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlProvincia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlCanton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlDistrito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Lugar", pnlLugar);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 650, 370));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, 670, 370));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 790, 500));
@@ -649,6 +964,33 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnRegistrarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPaisActionPerformed
         registrarPais();
     }//GEN-LAST:event_btnRegistrarPaisActionPerformed
+    private void btnRegistrarProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProvinciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarProvinciaActionPerformed
+    private void btnRegistrarDistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDistritoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarDistritoActionPerformed
+    private void btnRegistrarCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCantonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarCantonActionPerformed
+    private void rdPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdPaisItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdPaisItemStateChanged
+    private void rdDistritoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdDistritoItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdDistritoItemStateChanged
+    private void rdProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProvinciaItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdProvinciaItemStateChanged
+    private void rdCantonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdCantonItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdCantonItemStateChanged
+
+    private void cbxProvincaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvincaActionPerformed
+        int x;
+        x = cbxProvinca.getSelectedIndex();
+            System.out.println(x);
+    }//GEN-LAST:event_cbxProvincaActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -683,14 +1025,20 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btnGroupLugares;
     private javax.swing.JButton btnRegistrarAgencia;
+    private javax.swing.JButton btnRegistrarCanton;
+    private javax.swing.JButton btnRegistrarDistrito;
     private javax.swing.JButton btnRegistrarPais;
+    private javax.swing.JButton btnRegistrarProvincia;
     private javax.swing.JButton btnRegistrarPuesto;
     private javax.swing.JButton btnRegistrarTipoHabitacion;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JComboBox<String> cbxCanton;
+    private javax.swing.JComboBox<String> cbxDistrito;
+    private javax.swing.JComboBox<String> cbxProvinca;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
@@ -706,15 +1054,26 @@ public class FrmRegistro extends javax.swing.JFrame {
     private javax.swing.JLabel lblNombreAgencia;
     private javax.swing.JLabel lblNombreCliente;
     private javax.swing.JLabel lblNombrePais;
+    private javax.swing.JLabel lblNombrePais1;
+    private javax.swing.JLabel lblNombrePais2;
+    private javax.swing.JLabel lblNombrePais3;
     private javax.swing.JLabel lblPorcentajeComision;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JPanel pnlAgencia;
+    private javax.swing.JPanel pnlCanton;
     private javax.swing.JPanel pnlCliente;
+    private javax.swing.JPanel pnlDistrito;
     private javax.swing.JPanel pnlHabitaciones;
     private javax.swing.JPanel pnlLugar;
+    private javax.swing.JPanel pnlPais;
+    private javax.swing.JPanel pnlProvincia;
     private javax.swing.JPanel pnlPuestos;
     private javax.swing.JPanel pnlTipoHabitacion;
     private javax.swing.JPanel pnlUsuario;
+    private javax.swing.JRadioButton rdCanton;
+    private javax.swing.JRadioButton rdDistrito;
+    private javax.swing.JRadioButton rdPais;
+    private javax.swing.JRadioButton rdProvincia;
     private javax.swing.JSlider sldPorcentajeComisionAgencia;
     private javax.swing.JTextField txtApellidoCliente;
     private javax.swing.JTextField txtCliente;
@@ -723,8 +1082,11 @@ public class FrmRegistro extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdAgencia;
     private javax.swing.JTextField txtIdTipoHabitacion;
     private javax.swing.JTextField txtNombreAgencia;
+    private javax.swing.JTextField txtNombreCanton;
     private javax.swing.JTextField txtNombreCliente;
+    private javax.swing.JTextField txtNombreDistrito;
     private javax.swing.JTextField txtNombrePais;
+    private javax.swing.JTextField txtNombreProvincia;
     private javax.swing.JTextField txtNombrePuesto;
     private javax.swing.JTextField txtPrecioTipoHabitacion;
     // End of variables declaration//GEN-END:variables

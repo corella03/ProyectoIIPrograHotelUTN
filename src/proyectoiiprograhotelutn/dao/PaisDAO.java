@@ -7,6 +7,8 @@ package proyectoiiprograhotelutn.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
 /**
@@ -26,6 +28,27 @@ public class PaisDAO {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar el país, favor intente nuevamente.");
         }
+    }
+    public ArrayList<Pais> cargarPaises() {
+        ArrayList<Pais> paises = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from pais";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                paises.add(cargarPais(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar los Paises, favor intente nuevamente.");
+        }
+        return paises;
+    }
+    private Pais cargarPais(ResultSet rs) throws SQLException {
+        Pais pais = new Pais();
+        pais.setId(rs.getInt("id"));
+        pais.setNombre(rs.getString("nombre"));
+        return pais;
     }
     public boolean verificarExistenciaPais(String nombre) {
         try (Connection con = Conexion.getConexion()) {

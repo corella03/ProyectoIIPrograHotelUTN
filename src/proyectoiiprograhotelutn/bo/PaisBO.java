@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.bo;
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.PaisDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
@@ -22,5 +23,9 @@ public class PaisBO {
             throw new MiError("El país ya ha sido registrado.");
         }
         return paisdao.insertarPais(pais);
+    }
+     public ArrayList<Pais> cargarPaises() {
+        PaisDAO paisdao = new PaisDAO();
+        return paisdao.cargarPaises();
     }
 }
