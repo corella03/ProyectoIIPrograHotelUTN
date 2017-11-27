@@ -38,7 +38,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         agencia = new AgenciaDeViajes();
         pais = new Pais();
         provincia = new Provincia();
-        cargarTiposDeHabitaciones();
+        cargarAgencias();
         datosIniciales();
     }
     public void datosIniciales(){
@@ -102,6 +102,12 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorAgencia.setText(ex.getMessage());
         } catch (Exception ex) {
             lblErrorAgencia.setText("Llamar a TI ...xD");
+        }
+    }
+    public void cargarAgencias(){
+        AgenciaDeViajesBO agencia = new AgenciaDeViajesBO();
+        for (int i = 0; i < agencia.cargarAgenciasDeViajes().size(); i++) {
+            System.out.println(agencia.cargarAgenciasDeViajes().get(i).getId());
         }
     }
     public void registrarTipoHabitacio(){

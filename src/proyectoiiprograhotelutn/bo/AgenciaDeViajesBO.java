@@ -5,7 +5,9 @@
  */
 package proyectoiiprograhotelutn.bo;
 
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.AgenciaDeViajesDAO;
+import proyectoiiprograhotelutn.dao.TipoHabitacionDAO;
 import proyectoiiprograhotelutn.entities.AgenciaDeViajes;
 import proyectoiiprograhotelutn.entities.MiError;
 
@@ -30,5 +32,9 @@ public class AgenciaDeViajesBO {
             throw new MiError("la agencia ya ha sido registrada.");
         }
         return adao.insertarAgencia(agencia);
+    }
+    public ArrayList<AgenciaDeViajes> cargarAgenciasDeViajes() {
+        AgenciaDeViajesDAO agenciadao = new AgenciaDeViajesDAO();
+        return agenciadao.cargarAgenciasDeViajes();
     }
 }

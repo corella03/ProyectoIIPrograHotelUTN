@@ -7,6 +7,8 @@ package proyectoiiprograhotelutn.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.AgenciaDeViajes;
 import proyectoiiprograhotelutn.entities.MiError;
 /**
@@ -28,6 +30,28 @@ public class AgenciaDeViajesDAO {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar la agencia, favor intente nuevamente.");
         }
+    }
+    public ArrayList<AgenciaDeViajes> cargarAgenciasDeViajes() {
+        ArrayList<AgenciaDeViajes> agencia = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from agencia_de_viajes";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                agencia.add(cargarAgenciaDeViajes(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar las agencias de viajes, favor intente nuevamente.");
+        }
+        return agencia;
+    }
+    private AgenciaDeViajes cargarAgenciaDeViajes(ResultSet rs) throws SQLException {
+        AgenciaDeViajes agencia = new AgenciaDeViajes();
+        agencia.setId(rs.getString("id"));
+        agencia.setNombre(rs.getString("nombre"));
+        agencia.setComision(rs.getInt("comision"));
+        return agencia;
     }
     public boolean verificarExistenciaAgencia(String id) {
         try (Connection con = Conexion.getConexion()) {
