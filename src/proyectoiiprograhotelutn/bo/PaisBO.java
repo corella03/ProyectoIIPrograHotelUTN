@@ -24,7 +24,7 @@ public class PaisBO {
         }
         return paisdao.insertarPais(pais);
     }
-     public ArrayList<Pais> cargarPaises() {
+    public ArrayList<Pais> cargarPaises() {
         PaisDAO paisdao = new PaisDAO();
         return paisdao.cargarPaises();
     }

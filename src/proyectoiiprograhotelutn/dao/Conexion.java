@@ -25,7 +25,7 @@ public class Conexion {
         try {
             Class.forName("org.postgresql.Driver");
             conn = DriverManager.getConnection(url, USER, PASS);
-            System.out.println("Conexión  con éxito!!"); //TODO: Eliminar linea
+            //System.out.println("Conexión  con éxito!!"); //TODO: Eliminar linea
         } catch (ClassNotFoundException ex) {
             throw new MiError("Falta el driver de base de datos.");
         } catch (SQLException ex) {
