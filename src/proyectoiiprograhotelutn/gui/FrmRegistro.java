@@ -38,6 +38,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         agencia = new AgenciaDeViajes();
         pais = new Pais();
         provincia = new Provincia();
+        cargarPuestos();
         datosIniciales();
     }
     public void datosIniciales(){
@@ -76,6 +77,12 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorPuesto.setText(ex.getMessage());
         } catch (Exception ex) {
             lblErrorPuesto.setText("Llamar a TI ...xD");
+        }
+    }
+    public void cargarPuestos(){
+        PuestoBO puestobo = new PuestoBO();
+        for (int i = 0; i < puestobo.cargarPuestos().size(); i++) {
+            System.out.println(puestobo.cargarPuestos().get(i).getNombre());
         }
     }
     public void registrarAgencia(){
@@ -168,18 +175,22 @@ public class FrmRegistro extends javax.swing.JFrame {
             cbxCanton.addItem(provinciabo.cargarProvincias().get(i).getNombre());
         }
     }
-    public void cargarCantones()    {
-        cbxCanton.removeAllItems();
-        cbxCantonPais.removeAllItems();
-        ProvinciaBO provinciabo = new ProvinciaBO();
-        for (int i = 0; i < provinciabo.cargarProvincias().size(); i++) {
-            cbxCanton.addItem(provinciabo.cargarProvincias().get(i).getNombre());
-        }
+//    public void cargarCantones()    {
+//        cbxCanton.removeAllItems();
+//        cbxCantonPais.removeAllItems();
 //        ProvinciaBO provinciabo = new ProvinciaBO();
 //        for (int i = 0; i < provinciabo.cargarProvincias().size(); i++) {
 //            cbxCanton.addItem(provinciabo.cargarProvincias().get(i).getNombre());
 //        }
-    }
+//        PaisBO paisbo = new PaisBO();
+//        for (int i = 0; i < paisbo.cargarPaises().size(); i++) {
+//            cbxProvincia.addItem(paisbo.cargarPaises().get(i).getNombre());
+//        }
+////        ProvinciaBO provinciabo = new ProvinciaBO();
+////        for (int i = 0; i < provinciabo.cargarProvincias().size(); i++) {
+////            cbxCanton.addItem(provinciabo.cargarProvincias().get(i).getNombre());
+////        }
+//    }
     public void vistaLugar(){
         if(rdPais.isSelected()){
             txtNombrePais.setEnabled(true);

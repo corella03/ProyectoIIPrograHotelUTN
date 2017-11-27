@@ -8,6 +8,8 @@ package proyectoiiprograhotelutn.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;
 
@@ -30,7 +32,28 @@ public class PuestoDAO {
             throw new MiError("No se pudo registrar el puesto, favor intente nuevamente.");
         }
     }
-
+    public ArrayList<Puesto> cargarPuestos() {
+        ArrayList<Puesto> puestos = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from puesto";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                puestos.add(cargarPuestos(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar los Pustos, favor intente nuevamente.");
+        }
+        return puestos;
+    }
+    private Puesto cargarPuestos(ResultSet rs) throws SQLException {
+        Puesto puestos = new Puesto();
+        puestos.setId(rs.getInt("id"));
+        puestos.setNombre(rs.getString("nombre"));
+        puestos.setDescripcion(rs.getString("descripcion"));
+        return puestos;
+    }
     public boolean verificarExistenciaAgencia(String nombre) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from puesto where nombre = ?";

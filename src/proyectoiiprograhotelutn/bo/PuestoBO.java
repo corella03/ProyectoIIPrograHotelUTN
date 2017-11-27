@@ -5,6 +5,7 @@
  */
 package proyectoiiprograhotelutn.bo;
 
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.PuestoDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;
@@ -27,5 +28,9 @@ public class PuestoBO {
             throw new MiError("Ya existe el puesto ingresado.");
         }
         return udao.insertarAgencia(puesto);
+    }
+    public ArrayList<Puesto> cargarPuestos() {
+        PuestoDAO puestosdao = new PuestoDAO();
+        return puestosdao.cargarPuestos();
     }
 }
