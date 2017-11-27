@@ -8,7 +8,10 @@ package proyectoiiprograhotelutn.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
+import proyectoiiprograhotelutn.entities.Puesto;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;
 
 /**
@@ -30,6 +33,28 @@ public class TipoHabitacionDAO {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar el tipo de habitación, favor intente nuevamente.");
         }
+    }
+    public ArrayList<TipoHabitacion> cargarTiposDeHabitaciones() {
+        ArrayList<TipoHabitacion> tipos = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from tipo_habitacion";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                tipos.add(cargarTipoDeHabitacion(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar los tipos de habitación, favor intente nuevamente.");
+        }
+        return tipos;
+    }
+    private TipoHabitacion cargarTipoDeHabitacion(ResultSet rs) throws SQLException {
+        TipoHabitacion tipo = new TipoHabitacion();
+        tipo.setId(rs.getString("id"));
+        tipo.setDescripcion(rs.getString("descripcion"));
+        tipo.setPrecio(rs.getInt("precio"));
+        return tipo;
     }
     public boolean verificarExistenciaTipoHabitacion(String id) {
         try (Connection con = Conexion.getConexion()) {

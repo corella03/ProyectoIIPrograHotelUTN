@@ -38,7 +38,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         agencia = new AgenciaDeViajes();
         pais = new Pais();
         provincia = new Provincia();
-        cargarPuestos();
+        cargarTiposDeHabitaciones();
         datosIniciales();
     }
     public void datosIniciales(){
@@ -121,6 +121,12 @@ public class FrmRegistro extends javax.swing.JFrame {
             lblErrorTipoHabitacion.setText(ex.getMessage());
         } catch (Exception ex) {
             lblErrorTipoHabitacion.setText("Llamar a TI ...xD");
+        }
+    }
+    public void cargarTiposDeHabitaciones(){
+        TipoHabitacionBO tipobo = new TipoHabitacionBO();
+        for (int i = 0; i < tipobo.cargarTiposDeHabitaciones().size(); i++) {
+            System.out.println(tipobo.cargarTiposDeHabitaciones().get(i).getId());
         }
     }
     public void registrarPais(){

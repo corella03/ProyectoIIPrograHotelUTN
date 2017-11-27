@@ -5,8 +5,11 @@
  */
 package proyectoiiprograhotelutn.bo;
 
+import java.util.ArrayList;
+import proyectoiiprograhotelutn.dao.PuestoDAO;
 import proyectoiiprograhotelutn.dao.TipoHabitacionDAO;
 import proyectoiiprograhotelutn.entities.MiError;
+import proyectoiiprograhotelutn.entities.Puesto;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;
 
 /**
@@ -30,5 +33,9 @@ public class TipoHabitacionBO {
             throw new MiError("Ya existe el tipo de habitación ingresada.");
         }
         return tipodao.insertarTipoHabitacion(tipo);
+    }
+    public ArrayList<TipoHabitacion> cargarTiposDeHabitaciones() {
+        TipoHabitacionDAO tiposdao = new TipoHabitacionDAO();
+        return tiposdao.cargarTiposDeHabitaciones();
     }
 }
