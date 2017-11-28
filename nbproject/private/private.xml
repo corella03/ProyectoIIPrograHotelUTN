@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/dao/PaisDAO.java</file>
-            <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/bo/PaisBO.java</file>
+            <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/entities/Lugar.java</file>
+            <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/bo/TipoHabitacionBO.java</file>
             <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/gui/FrmRegistro.java</file>
+            <file>file:/C:/Users/luisalonso/Documents/Proyectos%20UTN/ProyectoIIPrograHotelUTN/ProyectoIIPrograHotelUTN/src/proyectoiiprograhotelutn/dao/TipoHabitacionDAO.java</file>
         </group>
     </open-files>
 </project-private>

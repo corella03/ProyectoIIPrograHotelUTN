@@ -51,8 +51,7 @@ public class AgenciaDeViajesDAO {
         agencia.setId(rs.getString("id"));
         agencia.setNombre(rs.getString("nombre"));
         agencia.setComision(rs.getInt("comision"));
-        return agencia;
-    }
+        return agencia;    }
     public boolean verificarExistenciaAgencia(String id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select id from agencia_de_viajes where id = ?";

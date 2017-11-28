@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class Conexion {
     public static final String DRIVER = "jdbc:postgresql://";
     public static final String SERVER = "localhost:5432/";
-    public static final String DB = "ProyectoIIPrograHotelUTN";
+    public static final String DB = "BDPrograIIHotelUTN";
     public static final String USER = "postgres";
     public static final String PASS = "postgres";
     public static Connection getConexion() {

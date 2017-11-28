@@ -19,11 +19,11 @@ public class FrmLogin extends javax.swing.JFrame {
         btnSalir.setContentAreaFilled(false);
         btnIniciar.setContentAreaFilled(false);
     }
-    public void irAMenuPrincipal(){
-        FrmRegistro principal = new FrmRegistro();
+    private void irAMenuPrincipal(){
+        FrmMenuPrincipal principal = new FrmMenuPrincipal();
         principal.setVisible(true);
         dispose();
-    }    
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

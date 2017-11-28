@@ -16,6 +16,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public FrmMenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
+        btnSalir.setContentAreaFilled(false);
+    }
+    private void irAFrmLogin(){
+        FrmLogin login = new FrmLogin();
+        login.setVisible(true);
+        dispose();
+    }
+    private void irARegistro(){
+        FrmRegistro registro = new FrmRegistro();
+        registro.setVisible(true);
+        dispose();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,21 +37,43 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        brnIrRegistro = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        brnIrRegistro.setText("Ir a Registro");
+        brnIrRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                brnIrRegistroActionPerformed(evt);
+            }
+        });
+        getContentPane().add(brnIrRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, 30));
+
+        btnSalir.setBackground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
+        btnSalir.setOpaque(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 44, 28));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgMenuPrincipal.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        irAFrmLogin();
+    }//GEN-LAST:event_btnSalirActionPerformed
+    private void brnIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnIrRegistroActionPerformed
+        irARegistro();
+    }//GEN-LAST:event_brnIrRegistroActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -75,5 +108,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton brnIrRegistro;
+    private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }

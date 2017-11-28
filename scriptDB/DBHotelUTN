@@ -4,12 +4,16 @@ create table usuario
     nombre text not null,
     apellido text not null,
     cedula text not null,
+    telefono text not null,
     contrasena text not null,
     direccion text not null,
     id_distrito int not null,
     id_puesto int not null,
+    activo boolean not null,
     constraint pk_usuario primary key (id)
 );
+alter table usuario
+	add constraint unq_cedula_usuario unique (cedula);
 select * from usuario;
 ---
 ---
@@ -17,21 +21,10 @@ create table puesto(
     id serial,
     nombre text not null,
     descripcion text not null,
+    activo boolean not null,
     constraint pk_puesto primary key (id)
 );
-alter table puesto
-	add constraint unq_id_agencia_de_viajes unique (id);
 select * from puesto;
-drop table puesto;
----
----
-create table telefono_usuario(
-    id serial,
-    telefono int not null,
-    id_usuario int not null,
-    constraint pk_telefono_usuario primary key (id)
-);
-select * from telefono_usuario;
 ---
 ---
 create table distrito(
@@ -73,11 +66,15 @@ create table cliente(
     id serial,
     nombre text not null,
     apellido text not null,
+    cedula text not null,
     direccion text not null,
     id_distrito int not null,
     numero_tarjeta text not null,
+    activo boolean not null,
     constraint pk_cliente primary key (id)
 );
+alter table cliente
+	add constraint unq_cedula_cliente unique (cedula);
 select * from cliente;
 ---
 ---
@@ -85,6 +82,7 @@ create table telefono_cliente(
     id serial,
     telefono int not null,
     id_cliente int not null,
+    activo boolean not null,
     constraint pk_telefono_cliente primary key (id)
 );
 select * from telefono_cliente;
@@ -94,7 +92,8 @@ create table detalle_reservacion(
     id serial,
     id_usuario int not null,
     id_cliente int not null,
-    id_habitacion text not null,
+    id_habitacion int not null,
+    id_agencia_de_viajes int,
     fecha_reservacion text not null,
     fecha_entrada text not null,
     fecha_salida text not null,
@@ -108,54 +107,50 @@ select * from detalle_reservacion;
 create table reservacion(
     id serial,
     id_detalle_reservacion int not null,
+    activo boolean not null,
     constraint pk_reservacion primary key (id)
 );
 select * from reservacion;
 ---
 ---
 create table habitacion(
-	id text not null,
-    id_tipo_habitacion text not null,
+	id serial,
+    codigo text not null,
+    id_tipo_habitacion int not null,
+    foto bytea not null,
     descripcion text not null,
-    estado_habitacion boolean not null,
+    estado_habitacion text not null,
     cant_personas int not null,
     constraint pk_habitacion primary key (id)
 );
 alter table habitacion
-	add constraint unq_id_habitacion unique (id);
+	add constraint unq_codigo_habitacion unique (id);
 select * from habitacion;
 ---
 ---
 create table tipo_habitacion(
-    id text not null,
+    id serial,
+    codigo text not null,
     descripcion text not null,
     precio int not null,
     constraint pk_tipo_habitacion primary key (id)
 );
 alter table tipo_habitacion
-	add constraint unq_id_tipo_habitacion unique (id);
+	add constraint unq_codigo_tipo_habitacion unique (codigo);
 select * from tipo_habitacion;
 ---
 ---
 create table agencia_de_viajes(
-    id text not null,
+    id serial,
+    codigo text not null,
     nombre text not null,
+    telefono text not null,
     comision int not null,
     constraint pk_agencia_de_viajes primary key (id)
 );
 alter table agencia_de_viajes
-	add constraint unq_id_agencia_de_viajes unique (id);
+	add constraint unq_codigo_agencia_de_viajes unique (codigo);
 select * from agencia_de_viajes;
-select id from agencia_de_viajes;
----
----
-create table telefono_agencia_de_viajes(
-    id serial,
-    telefono int not null,
-    id_agencia_de_viajes text not null,
-    constraint pk_telefono_agencia_de_viajes primary key (id)
-);
-select * from telefono_agencia_de_viajes;
 ---
 -- foreign key usuario
 ---
@@ -170,14 +165,6 @@ alter table usuario
 		fk_usuario_distrito
 		foreign key (id_distrito)
            references distrito (id);
----
--- foreign key telefono_usuario
----
-alter table telefono_usuario
-        add constraint 
-		fk_telefono_usuario_usuario
-		foreign key (id_usuario)
-           references usuario (id);
 ---
 -- foreign key distrito
 ---
@@ -202,7 +189,7 @@ alter table provincia
 		fk_provincia_pais
 		foreign key (id_pais)
            references pais (id);
----
+           ---
 -- foreign key cliente
 ---
 alter table cliente
@@ -238,6 +225,12 @@ alter table detalle_reservacion
 		fk_detalle_reservacion_habitacion
 		foreign key (id_habitacion)
            references habitacion (id);
+           
+alter table detalle_reservacion
+        add constraint 
+		fk_detalle_reservacion_agencia_de_viajes
+		foreign key (id_agencia_de_viajes)
+           references agencia_de_viajes (id);
 ---
 -- foreign key reservacion
 ---
@@ -254,11 +247,4 @@ alter table habitacion
 		fk_habitacion_tipo_habitacion
 		foreign key (id_tipo_habitacion)
            references tipo_habitacion (id);
----
--- foreign key telefono_agencia_de_viajes
----
-alter table telefono_agencia_de_viajes
-        add constraint 
-		fk_telefono_agencia_de_viajes_agencia_de_viajes
-		foreign key (id_agencia_de_viajes)
-           references agencia_de_viajes (id);
+

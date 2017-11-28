@@ -10,22 +10,29 @@ package proyectoiiprograhotelutn.entities;
  ** 24/11/2017
  **/
 public class TipoHabitacion {
-    private String id;
+    private int id;
+    private String codigo;
     private String descripcion;
     private int precio;
-
     public TipoHabitacion() {
     }
-    public TipoHabitacion(String id, String descripcion, int precio) {
+    public TipoHabitacion(int id, String codigo, String descripcion, int precio) {
         this.id = id;
+        this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     public String getDescripcion() {
         return descripcion;
@@ -41,6 +48,6 @@ public class TipoHabitacion {
     }
     @Override
     public String toString() {
-        return "Tipo Habitacion: " + "\nId: " + id + "\nDescripción: " + descripcion + "\nPrecio:" + precio;
+        return "Código: " + codigo + " ₡ " + precio;
     }
 }
