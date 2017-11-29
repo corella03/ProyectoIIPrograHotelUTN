@@ -12,21 +12,35 @@ import proyectoiiprograhotelutn.entities.TipoHabitacion;
  ** @author Luis Alonso Corella Chaves
  ** 28/11/2017
  **/
-public class FrmTipoHabitacion extends javax.swing.JFrame {
+public class FrmTipoHabitacion extends javax.swing.JDialog {
+
     /**
      * Creates new form FrmTipoHabitacion
      */
     private TipoHabitacion tipo;
-    public FrmTipoHabitacion() {
+    public FrmTipoHabitacion(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         btnRegresar.setContentAreaFilled(false);
         btnRegistrarTipoHabitacion.setContentAreaFilled(false);
-        tipo = new TipoHabitacion();
+        this.tipo = new TipoHabitacion();
+        cargarTipoHabitacion();
+        rdActivoTipoHabitacion.setVisible(false);
+    }
+    public FrmTipoHabitacion(java.awt.Frame parent, boolean modal, TipoHabitacion tipo) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegistrarTipoHabitacion.setContentAreaFilled(false);
+        btnRegistrarTipoHabitacion.setText("Editar");
+        rdActivoTipoHabitacion.setContentAreaFilled(false);
+        this.tipo = tipo;
+        cargarTipoHabitacion();
     }
     private void irAFrmRegistro(){
-        FrmRegistro registro = new FrmRegistro();
-        registro.setVisible(true);
+        super.getParent().setVisible(true);
         dispose();
     } 
     public void registrarTipoHabitacio(){
@@ -37,9 +51,16 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
             tipoHabitacion.setCodigo(txtCodTipoHabitacion.getText().trim().toUpperCase());
             tipoHabitacion.setPrecio(Integer.parseInt(txtPrecioTipoHabitacion.getText().trim()));
             tipoHabitacion.setDescripcion(txtDescripcionTipoHabitacion.getText().trim());
+            if(!this.tipo.isActivo()){
+                if(rdActivoTipoHabitacion.isSelected()){
+                    tipoHabitacion.setActivo(true);
+                }
+            }
             TipoHabitacionBO tipobo = new TipoHabitacionBO();
             if (tipobo.registrarTipoHabitacion(tipoHabitacion)) {
                 lblErrorTipoHabitacion.setText("Tipo de habitación registrada con éxito.");
+                super.getParent().setVisible(true);
+                dispose();
             } else {
                 lblErrorTipoHabitacion.setText("Intente nuevamente.");
             }
@@ -49,12 +70,23 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
             lblErrorTipoHabitacion.setText("Llamar a TI ...xD");
         }
     }
-//    public void cargarTiposDeHabitaciones(){
-//        TipoHabitacionBO tipobo = new TipoHabitacionBO();
-//        for (int i = 0; i < tipobo.cargarTiposDeHabitaciones().size(); i++) {
-//            System.out.println(tipobo.cargarTiposDeHabitaciones().get(i).getId());
-//        }
-//    }
+    public void cargarTiposDeHabitaciones(){
+        TipoHabitacionBO tipobo = new TipoHabitacionBO();
+        for (int i = 0; i < tipobo.cargarTiposDeHabitaciones().size(); i++) {
+            System.out.println(tipobo.cargarTiposDeHabitaciones().get(i).toString());
+        }
+    }
+    private void cargarTipoHabitacion(){
+        txtCodTipoHabitacion.setText(tipo.getCodigo());
+        txtPrecioTipoHabitacion.setText(String.valueOf(tipo.getPrecio()));
+        txtDescripcionTipoHabitacion.setText(tipo .getDescripcion());
+        rdActivoTipoHabitacion.setSelected(true);
+        if(tipo.isActivo()){
+            rdActivoTipoHabitacion.setSelected(true);
+        }else if(!tipo.isActivo()){
+            rdActivoTipoHabitacion.setSelected(false);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,33 +96,28 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblSimbloColones = new javax.swing.JLabel();
-        lblErrorTipoHabitacion = new javax.swing.JLabel();
+        rdActivoTipoHabitacion = new javax.swing.JRadioButton();
         lblCodigoTipoHabitacion = new javax.swing.JLabel();
         txtCodTipoHabitacion = new javax.swing.JTextField();
         lblPrecio = new javax.swing.JLabel();
         txtPrecioTipoHabitacion = new javax.swing.JTextField();
+        lblSimbloColones = new javax.swing.JLabel();
         lblDescripcionTipoHabitacion = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         txtDescripcionTipoHabitacion = new javax.swing.JTextArea();
         btnRegistrarTipoHabitacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
+        lblErrorTipoHabitacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblSimbloColones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblSimbloColones.setForeground(new java.awt.Color(255, 255, 255));
-        lblSimbloColones.setText("₡");
-        getContentPane().add(lblSimbloColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, 20));
-
-        lblErrorTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblErrorTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
-        lblErrorTipoHabitacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorTipoHabitacion.setToolTipText("");
-        getContentPane().add(lblErrorTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 580, 30));
+        rdActivoTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        rdActivoTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
+        rdActivoTipoHabitacion.setText("Activo");
+        getContentPane().add(rdActivoTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
 
         lblCodigoTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblCodigoTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,6 +134,11 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
 
         txtPrecioTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         getContentPane().add(txtPrecioTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 140, -1));
+
+        lblSimbloColones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblSimbloColones.setForeground(new java.awt.Color(255, 255, 255));
+        lblSimbloColones.setText("₡");
+        getContentPane().add(lblSimbloColones, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, 20));
 
         lblDescripcionTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblDescripcionTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
@@ -145,15 +177,23 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgRegistros.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));
 
+        lblErrorTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblErrorTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
+        lblErrorTipoHabitacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorTipoHabitacion.setToolTipText("");
+        getContentPane().add(lblErrorTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, 580, 30));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        irAFrmRegistro();
-    }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed
         registrarTipoHabitacio();
     }//GEN-LAST:event_btnRegistrarTipoHabitacionActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        irAFrmRegistro();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -180,13 +220,23 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmTipoHabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        /* Create and display the form */
+        //</editor-fold>
+
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmTipoHabitacion().setVisible(true);
+                FrmTipoHabitacion dialog = new FrmTipoHabitacion(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarTipoHabitacion;
     private javax.swing.JButton btnRegresar;
@@ -197,6 +247,7 @@ public class FrmTipoHabitacion extends javax.swing.JFrame {
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblPrecio;
     private javax.swing.JLabel lblSimbloColones;
+    private javax.swing.JRadioButton rdActivoTipoHabitacion;
     private javax.swing.JTextField txtCodTipoHabitacion;
     private javax.swing.JTextArea txtDescripcionTipoHabitacion;
     private javax.swing.JTextField txtPrecioTipoHabitacion;

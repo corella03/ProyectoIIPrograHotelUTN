@@ -133,11 +133,13 @@ create table tipo_habitacion(
     codigo text not null,
     descripcion text not null,
     precio int not null,
+    activo boolean not null,
     constraint pk_tipo_habitacion primary key (id)
 );
 alter table tipo_habitacion
 	add constraint unq_codigo_tipo_habitacion unique (codigo);
 select * from tipo_habitacion;
+select * from tipo_habitacion where id = 4;
 ---
 ---
 create table agencia_de_viajes(

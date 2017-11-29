@@ -14,13 +14,15 @@ public class TipoHabitacion {
     private String codigo;
     private String descripcion;
     private int precio;
+    private boolean activo;
     public TipoHabitacion() {
     }
-    public TipoHabitacion(int id, String codigo, String descripcion, int precio) {
+    public TipoHabitacion(int id, String codigo, String descripcion, int precio, boolean activo) {
         this.id = id;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
+        this.activo = activo;
     }
     public int getId() {
         return id;
@@ -45,6 +47,12 @@ public class TipoHabitacion {
     }
     public void setPrecio(int precio) {
         this.precio = precio;
+    }
+    public boolean isActivo() {
+        return activo;
+    }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     @Override
     public String toString() {

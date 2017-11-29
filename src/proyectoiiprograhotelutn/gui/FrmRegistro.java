@@ -21,15 +21,20 @@ public class FrmRegistro extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         btnRegresar.setContentAreaFilled(false);
     }
+    public FrmRegistro(TipoHabitacion tipo) {
+        initComponents();
+        setLocationRelativeTo(null);
+        btnRegresar.setContentAreaFilled(false);
+    }
     private void irAMenuPrincipal(){
         FrmMenuPrincipal principal = new FrmMenuPrincipal();
         principal.setVisible(true);
         dispose();
     }
     private void irAFrmTipoHabitacion(){
-        FrmTipoHabitacion tipo = new FrmTipoHabitacion();
+        FrmTipoHabitacion tipo = new FrmTipoHabitacion(this, true);
         tipo.setVisible(true);
-        dispose();
+        //dispose();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,7 +53,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnTipoHabitacion.setText("jButton1");
+        btnTipoHabitacion.setText("Registar");
         btnTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTipoHabitacionActionPerformed(evt);

@@ -28,6 +28,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         registro.setVisible(true);
         dispose();
     }
+    private void irAFrmCargarTiposHabitacion(){
+        FrmCargarTiposHabitacion tipo = new FrmCargarTiposHabitacion();
+        tipo.setVisible(true);
+        dispose();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,6 +43,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         brnIrRegistro = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
@@ -52,6 +58,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(brnIrRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, 30));
+
+        btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 90, 30));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
@@ -74,6 +88,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void brnIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnIrRegistroActionPerformed
         irARegistro();
     }//GEN-LAST:event_brnIrRegistroActionPerformed
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        irAFrmCargarTiposHabitacion();
+    }//GEN-LAST:event_btnModificarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -109,6 +126,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton brnIrRegistro;
+    private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
