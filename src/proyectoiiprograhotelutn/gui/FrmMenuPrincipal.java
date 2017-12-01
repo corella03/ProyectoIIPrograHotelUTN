@@ -17,6 +17,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         btnSalir.setContentAreaFilled(false);
+        btnRegistar.setContentAreaFilled(false);
+        btnModificar.setContentAreaFilled(false);
+        btnElimniar.setContentAreaFilled(false);
     }
     private void irAFrmLogin(){
         FrmLogin login = new FrmLogin();
@@ -28,9 +31,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         registro.setVisible(true);
         dispose();
     }
-    private void irAFrmCargarTiposHabitacion(){
-        FrmCargarTiposHabitacion tipo = new FrmCargarTiposHabitacion();
-        tipo.setVisible(true);
+    public void irAFrmEliminar(){
+        FrmEliminar eliminar = new FrmEliminar();
+        eliminar.setVisible(true);
+        dispose();
+    }
+    public void irAModificar(){
+        FrmModificar modificar = new FrmModificar();
+        modificar.setVisible(true);
         dispose();
     }
     /**
@@ -42,22 +50,28 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        brnIrRegistro = new javax.swing.JButton();
+        btnRegistar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnElimniar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        brnIrRegistro.setText("Ir a Registro");
-        brnIrRegistro.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnRegistar.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgAgregar.png"))); // NOI18N
+        btnRegistar.setText("Ir a Registro");
+        btnRegistar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnRegistar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brnIrRegistroActionPerformed(evt);
+                btnRegistarActionPerformed(evt);
             }
         });
-        getContentPane().add(brnIrRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, 30));
+        getContentPane().add(btnRegistar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
 
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
@@ -65,7 +79,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 180, 90, 30));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 90, 30));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
@@ -77,6 +91,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 44, 28));
 
+        btnElimniar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnElimniar.setForeground(new java.awt.Color(255, 255, 255));
+        btnElimniar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgEliminar.png"))); // NOI18N
+        btnElimniar.setText("Eliminar");
+        btnElimniar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnElimniar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnElimniar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnElimniarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnElimniar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 100, 90));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgMenuPrincipal.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -85,12 +112,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         irAFrmLogin();
     }//GEN-LAST:event_btnSalirActionPerformed
-    private void brnIrRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brnIrRegistroActionPerformed
+    private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
         irARegistro();
-    }//GEN-LAST:event_brnIrRegistroActionPerformed
+    }//GEN-LAST:event_btnRegistarActionPerformed
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        irAFrmCargarTiposHabitacion();
+        irAModificar();
     }//GEN-LAST:event_btnModificarActionPerformed
+    private void btnElimniarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimniarActionPerformed
+        irAFrmEliminar();
+    }//GEN-LAST:event_btnElimniarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -125,8 +155,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton brnIrRegistro;
+    private javax.swing.JButton btnElimniar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnRegistar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables

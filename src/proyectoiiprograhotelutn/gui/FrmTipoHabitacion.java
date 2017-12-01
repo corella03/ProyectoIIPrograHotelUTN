@@ -25,7 +25,6 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
         btnRegresar.setContentAreaFilled(false);
         btnRegistrarTipoHabitacion.setContentAreaFilled(false);
         this.tipo = new TipoHabitacion();
-        cargarTipoHabitacion();
         rdActivoTipoHabitacion.setVisible(false);
     }
     public FrmTipoHabitacion(java.awt.Frame parent, boolean modal, TipoHabitacion tipo) {
@@ -79,8 +78,7 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
     private void cargarTipoHabitacion(){
         txtCodTipoHabitacion.setText(tipo.getCodigo());
         txtPrecioTipoHabitacion.setText(String.valueOf(tipo.getPrecio()));
-        txtDescripcionTipoHabitacion.setText(tipo .getDescripcion());
-        rdActivoTipoHabitacion.setSelected(true);
+        txtDescripcionTipoHabitacion.setText(tipo.getDescripcion());
         if(tipo.isActivo()){
             rdActivoTipoHabitacion.setSelected(true);
         }else if(!tipo.isActivo()){
@@ -185,15 +183,12 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed
         registrarTipoHabitacio();
     }//GEN-LAST:event_btnRegistrarTipoHabitacionActionPerformed
-
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         irAFrmRegistro();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -221,7 +216,6 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
         }
         //</editor-fold>
         //</editor-fold>
-
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -236,7 +230,6 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarTipoHabitacion;
     private javax.swing.JButton btnRegresar;

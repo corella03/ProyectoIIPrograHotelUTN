@@ -5,6 +5,7 @@
  */
 package proyectoiiprograhotelutn.gui;
 
+import proyectoiiprograhotelutn.entities.Puesto;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;
 
 /**
@@ -36,6 +37,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         tipo.setVisible(true);
         //dispose();
     }
+    private void irAFrmPuesto(){
+        FrmPuesto puesto = new FrmPuesto(this, true);
+        puesto.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -47,13 +52,14 @@ public class FrmRegistro extends javax.swing.JFrame {
 
         btnTipoHabitacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        btnPuesto = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnTipoHabitacion.setText("Registar");
+        btnTipoHabitacion.setText("Tipo Habitación");
         btnTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTipoHabitacionActionPerformed(evt);
@@ -71,6 +77,14 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 44, 28));
 
+        btnPuesto.setText("Puesto");
+        btnPuesto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuestoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -82,6 +96,9 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTipoHabitacionActionPerformed
         irAFrmTipoHabitacion();
     }//GEN-LAST:event_btnTipoHabitacionActionPerformed
+    private void btnPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestoActionPerformed
+        irAFrmPuesto();
+    }//GEN-LAST:event_btnPuestoActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -116,6 +133,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;
     private javax.swing.JLabel lblFondo;

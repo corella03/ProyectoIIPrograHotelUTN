@@ -13,12 +13,14 @@ public class Puesto {
     private int id;
     private String nombre;
     private String descripcion;
+    private boolean activo;
     public Puesto() {
     }
-    public Puesto(int id, String nombre, String descripcion) {
+    public Puesto(int id, String nombre, String descripcion, boolean activo) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
+        this.activo = activo;
     }
     public int getId() {
         return id;
@@ -38,8 +40,14 @@ public class Puesto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+    public boolean isActivo() {
+        return activo;
+    }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     @Override
     public String toString() {
-        return "Puesto." + "\nId: " + id + "\nNombre: "+ nombre + "\nDescripción:" + descripcion;
+        return "Puesto: " + nombre;
     } 
 }

@@ -21,7 +21,6 @@ public class TipoHabitacionDAO {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into tipo_habitacion(codigo, descripcion, precio)"
                     + "values (?,?,?)";
-            
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, tipo.getCodigo());
             stmt.setString(2, tipo.getDescripcion());
@@ -71,7 +70,7 @@ public class TipoHabitacionDAO {
                 return cargarTipoDeHabitacion(rs);
             }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar el el tipo de habitación, favor intente nuevamente");
+            throw new MiError("Problemas al cargar el tipo de habitación, favor intente nuevamente");
         }
         return null;
     }
@@ -88,7 +87,7 @@ public class TipoHabitacionDAO {
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo modificar el usuario, favor intente nuevamente");
+            throw new MiError("No se pudo modificar el tipo de habitación, favor intente nuevamente");
         }
     }
     public boolean eliminarTipoHabitacion(TipoHabitacion tipo) {
@@ -99,7 +98,7 @@ public class TipoHabitacionDAO {
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo Eliminar el usuario, favor intente nuevamente");
+            throw new MiError("No se pudo Eliminar el tipo de habitación, favor intente nuevamente");
         }
     }
 }

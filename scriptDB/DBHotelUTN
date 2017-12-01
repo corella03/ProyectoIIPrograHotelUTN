@@ -138,8 +138,10 @@ create table tipo_habitacion(
 );
 alter table tipo_habitacion
 	add constraint unq_codigo_tipo_habitacion unique (codigo);
-select * from tipo_habitacion;
+
 select * from tipo_habitacion where id = 4;
+update tipo_habitacion set activo = true where id = 14;
+select * from tipo_habitacion;
 ---
 ---
 create table agencia_de_viajes(

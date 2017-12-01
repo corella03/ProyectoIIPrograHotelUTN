@@ -1010,56 +1010,70 @@ public class FrmRegi extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         irALogin();
     }//GEN-LAST:event_btnSalirActionPerformed
-    private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
-        registrarPuesto();
-    }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
-    private void btnRegistrarAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAgenciaActionPerformed
-        registrarAgencia();
-    }//GEN-LAST:event_btnRegistrarAgenciaActionPerformed
-    private void sldPorcentajeComisionAgenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldPorcentajeComisionAgenciaStateChanged
-       lblPorcentajeComision.setText(sldPorcentajeComisionAgencia.getValue() + "%");
-    }//GEN-LAST:event_sldPorcentajeComisionAgenciaStateChanged
-    private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed
-        ;
-    }//GEN-LAST:event_btnRegistrarTipoHabitacionActionPerformed
-    private void btnRegistrarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPaisActionPerformed
-        registrarPais();
-        cargarPaises();
-    }//GEN-LAST:event_btnRegistrarPaisActionPerformed
-    private void btnRegistrarProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProvinciaActionPerformed
-        registrarProvincia();
-        cargarProvincias();
-    }//GEN-LAST:event_btnRegistrarProvinciaActionPerformed
-    private void btnRegistrarDistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDistritoActionPerformed
+
+    private void cbxCantonPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCantonPaisActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarDistritoActionPerformed
-    private void btnRegistrarCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCantonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegistrarCantonActionPerformed
-    private void rdPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdPaisItemStateChanged
-        vistaLugar();
-    }//GEN-LAST:event_rdPaisItemStateChanged
-    private void rdDistritoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdDistritoItemStateChanged
-        vistaLugar();
-    }//GEN-LAST:event_rdDistritoItemStateChanged
-    private void rdProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProvinciaItemStateChanged
-        vistaLugar();
-    }//GEN-LAST:event_rdProvinciaItemStateChanged
-    private void rdCantonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdCantonItemStateChanged
-        vistaLugar();
-    }//GEN-LAST:event_rdCantonItemStateChanged
-    private void cbxProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvinciaActionPerformed
-        //cargarPaises();
-        indexPais = cbxProvincia.getSelectedIndex();
-    }//GEN-LAST:event_cbxProvinciaActionPerformed
+    }//GEN-LAST:event_cbxCantonPaisActionPerformed
+
     private void cbxCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCantonActionPerformed
         //cargarProvincias();
         indexProvincia = cbxCanton.getSelectedIndex();
     }//GEN-LAST:event_cbxCantonActionPerformed
 
-    private void cbxCantonPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCantonPaisActionPerformed
+    private void btnRegistrarCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCantonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCantonPaisActionPerformed
+    }//GEN-LAST:event_btnRegistrarCantonActionPerformed
+
+    private void cbxProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvinciaActionPerformed
+        //cargarPaises();
+        indexPais = cbxProvincia.getSelectedIndex();
+    }//GEN-LAST:event_cbxProvinciaActionPerformed
+
+    private void btnRegistrarProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarProvinciaActionPerformed
+        registrarProvincia();
+        cargarProvincias();
+    }//GEN-LAST:event_btnRegistrarProvinciaActionPerformed
+
+    private void btnRegistrarDistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarDistritoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarDistritoActionPerformed
+
+    private void rdDistritoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdDistritoItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdDistritoItemStateChanged
+
+    private void rdCantonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdCantonItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdCantonItemStateChanged
+
+    private void rdProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProvinciaItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdProvinciaItemStateChanged
+
+    private void rdPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdPaisItemStateChanged
+        vistaLugar();
+    }//GEN-LAST:event_rdPaisItemStateChanged
+
+    private void btnRegistrarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPaisActionPerformed
+        registrarPais();
+        cargarPaises();
+    }//GEN-LAST:event_btnRegistrarPaisActionPerformed
+
+    private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed
+        ;
+    }//GEN-LAST:event_btnRegistrarTipoHabitacionActionPerformed
+
+    private void sldPorcentajeComisionAgenciaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sldPorcentajeComisionAgenciaStateChanged
+        lblPorcentajeComision.setText(sldPorcentajeComisionAgencia.getValue() + "%");
+    }//GEN-LAST:event_sldPorcentajeComisionAgenciaStateChanged
+
+    private void btnRegistrarAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAgenciaActionPerformed
+        registrarAgencia();
+    }//GEN-LAST:event_btnRegistrarAgenciaActionPerformed
+
+    private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
+        registrarPuesto();
+    }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
     /**
      * @param args the command line arguments
      */
