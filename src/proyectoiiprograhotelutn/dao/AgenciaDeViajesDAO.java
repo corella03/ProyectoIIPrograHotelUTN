@@ -19,26 +19,31 @@ import proyectoiiprograhotelutn.entities.MiError;
 public class AgenciaDeViajesDAO {
     public boolean insertarAgencia(AgenciaDeViajes agencia) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "insert into agencia_de_viajes(id, nombre, comision)"
-                    + "values (?,?,?)";
+            String sql = "insert into agencia_de_viajes(codigo, nombre, telefono, comision)"
+                    + "values (?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, agencia.getId());
+            stmt.setString(1, agencia.getCodigo());
             stmt.setString(2, agencia.getNombre());
-            stmt.setInt(3, agencia.getComision());
+            stmt.setInt(3, agencia.getTelefono());
+            stmt.setInt(4, agencia.getComision());
             return stmt.executeUpdate() > 0;
-        } catch (Exception ex) {
+        }catch(SQLException e) {
+            throw  new MiError("El codigo de la agencia ya fue registrada.");
+        } 
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar la agencia, favor intente nuevamente.");
         }
     }
-    public ArrayList<AgenciaDeViajes> cargarAgenciasDeViajes() {
+    public ArrayList<AgenciaDeViajes> cargarAgencias(boolean activo) {
         ArrayList<AgenciaDeViajes> agencia = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select * from agencia_de_viajes";
+            String sql = activo ? "select * from agencia_de_viajes where activo = true"
+                    : "select * from agencia_de_viajes";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                agencia.add(cargarAgenciaDeViajes(rs));
+                agencia.add(cargarAgencia(rs));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
@@ -46,21 +51,56 @@ public class AgenciaDeViajesDAO {
         }
         return agencia;
     }
-    private AgenciaDeViajes cargarAgenciaDeViajes(ResultSet rs) throws SQLException {
+    private AgenciaDeViajes cargarAgencia(ResultSet rs) throws SQLException {
         AgenciaDeViajes agencia = new AgenciaDeViajes();
-        agencia.setId(rs.getString("id"));
+        agencia.setId(rs.getInt("id"));
+        agencia.setCodigo(rs.getString("codigo"));
         agencia.setNombre(rs.getString("nombre"));
+        agencia.setTelefono(rs.getInt("telefono"));
         agencia.setComision(rs.getInt("comision"));
-        return agencia;    }
-    public boolean verificarExistenciaAgencia(String id) {
+        agencia.setActivo(rs.getBoolean("activo"));
+        return agencia;    
+    }
+    public AgenciaDeViajes seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select id from agencia_de_viajes where id = ?";
+            String sql = "select * from agencia_de_viajes where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, id.toLowerCase());
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                return cargarAgencia(rs);
+            }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar, favor intente nuevamente.");
+            throw new MiError("Problemas al cargar la Agencia, favor intente nuevamente");
+        }
+        return null;
+    }
+    public boolean modificarAgencia(AgenciaDeViajes agencia) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "update agencia_de_viajes set codigo=?, nombre=?, telefono=?, comision=?, activo=?"
+                    + " where id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, agencia.getCodigo());
+            stmt.setString(2, agencia.getNombre());
+            stmt.setInt(3, agencia.getTelefono());
+            stmt.setInt(4, agencia.getComision());
+            stmt.setBoolean(5, agencia.isActivo());
+            stmt.setInt(6, agencia.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new MiError("No se pudo modificar la agencia, favor intente nuevamente.");
+        }
+    }
+    public boolean eliminarAgencia(AgenciaDeViajes agencia) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "update agencia_de_viajes set activo = false where id =?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, agencia.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new MiError("No se pudo Eliminar la Agencia, favor intente nuevamente");
         }
     }
 }

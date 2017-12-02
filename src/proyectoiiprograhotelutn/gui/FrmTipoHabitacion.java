@@ -53,6 +53,8 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
             if(!this.tipo.isActivo()){
                 if(rdActivoTipoHabitacion.isSelected()){
                     tipoHabitacion.setActivo(true);
+                }else{
+                    tipoHabitacion.setActivo(false);
                 }
             }
             TipoHabitacionBO tipobo = new TipoHabitacionBO();

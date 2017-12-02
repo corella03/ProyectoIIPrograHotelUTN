@@ -25,6 +25,10 @@ public class FrmModificar extends javax.swing.JFrame {
         FrmCargarPuestos puestos = new FrmCargarPuestos(this, true, opc);
         puestos.setVisible(true);  
     }
+    public void irAModificarEliminarAgencia(int opc){
+        FrmCargarAgencias agencias = new FrmCargarAgencias(this, true, opc);
+        agencias.setVisible(true);  
+    }
     private void irAMenuPrincipal(){
         FrmMenuPrincipal principal = new FrmMenuPrincipal();
         principal.setVisible(true);
@@ -43,6 +47,7 @@ public class FrmModificar extends javax.swing.JFrame {
         btnRegresar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnPuesto = new javax.swing.JButton();
+        btnAgencia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -72,6 +77,13 @@ public class FrmModificar extends javax.swing.JFrame {
             }
         });
 
+        btnAgencia.setText("Agencia de Viajes");
+        btnAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgenciaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -81,6 +93,8 @@ public class FrmModificar extends javax.swing.JFrame {
                 .addComponent(btnTipoHabitacion)
                 .addGap(108, 108, 108)
                 .addComponent(btnPuesto)
+                .addGap(91, 91, 91)
+                .addComponent(btnAgencia)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(270, Short.MAX_VALUE)
@@ -99,7 +113,8 @@ public class FrmModificar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTipoHabitacion)
-                    .addComponent(btnPuesto))
+                    .addComponent(btnPuesto)
+                    .addComponent(btnAgencia))
                 .addContainerGap(308, Short.MAX_VALUE))
         );
 
@@ -114,6 +129,9 @@ public class FrmModificar extends javax.swing.JFrame {
     private void btnPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestoActionPerformed
         irAModificarEliminarPuesto(1);
     }//GEN-LAST:event_btnPuestoActionPerformed
+    private void btnAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgenciaActionPerformed
+        irAModificarEliminarAgencia(1);
+    }//GEN-LAST:event_btnAgenciaActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -148,6 +166,7 @@ public class FrmModificar extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgencia;
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;

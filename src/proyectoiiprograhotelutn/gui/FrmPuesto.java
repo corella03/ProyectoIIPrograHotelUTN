@@ -5,7 +5,6 @@
  */
 package proyectoiiprograhotelutn.gui;
 import proyectoiiprograhotelutn.bo.PuestoBO;
-import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;
 /**
@@ -52,6 +51,8 @@ public class FrmPuesto extends javax.swing.JDialog {
             if(!this.puesto.isActivo()){
                 if(rdActivoPuesto.isSelected()){
                     puestoNuevo.setActivo(true);
+                }else{
+                    puestoNuevo.setActivo(false);
                 }
             }
             PuestoBO puestobo = new PuestoBO();

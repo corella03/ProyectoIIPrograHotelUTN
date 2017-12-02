@@ -29,6 +29,8 @@
               <Component id="btnTipoHabitacion" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
               <Component id="btnPuesto" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
+              <Component id="btnAgencia" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
@@ -52,6 +54,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnTipoHabitacion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnPuesto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnAgencia" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="308" max="32767" attributes="0"/>
           </Group>
@@ -92,6 +95,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPuestoActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnAgencia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agencia de Viajes"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgenciaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

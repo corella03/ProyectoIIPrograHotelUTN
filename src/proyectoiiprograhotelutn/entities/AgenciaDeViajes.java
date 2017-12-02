@@ -10,21 +10,33 @@ package proyectoiiprograhotelutn.entities;
  ** 24/11/2017
  **/
 public class AgenciaDeViajes {
-    private String id;
+    private int id;
+    private String codigo;
     private String nombre;
+    private int telefono;
     private int comision;
+    private boolean activo;
     public AgenciaDeViajes() {
     }
-    public AgenciaDeViajes(String id, String nombre, int comision) {
+    public AgenciaDeViajes(int id, String codigo, String nombre, int telefono, int comision, boolean activo) {
         this.id = id;
+        this.codigo = codigo;
         this.nombre = nombre;
+        this.telefono = telefono;
         this.comision = comision;
+        this.activo = activo;
     }
-    public String getId() {
+    public int getId() {
         return id;
     }
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
+    }
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
     public String getNombre() {
         return nombre;
@@ -32,14 +44,26 @@ public class AgenciaDeViajes {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public int getTelefono() {
+        return telefono;
+    }
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
     public int getComision() {
         return comision;
     }
     public void setComision(int comision) {
         this.comision = comision;
     }
+    public boolean isActivo() {
+        return activo;
+    }
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     @Override
     public String toString() {
-        return "AgenciaDeViajes: " + "\nId: " + id + "\nNombre: " + nombre + "\nComisión: " + comision;
+        return "AgenciaDeViajes: " + nombre + " (" + codigo + ")";
     }
 }

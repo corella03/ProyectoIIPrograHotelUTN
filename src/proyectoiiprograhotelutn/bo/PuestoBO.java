@@ -19,13 +19,13 @@ public class PuestoBO {
         puestodao = new PuestoDAO();
     }
     public boolean registrarPuesto(Puesto puesto) {
-        if (puesto.getNombre().isEmpty()) {
+        if(puesto.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre del puesto.");
         }
-        if (puesto.getDescripcion().isEmpty()) {
+        if(puesto.getDescripcion().isEmpty()) {
             throw new MiError("Se Requiere que ingrese la descripcion del puesto.");
         }
-        if (puesto.getId() == 0) {
+        if(puesto.getId() == 0) {
             return puestodao.insertarPuesto(puesto);
         } else {
             return puestodao.modificarPuesto(puesto);

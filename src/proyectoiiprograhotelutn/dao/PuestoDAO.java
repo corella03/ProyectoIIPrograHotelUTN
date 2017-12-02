@@ -26,7 +26,10 @@ public class PuestoDAO {
             stmt.setString(1, puesto.getNombre());
             stmt.setString(2, puesto.getDescripcion());
             return stmt.executeUpdate() > 0;
-        } catch (Exception ex) {
+        }catch(SQLException e) {
+            throw  new MiError("El nombre del puesto ya fue registrada.");
+        } 
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar el puesto, favor intente nuevamente.");
         }

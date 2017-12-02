@@ -55,56 +55,7 @@ public class FrmRegi extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }
-    public void registrarPuesto(){
-        lblErrorPuesto.setText("");
-        try {
-            Puesto nuevoPuesto = new Puesto();
-            nuevoPuesto.setId(this.puesto.getId());
-            nuevoPuesto.setNombre(txtNombrePuesto.getText().trim().toLowerCase());
-            nuevoPuesto.setDescripcion(txtDescripcionPuesto.getText().trim());
-            PuestoBO pbo = new PuestoBO();
-            if (pbo.registrarPuesto(nuevoPuesto)) {
-                lblErrorPuesto.setText("Puesto registrado con éxito.");
-            } else {
-                lblErrorPuesto.setText("Intente nuevamente.");
-            }
-        } catch (MiError ex) {
-            lblErrorPuesto.setText(ex.getMessage());
-        } catch (Exception ex) {
-            lblErrorPuesto.setText("Llamar a TI ...xD");
-        }
-    }
-    public void cargarPuestos(){
-        PuestoBO puestobo = new PuestoBO();
-        for (int i = 0; i < puestobo.cargarPuestos().size(); i++) {
-            System.out.println(puestobo.cargarPuestos().get(i).getNombre());
-        }
-    }
-    public void registrarAgencia(){
-        lblErrorAgencia.setText("");
-        try {
-            AgenciaDeViajes nuevaAgencia = new AgenciaDeViajes();
-            nuevaAgencia.setId(txtIdAgencia.getText().trim().toLowerCase());
-            nuevaAgencia.setNombre(txtNombreAgencia.getText().trim().toLowerCase());
-            nuevaAgencia.setComision(sldPorcentajeComisionAgencia.getValue());
-            AgenciaDeViajesBO abo = new AgenciaDeViajesBO();
-            if (abo.registrarAgencia(nuevaAgencia)) {
-                lblErrorAgencia.setText("Agencia registrada con éxito.");
-            } else {
-                lblErrorAgencia.setText("Intente nuevamente.");
-            }
-        } catch (MiError ex) {
-            lblErrorAgencia.setText(ex.getMessage());
-        } catch (Exception ex) {
-            lblErrorAgencia.setText("Llamar a TI ...xD");
-        }
-    }
-    public void cargarAgencias(){
-        AgenciaDeViajesBO agencia = new AgenciaDeViajesBO();
-        for (int i = 0; i < agencia.cargarAgenciasDeViajes().size(); i++) {
-            System.out.println(agencia.cargarAgenciasDeViajes().get(i).getId());
-        }
-    }
+   
     
     public void registrarPais(){
         lblErrorLugar.setText("");
@@ -1068,11 +1019,11 @@ public class FrmRegi extends javax.swing.JFrame {
     }//GEN-LAST:event_sldPorcentajeComisionAgenciaStateChanged
 
     private void btnRegistrarAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarAgenciaActionPerformed
-        registrarAgencia();
+        
     }//GEN-LAST:event_btnRegistrarAgenciaActionPerformed
 
     private void btnRegistrarPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPuestoActionPerformed
-        registrarPuesto();
+       
     }//GEN-LAST:event_btnRegistrarPuestoActionPerformed
     /**
      * @param args the command line arguments

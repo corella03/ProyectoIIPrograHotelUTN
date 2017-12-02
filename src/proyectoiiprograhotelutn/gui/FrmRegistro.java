@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
-
-import proyectoiiprograhotelutn.entities.Puesto;
-import proyectoiiprograhotelutn.entities.TipoHabitacion;
-
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -18,11 +14,6 @@ public class FrmRegistro extends javax.swing.JFrame {
      * Creates new form FrmRegistro
      */
     public FrmRegistro() {
-        initComponents();
-        setLocationRelativeTo(null);
-        btnRegresar.setContentAreaFilled(false);
-    }
-    public FrmRegistro(TipoHabitacion tipo) {
         initComponents();
         setLocationRelativeTo(null);
         btnRegresar.setContentAreaFilled(false);
@@ -41,6 +32,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         FrmPuesto puesto = new FrmPuesto(this, true);
         puesto.setVisible(true);
     }
+    private void irAFrmAgencia(){
+        FrmAgenciaDeViajes agencia = new FrmAgenciaDeViajes(this, true);
+        agencia.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +48,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         btnTipoHabitacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnPuesto = new javax.swing.JButton();
+        btnAgencia = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -85,6 +81,14 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
         getContentPane().add(btnPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 50, -1, -1));
 
+        btnAgencia.setText("Agencia de Viajes");
+        btnAgencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgenciaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 50, -1, -1));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -99,6 +103,9 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnPuestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuestoActionPerformed
         irAFrmPuesto();
     }//GEN-LAST:event_btnPuestoActionPerformed
+    private void btnAgenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgenciaActionPerformed
+        irAFrmAgencia();
+    }//GEN-LAST:event_btnAgenciaActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -133,6 +140,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgencia;
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;
