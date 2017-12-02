@@ -8,24 +8,30 @@ import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.PaisDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
+import proyectoiiprograhotelutn.entities.Puesto;
 /**
  **
  ** @author Luis Alonso Corella Chaves
  ** 24/11/2017
  **/
 public class PaisBO {
+    PaisDAO paisdao;
+    public PaisBO() {
+        paisdao = new PaisDAO();
+    }
     public boolean registrarPais(Pais pais) {
         if (pais.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre del país.");
         }
-        PaisDAO paisdao = new PaisDAO();
-        if(paisdao.verificarExistenciaPais(pais.getNombre())){
-            throw new MiError("El país ya ha sido registrado.");
-        }
         return paisdao.insertarPais(pais);
     }
     public ArrayList<Pais> cargarPaises() {
-        PaisDAO paisdao = new PaisDAO();
         return paisdao.cargarPaises();
+    }
+    public Pais getPais(int id) {
+        if (id <= 0) {
+            throw new MiError("Favor seleccionar un Pais");
+        }
+        return paisdao.seleccionarPorId(id);
     }
 }

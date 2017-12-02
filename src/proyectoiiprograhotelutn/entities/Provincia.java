@@ -10,21 +10,21 @@ package proyectoiiprograhotelutn.entities;
  ** 26/11/2017
  **/
 public class Provincia extends Lugar{
-    private int idPais;
+    private Pais pais;
     public Provincia() {
     }
-    public Provincia(int idPais, int id, String nombre) {
+    public Provincia(Pais pais, int id, String nombre) {
         super(id, nombre);
-        this.idPais = idPais;
+        this.pais = pais;
     }
-    public int getIdPais() {
-        return idPais;
+    public Pais getPais() {
+        return pais;
     }
-    public void setIdPais(int idPais) {
-        this.idPais = idPais;
+    public void setPais(Pais pais) {
+        this.pais = pais;
     }
     @Override
     public String toString() {
-        return "Provincia: " + "\nId: " + getId() + "\nNombre: " + getNombre() + "\nId País: " + idPais;
+        return "Provincia: " + getNombre();
     }
 }

@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
+
+import proyectoiiprograhotelutn.gui.TiposHabitacion.FrmCargarTiposHabitacion;
+import proyectoiiprograhotelutn.gui.Puesto.FrmCargarPuestos;
+import proyectoiiprograhotelutn.gui.AgenciaDeViajes.FrmCargarAgencias;
+
 /**
  **
  ** @author Luis Alonso Corella Chaves

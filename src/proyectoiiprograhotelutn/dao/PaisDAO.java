@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
+import proyectoiiprograhotelutn.entities.Puesto;
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -24,7 +25,10 @@ public class PaisDAO {
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, pais.getNombre());
             return stmt.executeUpdate() > 0;
-        } catch (Exception ex) {
+        }catch(SQLException e) {
+            throw  new MiError("El nombre del puesto ya fue registrada.");
+        }  
+        catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar el país, favor intente nuevamente.");
         }
@@ -50,15 +54,31 @@ public class PaisDAO {
         pais.setNombre(rs.getString("nombre"));
         return pais;
     }
-    public boolean verificarExistenciaPais(String nombre) {
+    public Pais seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select nombre from pais where nombre = ?";
+            String sql = "select * from pais where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nombre.toLowerCase());
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                return cargarPais(rs);
+            }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar, favor intente nuevamente.");
+            throw new MiError("Problemas al cargar el pais, favor intente nuevamente");
+        }
+        return null;
+    }
+    public boolean modificarPais(Pais pais) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "update pais set nombre=?"
+                    + " where id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, pais.getNombre());
+            stmt.setInt(2, pais.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new MiError("No se pudo modificar el Pais, favor intente nuevamente");
         }
     }
 }

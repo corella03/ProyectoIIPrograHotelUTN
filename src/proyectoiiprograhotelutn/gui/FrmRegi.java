@@ -125,57 +125,7 @@ public class FrmRegi extends javax.swing.JFrame {
 ////            cbxCanton.addItem(provinciabo.cargarProvincias().get(i).getNombre());
 ////        }
 //    }
-    public void vistaLugar(){
-        if(rdPais.isSelected()){
-            txtNombrePais.setEnabled(true);
-            btnRegistrarPais.setEnabled(true);
-            txtNombreProvincia.setEnabled(false);
-            cbxProvincia.setEnabled(false);
-            btnRegistrarProvincia.setEnabled(false);
-            txtNombreCanton.setEnabled(false);
-            cbxCanton.setEnabled(false);
-            btnRegistrarCanton.setEnabled(false);
-            txtNombreDistrito.setEnabled(false);
-            cbxDistrito.setEnabled(false);
-            btnRegistrarDistrito.setVisible(false);
-        }else if(rdProvincia.isSelected()){
-            txtNombrePais.setEnabled(false);
-            btnRegistrarPais.setEnabled(false);
-            txtNombreProvincia.setEnabled(true);
-            cbxProvincia.setEnabled(true);
-            btnRegistrarProvincia.setEnabled(true);
-            txtNombreCanton.setEnabled(false);
-            cbxCanton.setEnabled(false);
-            btnRegistrarCanton.setEnabled(false);
-            txtNombreDistrito.setEnabled(false);
-            cbxDistrito.setEnabled(false);
-            btnRegistrarDistrito.setVisible(false);
-        }else if(rdCanton.isSelected()){
-            txtNombrePais.setEnabled(false);
-            btnRegistrarPais.setEnabled(false);
-            txtNombreProvincia.setEnabled(false);
-            cbxProvincia.setEnabled(false);
-            btnRegistrarProvincia.setEnabled(false);
-            txtNombreCanton.setEnabled(true);
-            cbxCanton.setEnabled(true);
-            btnRegistrarCanton.setEnabled(true);
-            txtNombreDistrito.setEnabled(false);
-            cbxDistrito.setEnabled(false);
-            btnRegistrarDistrito.setVisible(false);
-        }else if(rdDistrito.isSelected()){
-            txtNombrePais.setEnabled(false);
-            btnRegistrarPais.setEnabled(false);
-            txtNombreProvincia.setEnabled(false);
-            cbxProvincia.setEnabled(false);
-            btnRegistrarProvincia.setEnabled(false);
-            txtNombreCanton.setEnabled(false);
-            cbxCanton.setEnabled(false);
-            btnRegistrarCanton.setEnabled(false);
-            txtNombreDistrito.setEnabled(true);
-            cbxDistrito.setEnabled(true);
-            btnRegistrarDistrito.setVisible(true);
-        }
-    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
