@@ -71,7 +71,7 @@ public class ProvinciaDAO {
     }
     public boolean modificarProvincia(Provincia provincia) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "update pais set nombre=?, id_pais"
+            String sql = "update provincia set nombre=?, id_pais"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, provincia.getNombre());

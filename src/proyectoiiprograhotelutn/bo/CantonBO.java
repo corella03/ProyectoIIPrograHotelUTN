@@ -6,10 +6,9 @@
 package proyectoiiprograhotelutn.bo;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import proyectoiiprograhotelutn.dao.ProvinciaDAO;
+import proyectoiiprograhotelutn.dao.CantonDAO;
+import proyectoiiprograhotelutn.entities.Canton;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Provincia;
 
 /**
  **
@@ -17,30 +16,30 @@ import proyectoiiprograhotelutn.entities.Provincia;
  ** 26/11/2017
  **/
 public class CantonBO {
-    ProvinciaDAO provinciadao;
+    CantonDAO cantondao;
     public CantonBO() {
-        provinciadao = new ProvinciaDAO();
+        cantondao = new CantonDAO();
     }
-    public boolean registrarProvincia(Provincia provincia) {
-        if (provincia.getNombre().isEmpty()) {
-            throw new MiError("Se Requiere que ingrese el nombre de la provincia.");
+    public boolean registrarCanton(Canton canton) {
+        if (canton.getNombre().isEmpty()) {
+            throw new MiError("Se Requiere que ingrese el nombre del Cantón.");
         }
-        if (String.valueOf(provincia.getPais().getId()).isEmpty()) {
-            throw new MiError("Se Requiere que ingrese el país que pertenece la provincia.");
+        if (String.valueOf(canton.getProvincia().getId()).isEmpty()) {
+            throw new MiError("Se Requiere que ingrese la provincia a la que pertenece el cantón.");
         }
-        if(provincia.getId() == 0) {
-            return provinciadao.insertarProvincia(provincia);
+        if(canton.getId() == 0) {
+            return cantondao.insertarCanton(canton);
         } else {
-            return provinciadao.modificarProvincia(provincia);
+            return cantondao.modificarCanton(canton);
         }
     }
-    public ArrayList<Provincia> cargarProvincias() {
-        return provinciadao.cargarProvincias();
+    public ArrayList<Canton> cargarCantones() {
+        return cantondao.cargarCantones();
     }
-    public Provincia getPais(int id) {
+    public Canton getCanton(int id) {
         if (id <= 0) {
-            throw new MiError("Favor seleccionar una Provincia");
+            throw new MiError("Favor seleccionar un Cantón");
         }
-        return provinciadao.seleccionarPorId(id);
+        return cantondao.seleccionarPorId(id);
     }
 }

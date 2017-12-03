@@ -9,78 +9,78 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import proyectoiiprograhotelutn.entities.Canton;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Provincia;
 /**
  **
  ** @author Luis Alonso Corella Chaves
  ** 26/11/2017
  **/
 public class CantonDAO {
-    public boolean insertarProvincia(Provincia provincia) {
+    public boolean insertarCanton(Canton canton) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "insert into provincia(nombre, id_pais)"
+            String sql = "insert into canton(nombre, id_provincia)"
                     + "values (?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, provincia.getNombre());
-            stmt.setInt(2, provincia.getPais().getId());
+            stmt.setString(1, canton.getNombre());
+            stmt.setInt(2, canton.getProvincia().getId());
             return stmt.executeUpdate() > 0;
         }catch(SQLException e) {
-            throw  new MiError("El nombre del puesto ya fue registrada.");
+            throw  new MiError("El nombre del cantón ya fue registrada.");
         }catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo registrar la provincia, favor intente nuevamente.");
+            throw new MiError("No se pudo registrar el cantón, favor intente nuevamente.");
         }
     }
-    public ArrayList<Provincia> cargarProvincias() {
-        ArrayList<Provincia> provincias = new ArrayList<>();
+    public ArrayList<Canton> cargarCantones() {
+        ArrayList<Canton> cantones = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select * from provincia";
+            String sql = "select * from canton";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                provincias.add(cargarProvincia(rs));
+                cantones.add(cargarCanton(rs));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
-            throw new MiError("Problemas al cargar las Provincias, favor intente nuevamente.");
+            throw new MiError("Problemas al cargar los cantónes, favor intente nuevamente.");
         }
-        return provincias;
+        return cantones;
     }
-    private Provincia cargarProvincia(ResultSet rs) throws SQLException {
-        Provincia provincia = new Provincia();
-        provincia.setId(rs.getInt("id"));
-        provincia.setNombre(rs.getString("nombre"));
-        PaisDAO paisdao = new PaisDAO();
-        provincia.setPais(paisdao.seleccionarPorId(rs.getInt("id_pais")));
-        return provincia;
+    private Canton cargarCanton(ResultSet rs) throws SQLException {
+        Canton canton = new Canton();
+        canton.setId(rs.getInt("id"));
+        canton.setNombre(rs.getString("nombre"));
+        ProvinciaDAO provinciadao = new ProvinciaDAO();
+        canton.setProvincia(provinciadao.seleccionarPorId(rs.getInt("id_provincia")));
+        return canton;
     }
-    public Provincia seleccionarPorId(int id) {
+    public Canton seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select * from provincia where id = ?";
+            String sql = "select * from canton where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return cargarProvincia(rs);
+                return cargarCanton(rs);
             }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar la provincia, favor intente nuevamente");
+            throw new MiError("Problemas al cargar el cantón, favor intente nuevamente");
         }
         return null;
     }
-    public boolean modificarProvincia(Provincia provincia) {
+    public boolean modificarCanton(Canton canton) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "update pais set nombre=?, id_pais"
+            String sql = "update canton set nombre=?, id_pais"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, provincia.getNombre());
-            stmt.setInt(2,provincia.getPais().getId());//revisar
-            stmt.setInt(3, provincia.getId());
+            stmt.setString(1, canton.getNombre());
+            stmt.setInt(2,canton.getProvincia().getId());//revisar
+            stmt.setInt(3, canton.getId());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo modificar la provincia , favor intente nuevamente");
+            throw new MiError("No se pudo modificar el cantón, favor intente nuevamente");
         }
     }
 }

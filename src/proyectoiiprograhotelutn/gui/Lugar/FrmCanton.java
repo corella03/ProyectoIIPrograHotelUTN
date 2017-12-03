@@ -6,6 +6,7 @@
 package proyectoiiprograhotelutn.gui.Lugar;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import proyectoiiprograhotelutn.bo.CantonBO;
 import proyectoiiprograhotelutn.bo.PaisBO;
 import proyectoiiprograhotelutn.bo.ProvinciaBO;
 import proyectoiiprograhotelutn.entities.Canton;
@@ -38,7 +39,6 @@ public class FrmCanton extends javax.swing.JDialog {
         cbxPais.setModel(paises);
         cbxProvincia.setModel(provincias);
         cargarPaises();
-        cargarProvincias();
     }
     public FrmCanton(java.awt.Frame parent, boolean modal, Canton canton) {
         super(parent, modal);
@@ -60,31 +60,34 @@ public class FrmCanton extends javax.swing.JDialog {
             paises.addElement(p);
         }
     }
-    public void cargarProvincias(){
+    public void cargarProvincias(){///Preguntar
         cbxProvincia.removeAllItems();
-        PaisBO paisbo = new PaisBO();
-        ArrayList<Pais> listaPaises = paisbo.cargarPaises();
-        for (Pais p : listaPaises) {
-            paises.addElement(p);
+        ProvinciaBO provinciabo = new ProvinciaBO();
+        ArrayList<Provincia> listaProvincias = provinciabo.cargarProvincias();
+        for (Provincia p : listaProvincias) {
+            if(((Pais) cbxPais.getSelectedItem()).getId() == (p.getPais().getId()))
+            {
+                provincias.addElement(p);
+            }
         }
     }
-    public void registrarProvincia(){
-        lblErrorLugar.setText("");
+    public void registrarCanton(){
+        lblErrorCanton.setText("");
         try {
             canton.setId(this.canton.getId());
             Canton nuevoCanton = new Canton();
             nuevoCanton.setNombre(txtNombreCanton.getText().trim().toLowerCase());
             nuevoCanton.setProvincia((Provincia) cbxProvincia.getSelectedItem());
-            CantonBO provinciabo = new ProvinciaBO();
-            if (provinciabo.registrarProvincia(nuevoCanton)) {
-                lblErrorLugar.setText("Provincia registrada con éxito.");
+            CantonBO cantonbo = new CantonBO();
+            if (cantonbo.registrarCanton(nuevoCanton)) {
+                lblErrorCanton.setText("Cantón registrado con éxito.");
             } else {
-                lblErrorLugar.setText("Intente nuevamente.");
+                lblErrorCanton.setText("Intente nuevamente.");
             }
         } catch (MiError ex) {
-            lblErrorLugar.setText(ex.getMessage());
+            lblErrorCanton.setText(ex.getMessage());
         } catch (Exception ex) {
-            lblErrorLugar.setText("Llamar a TI ...xD");
+            lblErrorCanton.setText("Llamar a TI ...xD");
         }
     }
     private void irAFrmRegistro(){
@@ -105,7 +108,7 @@ public class FrmCanton extends javax.swing.JDialog {
     private void initComponents() {
 
         btnRegresar = new javax.swing.JButton();
-        lblErrorLugar = new javax.swing.JLabel();
+        lblErrorCanton = new javax.swing.JLabel();
         lblNombreCanton = new javax.swing.JLabel();
         txtNombreCanton = new javax.swing.JTextField();
         btnRegistrarCanton = new javax.swing.JButton();
@@ -129,11 +132,11 @@ public class FrmCanton extends javax.swing.JDialog {
         });
         getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 44, 28));
 
-        lblErrorLugar.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lblErrorLugar.setForeground(new java.awt.Color(255, 255, 255));
-        lblErrorLugar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblErrorLugar.setToolTipText("");
-        getContentPane().add(lblErrorLugar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 410, 580, 30));
+        lblErrorCanton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblErrorCanton.setForeground(new java.awt.Color(255, 255, 255));
+        lblErrorCanton.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorCanton.setToolTipText("");
+        getContentPane().add(lblErrorCanton, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 360, 580, 30));
 
         lblNombreCanton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         lblNombreCanton.setForeground(new java.awt.Color(255, 255, 255));
@@ -188,17 +191,13 @@ public class FrmCanton extends javax.swing.JDialog {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         irAFrmRegistro();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
     private void btnRegistrarCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCantonActionPerformed
-        // TODO add your handling code here:
+        registrarCanton();
     }//GEN-LAST:event_btnRegistrarCantonActionPerformed
-
     private void cbxPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxPaisActionPerformed
-        // TODO add your handling code here:
+        cargarProvincias();
     }//GEN-LAST:event_cbxPaisActionPerformed
-
     private void cbxProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvinciaActionPerformed
-        // TODO add your handling code here:
     }//GEN-LAST:event_cbxProvinciaActionPerformed
     /**
      * @param args the command line arguments
@@ -246,7 +245,7 @@ public class FrmCanton extends javax.swing.JDialog {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JComboBox<Pais> cbxPais;
     private javax.swing.JComboBox<Provincia> cbxProvincia;
-    private javax.swing.JLabel lblErrorLugar;
+    private javax.swing.JLabel lblErrorCanton;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblNombreCanton;
     private javax.swing.JLabel lblNombrePais;

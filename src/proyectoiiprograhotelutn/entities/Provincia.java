@@ -25,6 +25,6 @@ public class Provincia extends Lugar{
     }
     @Override
     public String toString() {
-        return "Provincia: " + getNombre();
+        return getNombre();
     }
 }

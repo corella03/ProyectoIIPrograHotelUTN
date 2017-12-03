@@ -37,7 +37,7 @@ public class ProvinciaBO {
     public ArrayList<Provincia> cargarProvincias() {
         return provinciadao.cargarProvincias();
     }
-    public Provincia getPais(int id) {
+    public Provincia getProvincia(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar una Provincia");
         }
