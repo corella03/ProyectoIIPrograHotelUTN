@@ -4,16 +4,13 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.dao;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Pais;
 import proyectoiiprograhotelutn.entities.Provincia;
-
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -26,9 +23,11 @@ public class ProvinciaDAO {
                     + "values (?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, provincia.getNombre());
-            stmt.setInt(2, provincia.getIdPais());
+            stmt.setInt(2, provincia.getPais().getId());
             return stmt.executeUpdate() > 0;
-        } catch (Exception ex) {
+        }catch(SQLException e) {
+            throw  new MiError("El nombre de la provincia ya fue registrada.");
+        }catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar la provincia, favor intente nuevamente.");
         }
@@ -52,18 +51,36 @@ public class ProvinciaDAO {
         Provincia provincia = new Provincia();
         provincia.setId(rs.getInt("id"));
         provincia.setNombre(rs.getString("nombre"));
-        provincia.setIdPais(rs.getInt("id_pais"));
+        PaisDAO paisdao = new PaisDAO();
+        provincia.setPais(paisdao.seleccionarPorId(rs.getInt("id_pais")));
         return provincia;
     }
-    public boolean verificarExistenciaProvincia(String nombre) {
+    public Provincia seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select nombre from provincia where nombre = ?";
+            String sql = "select * from provincia where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nombre.toLowerCase());
+            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-            return rs.next();
+            if (rs.next()) {
+                return cargarProvincia(rs);
+            }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar, favor intente nuevamente.");
+            throw new MiError("Problemas al cargar la provincia, favor intente nuevamente");
+        }
+        return null;
+    }
+    public boolean modificarProvincia(Provincia provincia) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "update pais set nombre=?, id_pais"
+                    + " where id = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, provincia.getNombre());
+            stmt.setInt(2,provincia.getPais().getId());//revisar
+            stmt.setInt(3, provincia.getId());
+            return stmt.executeUpdate() > 0;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            throw new MiError("No se pudo modificar la provincia , favor intente nuevamente");
         }
     }
 }

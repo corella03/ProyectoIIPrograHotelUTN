@@ -24,6 +24,8 @@ create table puesto(
     activo boolean not null,
     constraint pk_puesto primary key (id)
 );
+alter table puesto
+	add constraint unq_nombre_puesto unique (nombre);
 select * from puesto;
 ---
 ---
@@ -33,6 +35,8 @@ create table distrito(
     id_canton int not null,
     constraint pk_distrito primary key (id)
 );
+alter table distrito
+	add constraint unq_nombre_distrito unique (nombre);
 select * from distrito;
 ---
 ---
@@ -42,6 +46,8 @@ create table canton(
     id_provincia int not null,
     constraint pk_canton primary key (id)
 );
+alter table canton
+	add constraint unq_nombre_canton unique (nombre);
 select * from canton;
 ---
 ---
@@ -51,6 +57,8 @@ create table provincia(
     id_pais int not null,
     constraint pk_provincia primary key (id)
 );
+alter table provincia
+	add constraint unq_nombre_provincia unique (nombre);
 select * from provincia;
 ---
 ---
@@ -59,6 +67,8 @@ create table pais(
     nombre text not null,
     constraint pk_pais primary key (id)
 );
+alter table pais
+	add constraint unq_nombre_pais unique (nombre);
 select * from pais;
 ---
 ---

@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
-import proyectoiiprograhotelutn.entities.Puesto;
 /**
  **
  ** @author Luis Alonso Corella Chaves

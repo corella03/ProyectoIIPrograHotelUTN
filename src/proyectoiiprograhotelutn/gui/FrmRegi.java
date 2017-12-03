@@ -50,31 +50,7 @@ public class FrmRegi extends javax.swing.JFrame {
         btnRegistrarDistrito.setContentAreaFilled(false);
         btnRegistrarCanton.setContentAreaFilled(false);
     }
-    public void irALogin(){
-        FrmLogin login = new FrmLogin();
-        login.setVisible(true);
-        dispose();
-    }
-   
     
-    public void registrarPais(){
-        lblErrorLugar.setText("");
-        try {
-            Pais nuevoPais = new Pais();
-            pais.setId(this.pais.getId());
-            nuevoPais.setNombre(txtNombrePais.getText().trim().toLowerCase());
-            PaisBO paisbo = new PaisBO();
-            if (paisbo.registrarPais(nuevoPais)) {
-                lblErrorLugar.setText("País registrado con éxito.");
-            } else {
-                lblErrorLugar.setText("Intente nuevamente.");
-            }
-        } catch (MiError ex) {
-            lblErrorLugar.setText(ex.getMessage());
-        } catch (Exception ex) {
-            lblErrorLugar.setText("Llamar a TI ...xD");
-        }
-    }
     public void cargarPaises(){
         cbxProvincia.removeAllItems();
         PaisBO paisbo = new PaisBO();
@@ -90,7 +66,7 @@ public class FrmRegi extends javax.swing.JFrame {
             Provincia nuevaProvincia = new Provincia();
             provincia.setId(this.provincia.getId());
             nuevaProvincia.setNombre(txtNombreProvincia.getText().trim().toLowerCase());
-            nuevaProvincia.setIdPais(paisbo.cargarPaises().get(indexPais).getId());
+//            nuevaProvincia.setIdPais(paisbo.cargarPaises().get(indexPais).getId());
             if (provinciabo.registrarProvincia(nuevaProvincia)) {
                 lblErrorLugar.setText("Provincia registrada con éxito.");
             } else {
@@ -909,7 +885,7 @@ public class FrmRegi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        irALogin();
+        
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cbxCantonPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCantonPaisActionPerformed
@@ -940,24 +916,24 @@ public class FrmRegi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarDistritoActionPerformed
 
     private void rdDistritoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdDistritoItemStateChanged
-        vistaLugar();
+       
     }//GEN-LAST:event_rdDistritoItemStateChanged
 
     private void rdCantonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdCantonItemStateChanged
-        vistaLugar();
+        
     }//GEN-LAST:event_rdCantonItemStateChanged
 
     private void rdProvinciaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdProvinciaItemStateChanged
-        vistaLugar();
+        
     }//GEN-LAST:event_rdProvinciaItemStateChanged
 
     private void rdPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_rdPaisItemStateChanged
-        vistaLugar();
+        
     }//GEN-LAST:event_rdPaisItemStateChanged
 
     private void btnRegistrarPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPaisActionPerformed
-        registrarPais();
-        cargarPaises();
+        
+        
     }//GEN-LAST:event_btnRegistrarPaisActionPerformed
 
     private void btnRegistrarTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarTipoHabitacionActionPerformed

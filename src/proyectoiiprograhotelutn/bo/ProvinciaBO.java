@@ -6,6 +6,7 @@
 package proyectoiiprograhotelutn.bo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import proyectoiiprograhotelutn.dao.ProvinciaDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Provincia;
@@ -16,21 +17,30 @@ import proyectoiiprograhotelutn.entities.Provincia;
  ** 26/11/2017
  **/
 public class ProvinciaBO {
+    ProvinciaDAO provinciadao;
+    public ProvinciaBO() {
+        provinciadao = new ProvinciaDAO();
+    }
     public boolean registrarProvincia(Provincia provincia) {
         if (provincia.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre de la provincia.");
         }
-        if (String.valueOf(provincia.getIdPais()).isEmpty()) {
+        if (String.valueOf(provincia.getPais().getId()).isEmpty()) {
             throw new MiError("Se Requiere que ingrese el país que pertenece la provincia.");
         }
-        ProvinciaDAO provinciadao = new ProvinciaDAO();
-        if(provinciadao.verificarExistenciaProvincia(provincia.getNombre())){
-            throw new MiError("La provincia ya ha sido registrado.");
+        if(provincia.getId() == 0) {
+            return provinciadao.insertarProvincia(provincia);
+        } else {
+            return provinciadao.modificarProvincia(provincia);
         }
-        return provinciadao.insertarProvincia(provincia);
     }
     public ArrayList<Provincia> cargarProvincias() {
-        ProvinciaDAO provinciadao = new ProvinciaDAO();
         return provinciadao.cargarProvincias();
+    }
+    public Provincia getPais(int id) {
+        if (id <= 0) {
+            throw new MiError("Favor seleccionar una Provincia");
+        }
+        return provinciadao.seleccionarPorId(id);
     }
 }

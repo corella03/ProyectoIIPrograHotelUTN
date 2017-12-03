@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.PaisDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
-import proyectoiiprograhotelutn.entities.Puesto;
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -23,7 +22,11 @@ public class PaisBO {
         if (pais.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre del país.");
         }
-        return paisdao.insertarPais(pais);
+        if(pais.getId() == 0) {
+            return paisdao.insertarPais(pais);
+        } else {
+            return paisdao.modificarPais(pais);
+        }
     }
     public ArrayList<Pais> cargarPaises() {
         return paisdao.cargarPaises();

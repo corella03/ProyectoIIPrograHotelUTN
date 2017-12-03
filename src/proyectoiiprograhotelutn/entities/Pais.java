@@ -17,6 +17,6 @@ public class Pais extends Lugar{
     }
     @Override
     public String toString() {
-        return "Pais: " + "\nId: " + getId() + "\nNombre: " + getNombre();
+        return getNombre();
     }
 }
