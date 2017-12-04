@@ -25,6 +25,6 @@ public class Canton extends Lugar{
     }
     @Override
     public String toString() {
-        return "Canton: " + getNombre();
+        return getNombre();
     } 
 }

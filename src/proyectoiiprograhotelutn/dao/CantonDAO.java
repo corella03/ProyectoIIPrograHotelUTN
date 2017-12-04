@@ -69,9 +69,25 @@ public class CantonDAO {
         }
         return null;
     }
+    public ArrayList<Canton> cargarCantonDeProvincia(int id) {
+        ArrayList<Canton> cantones = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from canton where id_provincia =?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                cantones.add(cargarCanton(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar los Cantónes, favor intente nuevamente.");
+        }
+        return cantones;
+    }
     public boolean modificarCanton(Canton canton) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "update canton set nombre=?, id_pais"
+            String sql = "update canton set nombre=?, id_provincia"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, canton.getNombre());

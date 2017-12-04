@@ -63,12 +63,9 @@ public class FrmCanton extends javax.swing.JDialog {
     public void cargarProvincias(){///Preguntar
         cbxProvincia.removeAllItems();
         ProvinciaBO provinciabo = new ProvinciaBO();
-        ArrayList<Provincia> listaProvincias = provinciabo.cargarProvincias();
+        ArrayList<Provincia> listaProvincias = provinciabo.cargarProvinciasDePais(((Pais) cbxPais.getSelectedItem()).getId());
         for (Provincia p : listaProvincias) {
-            if(((Pais) cbxPais.getSelectedItem()).getId() == (p.getPais().getId()))
-            {
-                provincias.addElement(p);
-            }
+            provincias.addElement(p);
         }
     }
     public void registrarCanton(){

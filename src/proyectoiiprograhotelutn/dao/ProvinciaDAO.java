@@ -69,6 +69,22 @@ public class ProvinciaDAO {
         }
         return null;
     }
+    public ArrayList<Provincia> cargarProvinciaDelPais(int id) {
+        ArrayList<Provincia> provincias = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from provincia where id_pais =?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                provincias.add(cargarProvincia(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar las Provincias, favor intente nuevamente.");
+        }
+        return provincias;
+    }
     public boolean modificarProvincia(Provincia provincia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update provincia set nombre=?, id_pais"
