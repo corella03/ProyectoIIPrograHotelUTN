@@ -35,10 +35,10 @@ public class CantonBO {
     }
     public ArrayList<Canton> cargarCantones() {
         return cantondao.cargarCantones();
-    }public ArrayList<Canton> cargarCantonesDeProvincia(int id) {
+    }
+    public ArrayList<Canton> cargarCantonesDeProvincia(int id) {
         return cantondao.cargarCantonDeProvincia(id);
     }
-    
     public Canton getCanton(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un Cantón");

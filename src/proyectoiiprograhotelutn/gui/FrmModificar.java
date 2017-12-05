@@ -5,9 +5,9 @@
  */
 package proyectoiiprograhotelutn.gui;
 
-import proyectoiiprograhotelutn.gui.TiposHabitacion.FrmCargarTiposHabitacion;
-import proyectoiiprograhotelutn.gui.Puesto.FrmCargarPuestos;
-import proyectoiiprograhotelutn.gui.AgenciaDeViajes.FrmCargarAgencias;
+import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmCargarTiposHabitacion;
+import proyectoiiprograhotelutn.gui.puesto.FrmCargarPuestos;
+import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmCargarAgencias;
 
 /**
  **

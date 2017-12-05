@@ -25,6 +25,6 @@ public class Distrito extends Lugar{
     }
     @Override
     public String toString() {
-        return "Distrito: " + getNombre();
+        return getNombre();
     }
 }

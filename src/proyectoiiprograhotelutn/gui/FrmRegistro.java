@@ -5,13 +5,14 @@
  */
 package proyectoiiprograhotelutn.gui;
 
-import proyectoiiprograhotelutn.gui.TiposHabitacion.FrmTipoHabitacion;
-import proyectoiiprograhotelutn.gui.Puesto.FrmPuesto;
-import proyectoiiprograhotelutn.gui.AgenciaDeViajes.FrmAgenciaDeViajes;
-import proyectoiiprograhotelutn.gui.Lugar.FrmCanton;
-import proyectoiiprograhotelutn.gui.Lugar.FrmDistrito;
-import proyectoiiprograhotelutn.gui.Lugar.FrmPais;
-import proyectoiiprograhotelutn.gui.Lugar.FrmProvincia;
+import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmTipoHabitacion;
+import proyectoiiprograhotelutn.gui.puesto.FrmPuesto;
+import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmAgenciaDeViajes;
+import proyectoiiprograhotelutn.gui.lugar.FrmCanton;
+import proyectoiiprograhotelutn.gui.lugar.FrmDistrito;
+import proyectoiiprograhotelutn.gui.lugar.FrmPais;
+import proyectoiiprograhotelutn.gui.lugar.FrmProvincia;
+import proyectoiiprograhotelutn.gui.usuario.FrmUsuario;
 
 /**
  **
@@ -61,6 +62,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         FrmDistrito distrito = new FrmDistrito(this, true);
         distrito.setVisible(true);
     }
+    public void irAFrmUsuario(){
+        FrmUsuario usuario = new FrmUsuario(this, true);
+        usuario.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +83,7 @@ public class FrmRegistro extends javax.swing.JFrame {
         btnProvincia = new javax.swing.JButton();
         btnCanton = new javax.swing.JButton();
         btnDistrito = new javax.swing.JButton();
+        btnUsuario = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -150,6 +156,14 @@ public class FrmRegistro extends javax.swing.JFrame {
         });
         getContentPane().add(btnDistrito, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, -1, -1));
 
+        btnUsuario.setText("Usuario");
+        btnUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 260, -1, -1));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -179,6 +193,9 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnDistritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDistritoActionPerformed
         irAFrmDistrito();
     }//GEN-LAST:event_btnDistritoActionPerformed
+    private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
+        irAFrmUsuario();
+    }//GEN-LAST:event_btnUsuarioActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -221,6 +238,7 @@ public class FrmRegistro extends javax.swing.JFrame {
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;
+    private javax.swing.JButton btnUsuario;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }

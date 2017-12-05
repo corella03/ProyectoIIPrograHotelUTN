@@ -48,6 +48,6 @@ public class Puesto {
     }
     @Override
     public String toString() {
-        return "Puesto: " + nombre;
+        return nombre;
     } 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoiiprograhotelutn.gui.Lugar;
+package proyectoiiprograhotelutn.gui.lugar;
 import proyectoiiprograhotelutn.bo.PaisBO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;

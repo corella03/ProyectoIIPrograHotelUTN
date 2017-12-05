@@ -4,7 +4,7 @@ create table usuario
     nombre text not null,
     apellido text not null,
     cedula text not null,
-    telefono text not null,
+    telefono int not null,
     contrasena text not null,
     direccion text not null,
     id_distrito int not null,
@@ -15,6 +15,8 @@ create table usuario
 alter table usuario
 	add constraint unq_cedula_usuario unique (cedula);
 select * from usuario;
+
+select * from distrito where id_canton = 1
 ---
 ---
 create table puesto(
@@ -104,9 +106,9 @@ create table detalle_reservacion(
     id_cliente int not null,
     id_habitacion int not null,
     id_agencia_de_viajes int,
-    fecha_reservacion text not null,
-    fecha_entrada text not null,
-    fecha_salida text not null,
+    fecha_reservacion date not null,
+    fecha_entrada date not null,
+    fecha_salida date not null,
     desayuno boolean not null,
     cant_personas int not null,
     constraint pk_detalle_reservacion primary key (id)

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoiiprograhotelutn.gui.Puesto;
+package proyectoiiprograhotelutn.gui.puesto;
 import proyectoiiprograhotelutn.bo.PuestoBO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Puesto;

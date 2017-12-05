@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoiiprograhotelutn.gui.TiposHabitacion;
+package proyectoiiprograhotelutn.gui.tiposhabitacion;
 import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;

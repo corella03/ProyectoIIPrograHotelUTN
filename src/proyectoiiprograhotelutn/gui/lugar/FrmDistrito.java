@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoiiprograhotelutn.gui.Lugar;
+package proyectoiiprograhotelutn.gui.lugar;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import proyectoiiprograhotelutn.bo.CantonBO;
@@ -73,9 +73,9 @@ public class FrmDistrito extends javax.swing.JDialog {
             provincias.addElement(p);
         }
     }
-    public void cargarCantones(int numberOfProvinces){///Preguntar
+    public void cargarCantones(int numDeProvincias){///Preguntar
         cbxCanton.removeAllItems();
-        if(numberOfProvinces > 0) {
+        if(numDeProvincias > 0) {
             CantonBO cantonbo = new CantonBO();
             ArrayList<Canton> listaCantones = cantonbo.cargarCantonesDeProvincia(((Provincia) cbxProvincia.getSelectedItem()).getId());
             for (Canton c : listaCantones) {
@@ -203,7 +203,7 @@ public class FrmDistrito extends javax.swing.JDialog {
                 cbxProvinciaActionPerformed(evt);
             }
         });
-        getContentPane().add(cbxProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 142, 28));
+        getContentPane().add(cbxProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, 142, 28));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgRegistros.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 500));

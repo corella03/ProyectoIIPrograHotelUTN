@@ -36,6 +36,9 @@ public class DistritoBO {
     public ArrayList<Distrito> cargarDistrito() {
         return distritodao.cargarDistritos();
     }
+    public ArrayList<Distrito> cargarDistritosDeCantones(int id) {
+        return distritodao.cargarDistritoDeCanton(id);
+    }
     public Distrito getDistito(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un Distrito");

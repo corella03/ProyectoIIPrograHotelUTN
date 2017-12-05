@@ -69,6 +69,22 @@ public class DistritoDAO {
         }
         return null;
     }
+    public ArrayList<Distrito> cargarDistritoDeCanton(int id) {
+        ArrayList<Distrito> distrito = new ArrayList<>();
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from distrito where id_canton =?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                distrito.add(cargarDistrito(rs));
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
+            throw new MiError("Problemas al cargar los Distritos, favor intente nuevamente.");
+        }
+        return distrito;
+    }
     public boolean modificarDistrito(Distrito distrito) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update distrito set nombre=?, id_canton"

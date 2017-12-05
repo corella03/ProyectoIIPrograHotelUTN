@@ -3,45 +3,45 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package proyectoiiprograhotelutn.gui.TiposHabitacion;
+package proyectoiiprograhotelutn.gui.puesto;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
-import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
-import proyectoiiprograhotelutn.entities.TipoHabitacion;
+import proyectoiiprograhotelutn.bo.PuestoBO;
+import proyectoiiprograhotelutn.entities.Puesto;
 /**
  **
  ** @author Luis Alonso Corella Chaves
  ** 29/11/2017
  **/
-public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
+public class FrmCargarPuestos extends javax.swing.JDialog {
     /**
      * Creates new form FrmCargarTiposHabitacion
      */
     private DefaultTableModel modelo;
-    private TipoHabitacionBO tipobo;
-    private TipoHabitacion tipo;
+    private PuestoBO puestobo;
+    private Puesto puesto;
     private int opc;
-    public FrmCargarTiposHabitacion(java.awt.Frame parent, boolean modal) {
+    public FrmCargarPuestos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         btnRegresar.setContentAreaFilled(false);
-        tipobo = new TipoHabitacionBO();
-        tipo = new TipoHabitacion();
-        modelo = (DefaultTableModel) tbTipoHabitacion.getModel();
-        cargarTipoHabitacion();
+        puestobo = new PuestoBO();
+        puesto = new Puesto();
+        modelo = (DefaultTableModel) tbPuesto.getModel();
+        cargarPuesto();
     }
-    public FrmCargarTiposHabitacion(java.awt.Frame parent, boolean modal,int opc) {
+    public FrmCargarPuestos(java.awt.Frame parent, boolean modal,int opc) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         this.opc = opc;
         vistaInicial();
         btnRegresar.setContentAreaFilled(false);
-        tipobo = new TipoHabitacionBO();
-        tipo = new TipoHabitacion();
-        modelo = (DefaultTableModel) tbTipoHabitacion.getModel();
-        cargarTipoHabitacion();
+        puestobo = new PuestoBO();
+        puesto = new Puesto();
+        modelo = (DefaultTableModel) tbPuesto.getModel();
+        cargarPuesto();
     }
     /**
      * 1 Modifica
@@ -57,29 +57,27 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
             btnEliminar.setVisible(true);
         }
     }
-    private void cargarTipoHabitacion(){
+    private void cargarPuesto(){
         limpiarTabla();
-        ArrayList<TipoHabitacion> tipo = tipobo.cargarTiposDeHabitacionesActivas();
-        for (TipoHabitacion th : tipo) {
+        ArrayList<Puesto> puesto = puestobo.cargarPuestosActivos();
+        for (Puesto p : puesto){
             Object[] row = {
-                th.getId(),
-                th.getCodigo(),
-                th.getPrecio(),
-                th.getDescripcion(),
+                p.getId(),
+                p.getNombre(),
+                p.getDescripcion(),
             };
             modelo.addRow(row);
         }
     }
-    private void cargarTiposHabitacionEliminados(){
+    private void cargarPuestosEliminados(){
         limpiarTabla();
-        ArrayList<TipoHabitacion> tipo = tipobo.cargarTiposDeHabitaciones();
-        for (TipoHabitacion th : tipo) {
-            if(!th.isActivo()){
+        ArrayList<Puesto> puesto = puestobo.cargarPuestos();
+        for (Puesto p : puesto){
+            if(!p.isActivo()){
                 Object[] row = {
-                th.getId(),
-                th.getCodigo(),
-                th.getPrecio(),
-                th.getDescripcion(),
+                p.getId(),
+                p.getNombre(),
+                p.getDescripcion(),
             };
                 modelo.addRow(row);
             }
@@ -90,23 +88,23 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
             modelo.removeRow(i);
         }
     }
-    private void editarTipoHabitacion(){
-        int row = tbTipoHabitacion.getSelectedRow();
+    private void editarPuesto(){
+        int row = tbPuesto.getSelectedRow();
         if (row > -1) {
-            tipo = tipobo.getTipoHabitacion((int)modelo.getValueAt(row, 0));
-            System.out.println(tipobo.toString());
-            FrmTipoHabitacion modificar = new FrmTipoHabitacion(null,true,tipo);
+            puesto = puestobo.getPuesto((int)modelo.getValueAt(row, 0));
+            System.out.println(puestobo.toString());
+            FrmPuesto modificar = new FrmPuesto(null,true,puesto);
             modificar.setVisible(true);
-            cargarTipoHabitacion();
+            cargarPuesto();
         }
     }
     public void eliminarTipoHabitacion(){
-        int row = tbTipoHabitacion.getSelectedRow();
+        int row = tbPuesto.getSelectedRow();
         if (row > -1) {
-            tipo = tipobo.getTipoHabitacion((int)modelo.getValueAt(row, 0));
-            tipobo.elmininarTiposHabitacion(tipo);
+            puesto = puestobo.getPuesto((int)modelo.getValueAt(row, 0));
+            puestobo.elmininarPuesto(puesto);
         }
-        cargarTipoHabitacion();
+        cargarPuesto();
     }
     private void irAMenuPrincipal(){
         super.getParent().setVisible(true);
@@ -122,7 +120,7 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbTipoHabitacion = new javax.swing.JTable();
+        tbPuesto = new javax.swing.JTable();
         btnVerActivos = new javax.swing.JButton();
         btnVerEliminados = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
@@ -132,25 +130,25 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
 
-        tbTipoHabitacion.setModel(new javax.swing.table.DefaultTableModel(
+        tbPuesto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Código", "Precio", "Descripción"
+                "ID", "Nombre", "Descripción"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, false
+                true, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbTipoHabitacion);
+        jScrollPane1.setViewportView(tbPuesto);
 
-        btnVerActivos.setText("Tipos habitación Activos");
+        btnVerActivos.setText("Puestos Activos");
         btnVerActivos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerActivosActionPerformed(evt);
@@ -192,7 +190,7 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(52, Short.MAX_VALUE)
+                .addContainerGap(53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,16 +234,16 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void btnVerActivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActivosActionPerformed
-        cargarTipoHabitacion();
+        cargarPuesto();
     }//GEN-LAST:event_btnVerActivosActionPerformed
     private void btnVerEliminadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerEliminadosActionPerformed
-        cargarTiposHabitacionEliminados();
+        cargarPuestosEliminados();
     }//GEN-LAST:event_btnVerEliminadosActionPerformed
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         eliminarTipoHabitacion();
     }//GEN-LAST:event_btnEliminarActionPerformed
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        editarTipoHabitacion();
+        editarPuesto();
     }//GEN-LAST:event_btnEditarActionPerformed
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         irAMenuPrincipal();
@@ -267,20 +265,20 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmCargarTiposHabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCargarPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmCargarTiposHabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCargarPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmCargarTiposHabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCargarPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmCargarTiposHabitacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmCargarPuestos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FrmCargarTiposHabitacion dialog = new FrmCargarTiposHabitacion(new javax.swing.JFrame(), true);
+                FrmCargarPuestos dialog = new FrmCargarPuestos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -298,6 +296,6 @@ public class FrmCargarTiposHabitacion extends javax.swing.JDialog {
     private javax.swing.JButton btnVerActivos;
     private javax.swing.JButton btnVerEliminados;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTipoHabitacion;
+    private javax.swing.JTable tbPuesto;
     // End of variables declaration//GEN-END:variables
 }
