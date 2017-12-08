@@ -69,7 +69,7 @@ public class UsuarioBO {
     public ArrayList<Usuario> cargarUsuario(){
         return usuariodao.cargarUsuarios(false);
     }
-    public Usuario getPuesto(int id) {
+    public Usuario getUsuario(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un usuario");
         }

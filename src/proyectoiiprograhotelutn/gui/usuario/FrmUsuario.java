@@ -19,7 +19,6 @@ import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Pais;
 import proyectoiiprograhotelutn.entities.Provincia;
 import proyectoiiprograhotelutn.entities.Puesto;
-import proyectoiiprograhotelutn.entities.TipoHabitacion;
 import proyectoiiprograhotelutn.entities.Usuario;
 /**
  **
@@ -57,8 +56,13 @@ public class FrmUsuario extends javax.swing.JDialog {
         btnRegistrarUsuario.setContentAreaFilled(false);
         btnRegistrarUsuario.setText("Editar");
         rdActivoTipoHabitacion.setContentAreaFilled(false);
+        lblContrasena.setVisible(false);
+        txtContrasena.setVisible(false);
         this.usuario = usuario;
-        //cargarTipoHabitacion();
+        DatosIniciales();
+        cargarUsuarios();
+        cargarPaises();
+        cargarPuestos();
     }
     private void DatosIniciales(){
         paises = new DefaultComboBoxModel<>();
@@ -160,22 +164,34 @@ public class FrmUsuario extends javax.swing.JDialog {
             lblErrorUsuario.setText("Llamar a TI ...xD");
         }
     }
-//    public void cargarTiposDeHabitaciones(){
-//        TipoHabitacionBO tipobo = new TipoHabitacionBO();
-//        for (int i = 0; i < tipobo.cargarTiposDeHabitaciones().size(); i++) {
-//            System.out.println(tipobo.cargarTiposDeHabitaciones().get(i).toString());
-//        }
-//    }
-//    private void cargarTipoHabitacion(){
-//        txtNombre.setText(tipo.getCodigo());
-//        txtPrecioTipoHabitacion.setText(String.valueOf(tipo.getPrecio()));
-//        txtDescripcionTipoHabitacion.setText(tipo.getDescripcion());
-//        if(tipo.isActivo()){
-//            rdActivoTipoHabitacion.setSelected(true);
-//        }else if(!tipo.isActivo()){
-//            rdActivoTipoHabitacion.setSelected(false);
-//        }
-//    }
+    private void cargarUsuarios(){
+        cargarPaises();
+        txtNombre.setText(usuario.getNombre());
+        txtApellido.setText(usuario.getApellido());
+        txtCedula.setText(usuario.getCedula());
+        String telefono = String.valueOf(usuario.getTelefono());
+        for (int i = 0; i < 8; i++) {
+            if(i <= 3){
+                txtTelefono.setText(txtTelefono.getText() + String.valueOf(telefono.charAt(i)));
+            }else if(i == 4 || i == 5){
+                txtTelefono2.setText(txtTelefono2.getText() + String.valueOf(telefono.charAt(i)));
+            }else if( i== 6 || i == 7){
+                txtTelefono3.setText(txtTelefono3.getText() + String.valueOf(telefono.charAt(i)));
+            }
+        }
+        txtDireccion.setText(usuario.getDireccion());
+        cbxPais.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia().getPais().getNombre());
+        cbxProvincia.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia().getNombre());
+        cbxCanton.setSelectedItem(usuario.getIdDistrito().getCanton().getNombre());
+        cbxDistrito.setSelectedItem(usuario.getIdDistrito().getNombre());
+        cbxPuestos.setSelectedItem(usuario.getIdPuesto().getNombre());
+        if(usuario.isActivo()){
+            rdActivoTipoHabitacion.setSelected(true);
+        }else if(!usuario.isActivo()){
+            rdActivoTipoHabitacion.setSelected(false);
+        }
+        txtContrasena.setText(usuario.getContrasena());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

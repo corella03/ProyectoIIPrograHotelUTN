@@ -89,7 +89,7 @@ public class UsuarioDAO {
     }
     public boolean modificarUsuario(Usuario usuario) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "update puesto set nombre =?, apellido=?, cedula=?, telefono=?, "
+            String sql = "update usuario set nombre =?, apellido=?, cedula=?, telefono=?, "
                     + "contrasena=?, direccion=?, id_distrito=?, id_puesto=?, activo=?"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
