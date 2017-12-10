@@ -47,6 +47,7 @@ public class FrmPais extends javax.swing.JDialog {
             PaisBO paisbo = new PaisBO();
             if (paisbo.registrarPais(nuevoPais)) {
                 lblErrorLugar.setText("País registrado con éxito.");
+                txtNombrePais.setText("");
             } else {
                 lblErrorLugar.setText("Intente nuevamente.");
             }

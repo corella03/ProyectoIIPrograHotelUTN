@@ -11,7 +11,6 @@ import proyectoiiprograhotelutn.bo.DistritoBO;
 import proyectoiiprograhotelutn.bo.PaisBO;
 import proyectoiiprograhotelutn.bo.ProvinciaBO;
 import proyectoiiprograhotelutn.bo.PuestoBO;
-import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
 import proyectoiiprograhotelutn.bo.UsuarioBO;
 import proyectoiiprograhotelutn.entities.Canton;
 import proyectoiiprograhotelutn.entities.Distrito;
@@ -26,7 +25,6 @@ import proyectoiiprograhotelutn.entities.Usuario;
  ** 01/11/2017
  **/
 public class FrmUsuario extends javax.swing.JDialog {
-
     /**
      * Creates new form FrmTipoHabitacion
      */
@@ -139,22 +137,17 @@ public class FrmUsuario extends javax.swing.JDialog {
             usuario.setContrasena( new String (txtContrasena.getPassword()).trim());
             usuario.setDireccion(txtDireccion.getText().trim());
             usuario.setIdDistrito((Distrito) cbxDistrito.getSelectedItem());
-            usuario.setIdPuesto((Puesto) cbxPuestos.getSelectedItem());
-            if(!this.usuario.isActivo()){
-                if(rdActivoTipoHabitacion.isSelected()){
-                    usuario.setActivo(true);
-                }else{
-                    usuario.setActivo(false);
-                }
-            }
+            usuario.setIdPuesto((Puesto) cbxPuestos.getSelectedItem());            
+            if(rdActivoTipoHabitacion.isSelected()){
+                usuario.setActivo(true);
+            }else{
+                usuario.setActivo(false);
+            }    
             UsuarioBO usubo = new UsuarioBO();
             if (usubo.registrarUsuario(usuario)) {
-                lblErrorUsuario.setText("Usuario registrado con éxito.");
-                
+                lblErrorUsuario.setText("Usuario registrado con éxito.");                
 //                super.getParent().setVisible(true);
 //                dispose();
-
-
             } else {
                 lblErrorUsuario.setText("Intente nuevamente.");
             }
@@ -165,7 +158,11 @@ public class FrmUsuario extends javax.swing.JDialog {
         }
     }
     private void cargarUsuarios(){
-        cargarPaises();
+//        //
+//        cbxPais.setSelectedIndex(usuario.getIdDistrito().getCanton().getProvincia().getPais().getId());
+//        cbxProvincia.setSelectedIndex(usuario.getIdDistrito().getCanton().getProvincia().getId());
+//        cbxCanton.setSelectedIndex(usuario.getIdDistrito().getCanton().getId());
+//        cbxDistrito.setSelectedIndex(usuario.getIdDistrito().getId());
         txtNombre.setText(usuario.getNombre());
         txtApellido.setText(usuario.getApellido());
         txtCedula.setText(usuario.getCedula());
@@ -180,11 +177,11 @@ public class FrmUsuario extends javax.swing.JDialog {
             }
         }
         txtDireccion.setText(usuario.getDireccion());
-        cbxPais.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia().getPais().getNombre());
-        cbxProvincia.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia().getNombre());
-        cbxCanton.setSelectedItem(usuario.getIdDistrito().getCanton().getNombre());
-        cbxDistrito.setSelectedItem(usuario.getIdDistrito().getNombre());
-        cbxPuestos.setSelectedItem(usuario.getIdPuesto().getNombre());
+        cbxPais.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia().getPais());
+        cbxProvincia.setSelectedItem(usuario.getIdDistrito().getCanton().getProvincia());
+        cbxCanton.setSelectedItem(usuario.getIdDistrito().getCanton());
+        cbxDistrito.setSelectedItem(usuario.getIdDistrito());
+        cbxPuestos.setSelectedItem(usuario.getIdPuesto());
         if(usuario.isActivo()){
             rdActivoTipoHabitacion.setSelected(true);
         }else if(!usuario.isActivo()){
@@ -286,6 +283,7 @@ public class FrmUsuario extends javax.swing.JDialog {
         lblNombrePais1.setText("Canton:");
         getContentPane().add(lblNombrePais1, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, -1, -1));
 
+        cbxCanton.setMaximumRowCount(100);
         cbxCanton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxCantonActionPerformed(evt);

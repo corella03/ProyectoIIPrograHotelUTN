@@ -93,6 +93,7 @@ public class FrmDistrito extends javax.swing.JDialog {
             DistritoBO distritobo = new DistritoBO();
             if (distritobo.registrarDistrito(distritoNuevo)) {
                 lblErrorDistrito.setText("Distrito registrado con éxito.");
+                txtNombreDistrito.setText("");
             } else {
                 lblErrorDistrito.setText("Intente nuevamente.");
             }

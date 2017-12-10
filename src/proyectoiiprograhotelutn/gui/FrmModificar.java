@@ -8,6 +8,7 @@ package proyectoiiprograhotelutn.gui;
 import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmCargarTiposHabitacion;
 import proyectoiiprograhotelutn.gui.puesto.FrmCargarPuestos;
 import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmCargarAgencias;
+import proyectoiiprograhotelutn.gui.habitacion.FrmCargarHabitaciones;
 import proyectoiiprograhotelutn.gui.usuario.FrmCargarUsuarios;
 
 /**
@@ -39,6 +40,10 @@ public class FrmModificar extends javax.swing.JFrame {
         FrmCargarUsuarios usuario = new FrmCargarUsuarios(this, true, opc);
         usuario.setVisible(true);  
     }
+    public void irAModificarEliminarHabitacion(int opc){
+        FrmCargarHabitaciones habitacion = new FrmCargarHabitaciones(this, true, opc);
+        habitacion.setVisible(true);  
+    }
     private void irAMenuPrincipal(){
         FrmMenuPrincipal principal = new FrmMenuPrincipal();
         principal.setVisible(true);
@@ -59,6 +64,7 @@ public class FrmModificar extends javax.swing.JFrame {
         btnPuesto = new javax.swing.JButton();
         btnAgencia = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnHabitaciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -102,6 +108,13 @@ public class FrmModificar extends javax.swing.JFrame {
             }
         });
 
+        btnHabitaciones.setText("Habitaciones");
+        btnHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHabitacionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,14 +129,17 @@ public class FrmModificar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(btnTipoHabitacion)
-                        .addGap(108, 108, 108)
-                        .addComponent(btnPuesto)
-                        .addGap(91, 91, 91)
-                        .addComponent(btnAgencia))
+                        .addComponent(btnTipoHabitacion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(jButton1)))
+                .addGap(78, 78, 78)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnPuesto)
+                        .addGap(91, 91, 91)
+                        .addComponent(btnAgencia))
+                    .addComponent(btnHabitaciones))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,9 +154,14 @@ public class FrmModificar extends javax.swing.JFrame {
                     .addComponent(btnTipoHabitacion)
                     .addComponent(btnPuesto)
                     .addComponent(btnAgencia))
-                .addGap(50, 50, 50)
-                .addComponent(jButton1)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(btnHabitaciones)))
+                .addContainerGap(221, Short.MAX_VALUE))
         );
 
         pack();
@@ -160,6 +181,9 @@ public class FrmModificar extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         irAModificarEliminarUsuario(1);
     }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabitacionesActionPerformed
+        irAModificarEliminarHabitacion(1);
+    }//GEN-LAST:event_btnHabitacionesActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -195,6 +219,7 @@ public class FrmModificar extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgencia;
+    private javax.swing.JButton btnHabitaciones;
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;

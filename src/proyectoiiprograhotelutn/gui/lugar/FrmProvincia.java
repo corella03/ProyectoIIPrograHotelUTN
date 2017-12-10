@@ -64,6 +64,7 @@ public class FrmProvincia extends javax.swing.JDialog {
             ProvinciaBO provinciabo = new ProvinciaBO();
             if (provinciabo.registrarProvincia(nuevaProvincia)) {
                 lblErrorLugar.setText("Provincia registrada con éxito.");
+                txtNombreProvincia.setText("");
             } else {
                 lblErrorLugar.setText("Intente nuevamente.");
             }

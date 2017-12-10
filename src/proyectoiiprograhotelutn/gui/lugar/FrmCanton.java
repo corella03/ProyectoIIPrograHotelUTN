@@ -78,6 +78,7 @@ public class FrmCanton extends javax.swing.JDialog {
             CantonBO cantonbo = new CantonBO();
             if (cantonbo.registrarCanton(nuevoCanton)) {
                 lblErrorCanton.setText("Cantón registrado con éxito.");
+                txtNombreCanton.setText("");
             } else {
                 lblErrorCanton.setText("Intente nuevamente.");
             }

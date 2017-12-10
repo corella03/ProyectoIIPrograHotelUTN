@@ -37,10 +37,18 @@
                   <Component id="btnUsuario" min="-2" max="-2" attributes="0"/>
                   <Component id="btnTipoHabitacion" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
-              <Component id="btnPuesto" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-              <Component id="btnAgencia" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Component id="btnPuesto" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+                      <Component id="btnAgencia" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                      <Component id="btnHabitaciones" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -67,7 +75,10 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
-              <Component id="btnUsuario" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnHabitaciones" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="206" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -123,6 +134,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuarioActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnHabitaciones">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Habitaciones"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHabitacionesActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -8,6 +8,7 @@ package proyectoiiprograhotelutn.gui;
 import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmCargarTiposHabitacion;
 import proyectoiiprograhotelutn.gui.puesto.FrmCargarPuestos;
 import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmCargarAgencias;
+import proyectoiiprograhotelutn.gui.habitacion.FrmCargarHabitaciones;
 import proyectoiiprograhotelutn.gui.usuario.FrmCargarUsuarios;
 
 /**
@@ -39,6 +40,10 @@ public class FrmEliminar extends javax.swing.JFrame {
         FrmCargarUsuarios usuario = new FrmCargarUsuarios(this, true, opc);
         usuario.setVisible(true);  
     }
+    public void irAModificarEliminarHabitacion(int opc){
+        FrmCargarHabitaciones habitacion = new FrmCargarHabitaciones(this, true, opc);
+        habitacion.setVisible(true);  
+    }
     private void irAMenuPrincipal(){
         FrmMenuPrincipal principal = new FrmMenuPrincipal();
         principal.setVisible(true);
@@ -59,6 +64,7 @@ public class FrmEliminar extends javax.swing.JFrame {
         btnPuesto = new javax.swing.JButton();
         btnAgencia = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
+        btnHabitaciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -102,6 +108,13 @@ public class FrmEliminar extends javax.swing.JFrame {
             }
         });
 
+        btnHabitaciones.setText("Habitaciones");
+        btnHabitaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHabitacionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -117,10 +130,15 @@ public class FrmEliminar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnUsuario)
                     .addComponent(btnTipoHabitacion))
-                .addGap(61, 61, 61)
-                .addComponent(btnPuesto)
-                .addGap(101, 101, 101)
-                .addComponent(btnAgencia)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(btnPuesto)
+                        .addGap(101, 101, 101)
+                        .addComponent(btnAgencia))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(74, 74, 74)
+                        .addComponent(btnHabitaciones)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -140,7 +158,9 @@ public class FrmEliminar extends javax.swing.JFrame {
                             .addComponent(btnPuesto)
                             .addComponent(btnAgencia))))
                 .addGap(71, 71, 71)
-                .addComponent(btnUsuario)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnUsuario)
+                    .addComponent(btnHabitaciones))
                 .addContainerGap(206, Short.MAX_VALUE))
         );
 
@@ -161,6 +181,9 @@ public class FrmEliminar extends javax.swing.JFrame {
     private void btnUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuarioActionPerformed
         irAModificarEliminarUsuario(2);
     }//GEN-LAST:event_btnUsuarioActionPerformed
+    private void btnHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabitacionesActionPerformed
+        irAModificarEliminarHabitacion(2);
+    }//GEN-LAST:event_btnHabitacionesActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -196,6 +219,7 @@ public class FrmEliminar extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgencia;
+    private javax.swing.JButton btnHabitaciones;
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;
