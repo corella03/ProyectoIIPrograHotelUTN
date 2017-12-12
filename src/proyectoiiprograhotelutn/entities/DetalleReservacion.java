@@ -23,13 +23,11 @@ public class DetalleReservacion {
     private Date fechaSalida;
     private boolean desayuno;
     private int cantPersonas;
-    private int telefono;
     public DetalleReservacion() {
     }
-
     public DetalleReservacion(int id, Usuario idUsuario, Cliente idCliente, Habitacion idHabitacion,
             AgenciaDeViajes idAgencia, Date fechaReservacion, Date fechaEntrada, Date fechaSalida,
-            boolean desayuno, int cantPersonas, int telefono) {
+            boolean desayuno, int cantPersonas) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idCliente = idCliente;
@@ -40,10 +38,7 @@ public class DetalleReservacion {
         this.fechaSalida = fechaSalida;
         this.desayuno = desayuno;
         this.cantPersonas = cantPersonas;
-        this.telefono = telefono;
     }
-
-    
     public int getId() {
         return id;
     }
@@ -103,12 +98,6 @@ public class DetalleReservacion {
     }
     public void setCantPersonas(int cantPersonas) {
         this.cantPersonas = cantPersonas;
-    }
-    public int getTelefono() {
-        return telefono;
-    }
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
     }
 }
 

@@ -5,55 +5,49 @@
  */
 package proyectoiiprograhotelutn.bo;
 import java.util.ArrayList;
-import proyectoiiprograhotelutn.dao.ClienteDAO;
-import proyectoiiprograhotelutn.entities.Cliente;
+import proyectoiiprograhotelutn.dao.DetalleReservacionDAO;
+import proyectoiiprograhotelutn.entities.DetalleReservacion;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Usuario;
 /**
  **
  ** @author Luis Alonso Corella Chaves
  ** 11/12/2017
  **/
 public class DetalleReservacionBO {
-    ClienteDAO clientedao;
+    DetalleReservacionDAO detalledao;
     public DetalleReservacionBO() {
-        clientedao = new ClienteDAO();
+        detalledao = new DetalleReservacionDAO();
     }
-    public boolean registrarUsuario(Cliente cliente) {
-        if(cliente.getCedula().isEmpty()) {
-            throw new MiError("Se Requiere que ingrese el número de cédula del cliente.");
+    public boolean registrarDetalleReservacion(DetalleReservacion detalle) {
+        if (String.valueOf(detalle.getIdUsuario().getId()).isEmpty()) {
+            throw new MiError("Se Requiere que ingrese el id del Usuario.");
         }
-        if(cliente.getNombre().isEmpty()) {
-            throw new MiError("Se Requiere que ingrese el nombre del cliente.");
+        if (String.valueOf(detalle.getIdHabitacion().getId()).isEmpty()) {
+            throw new MiError("Se Requiere que ingrese el id de la habitación.");
         }
-        if(cliente.getApellido().isEmpty()) {
-            throw new MiError("Se Requiere que ingrese el apellido del cliente.");
-        }
-        if(cliente.getNumeroTarjeta().isEmpty()) {
+        if(detalle.getFechaReservacion() == null) {
             throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
         }
-        if(cliente.getDireccion().isEmpty()) {
-            throw new MiError("Se Requiere que ingrese la dirección del cliente.");
+        if(detalle.getFechaEntrada() == null) {
+            throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
         }
-        if(cliente.getId() == 0) {
-            return clientedao.insertarCliente(cliente);
+        if(detalle.getFechaSalida() == null) {
+            throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
+        }
+        
+        if(detalle.getId() == 0) {
+            return detalledao.insertarDetalle(detalle);
         } else {
-            return clientedao.modificarCliente(cliente);
+            return detalledao.modificarDetalleReservacion(detalle);
         }
     }
-    public ArrayList<Cliente> cargarClientesActivos(){
-        return clientedao.cargarClientes(true);
+    public ArrayList<DetalleReservacion> cargarDetalleReservacion(){
+        return detalledao.cargarDetalleReservaciones();
     }
-    public ArrayList<Cliente> cargarClientes(){
-        return clientedao.cargarClientes(false);
-    }
-    public Cliente getCliente(int id) {
+    public DetalleReservacion getDetalleReservacion(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un cliente");
         }
-        return clientedao.seleccionarPorId(id);
-    }
-    public boolean elmininarUsuario(Cliente cliente){
-        return clientedao.eliminarCliente(cliente);
+        return detalledao.seleccionarPorId(id);
     }
 }

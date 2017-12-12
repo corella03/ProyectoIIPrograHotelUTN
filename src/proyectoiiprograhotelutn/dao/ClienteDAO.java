@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.Cliente;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Usuario;
 
 /**
  **
@@ -21,14 +20,15 @@ import proyectoiiprograhotelutn.entities.Usuario;
 public class ClienteDAO {
     public boolean insertarCliente(Cliente cliente) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "insert into cliente(nombre, apellido, cedula, direccion, numero_tarjeta)"
-                    + "values (?,?,?,?)";
+            String sql = "insert into cliente(nombre, apellido, cedula, direccion, numero_tarjeta,telefono)"
+                    + "values (?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getApellido());
             stmt.setString(3, cliente.getCedula());
             stmt.setString(4, cliente.getDireccion());
             stmt.setString(5, cliente.getNumeroTarjeta());
+            stmt.setInt(6, cliente.getTelefono());
             return stmt.executeUpdate() > 0;
         }
 //        catch(SQLException e) {
@@ -64,6 +64,7 @@ public class ClienteDAO {
         cliente.setDireccion(rs.getString("direccion"));
         cliente.setNumeroTarjeta(rs.getString("numero_tarjeta"));
         cliente.setActivo(rs.getBoolean("activo"));
+        cliente.setTelefono(rs.getInt("telefono"));
         return cliente;
     }
     public Cliente seleccionarPorId(int id) {
@@ -83,7 +84,7 @@ public class ClienteDAO {
     public boolean modificarCliente(Cliente cliente) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update cliente set nombre =?, apellido=?, cedula=?, direccion=?, "
-                    + "numero_tarjeta=?, activo=?"
+                    + "numero_tarjeta=?, activo=?, telefono=?"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, cliente.getNombre());
@@ -92,7 +93,8 @@ public class ClienteDAO {
             stmt.setString(4, cliente.getDireccion());
             stmt.setString(5, cliente.getNumeroTarjeta());
             stmt.setBoolean(6, cliente.isActivo());
-            stmt.setInt(7, cliente.getId());
+            stmt.setInt(7, cliente.getTelefono());
+            stmt.setInt(8, cliente.getId());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());

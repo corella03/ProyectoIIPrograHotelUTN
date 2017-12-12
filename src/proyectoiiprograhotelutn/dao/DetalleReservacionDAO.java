@@ -19,15 +19,23 @@ import proyectoiiprograhotelutn.entities.MiError;
 public class DetalleReservacionDAO {
     public boolean insertarDetalle(DetalleReservacion detalle) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "insert into cliente(id_usuario, id_cliente, id_habitacion,"
+            String sql = "insert into detalle_reservacion(id_usuario, id_cliente, id_habitacion,"
                     + " id_agencia_de_viajes, fecha_reservacion, fecha_entrada, fecha_salida, desayuno,"
-                    + "cant_personas, telefono)"
-                    + "values (?,?,?,?)";
+                    + "cant_personas)"
+                    + "values (?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, detalle.getIdUsuario().getId());
             stmt.setInt(2, detalle.getIdCliente().getId());
             stmt.setInt(3, detalle.getIdHabitacion().getId());
             stmt.setInt(4, detalle.getIdAgencia().getId());
+            java.sql.Date fechaReservacion = new java.sql.Date(detalle.getFechaReservacion().getTime());
+            stmt.setDate(5, fechaReservacion);
+            java.sql.Date fechaEntrada = new java.sql.Date(detalle.getFechaEntrada().getTime());
+            stmt.setDate(6, fechaEntrada);
+            java.sql.Date fechaSalida = new java.sql.Date(detalle.getFechaSalida().getTime());
+            stmt.setDate(7, fechaSalida);
+            stmt.setBoolean(8, detalle.isDesayuno());
+            stmt.setInt(9, detalle.getCantPersonas());
             return stmt.executeUpdate() > 0;
         }
 //        catch(SQLException e) {
@@ -35,78 +43,80 @@ public class DetalleReservacionDAO {
 //        } 
         catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo registrar el Cliente, favor intente nuevamente.");
+            throw new MiError("No se pudo registrar los detalles de reservación, favor intente nuevamente.");
         }
     }
-    public ArrayList<Cliente> cargarClientes(boolean activo) {
-        ArrayList<Cliente> clientes = new ArrayList<>();
+    public ArrayList<DetalleReservacion> cargarDetalleReservaciones() {
+        ArrayList<DetalleReservacion> reservaciones = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
-            String sql = activo ? "select * from cliente where activo = true"
-                    : "select * from cliente";
+            String sql = "select * from detalle_reservacion";
             PreparedStatement stmt = con.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                clientes.add(cargarCliente(rs));
+                reservaciones.add(cargarDetalleReservacion(rs));
             }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());// TODO: Eliminar esta  línea
-            throw new MiError("Problemas al cargar los clientes, favor intente nuevamente.");
+            throw new MiError("Problemas al cargar los detalles de reservación, favor intente nuevamente.");
         }
-        return clientes;
+        return reservaciones;
     }
-    private Cliente cargarCliente(ResultSet rs) throws SQLException {
-        Cliente cliente = new Cliente();
-        cliente.setId(rs.getInt("id"));
-        cliente.setNombre(rs.getString("nombre"));
-        cliente.setApellido(rs.getString("apellido"));
-        cliente.setCedula(rs.getString("cedula"));
-        cliente.setDireccion(rs.getString("direccion"));
-        cliente.setNumeroTarjeta(rs.getString("numero_tarjeta"));
-        cliente.setActivo(rs.getBoolean("activo"));
-        return cliente;
+    private DetalleReservacion cargarDetalleReservacion(ResultSet rs) throws SQLException {
+        DetalleReservacion dellate = new DetalleReservacion();
+        dellate.setId(rs.getInt("id"));
+        UsuarioDAO usu = new UsuarioDAO();
+        dellate.setIdUsuario(usu.seleccionarPorId(rs.getInt("id_usuario")));
+        ClienteDAO cli = new ClienteDAO();
+        dellate.setIdCliente(cli.seleccionarPorId(rs.getInt("id_cliente")));
+        HabitacionDAO habi = new HabitacionDAO();
+        dellate.setIdHabitacion(habi.seleccionarPorId(rs.getInt("id_habitacion")));
+        AgenciaDeViajesDAO agencia = new AgenciaDeViajesDAO();
+        dellate.setIdAgencia(agencia.seleccionarPorId(rs.getInt("id_agencia_de_viajes")));
+        dellate.setFechaReservacion(rs.getDate("fecha_reservacion"));
+        dellate.setFechaEntrada(rs.getDate("fecha_entrada"));
+        dellate.setFechaSalida(rs.getDate("fecha_salida"));
+        dellate.setDesayuno(rs.getBoolean("desayuno"));
+        dellate.setCantPersonas(rs.getInt("cant_personas"));
+        return dellate;
     }
-    public Cliente seleccionarPorId(int id) {
+    public DetalleReservacion seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "select * from cliente where id = ?";
+            String sql = "select * from detalle_reservacion where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                return cargarCliente(rs);
+                return cargarDetalleReservacion(rs);
             }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar el Cliente, favor intente nuevamente");
+            throw new MiError("Problemas al cargar los detalles de reservación, favor intente nuevamente");
         }
         return null;
     }
-    public boolean modificarCliente(Cliente cliente) {
+    public boolean modificarDetalleReservacion(DetalleReservacion detalle) {
         try (Connection con = Conexion.getConexion()) {
-            String sql = "update cliente set nombre =?, apellido=?, cedula=?, direccion=?, "
-                    + "numero_tarjeta=?, activo=?"
+            String sql = "update detalle_reservacion set id_usuario =?, id_cliente=?, id_habitacion=?,"
+                    + " id_agencia_de_viajes=?, fecha_reservacion=?, fecha_entrada=?, fecha_salida=?,"
+                    + "desayuno =?, cant_personas=?"
                     + " where id = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, cliente.getNombre());
-            stmt.setString(2, cliente.getApellido());
-            stmt.setString(3, cliente.getCedula());
-            stmt.setString(4, cliente.getDireccion());
-            stmt.setString(5, cliente.getNumeroTarjeta());
-            stmt.setBoolean(6, cliente.isActivo());
-            stmt.setInt(7, cliente.getId());
+            stmt.setInt(1, detalle.getIdUsuario().getId());
+            stmt.setInt(2, detalle.getIdCliente().getId());
+            stmt.setInt(3, detalle.getIdHabitacion().getId());
+            stmt.setInt(4, detalle.getIdAgencia().getId());
+            java.sql.Date fechaReservacion = new java.sql.Date(detalle.getFechaReservacion().getTime());
+            stmt.setDate(5, fechaReservacion);
+            java.sql.Date fechaEntrada = new java.sql.Date(detalle.getFechaEntrada().getTime());
+            stmt.setDate(6, fechaEntrada);
+            java.sql.Date fechaSalida = new java.sql.Date(detalle.getFechaSalida().getTime());
+            stmt.setDate(7, fechaSalida);
+            stmt.setBoolean(8, detalle.isDesayuno());
+            stmt.setInt(9, detalle.getCantPersonas());
+            stmt.setInt(10, detalle.getId());
             return stmt.executeUpdate() > 0;
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
-            throw new MiError("No se pudo modificar el Cliente, favor intente nuevamente");
-        }
-    }
-    public boolean eliminarCliente(Cliente cliente) {
-        try (Connection con = Conexion.getConexion()) {
-            String sql = "update cliente set activo = false where id =?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, cliente.getId());
-            return stmt.executeUpdate() > 0;
-        } catch (Exception ex) {
-            System.out.println(ex.getMessage());
-            throw new MiError("No se pudo Eliminar el Cliente, favor intente nuevamente");
+            throw new MiError("No se pudo modificar los detalles de reservación, favor intente nuevamente");
         }
     }
 }
