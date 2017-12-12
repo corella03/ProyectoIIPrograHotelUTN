@@ -76,6 +76,6 @@ public class Habitacion {
     }
     @Override
     public String toString() {
-        return "Habitacion: " + codigo;
+        return codigo;
     }
 }

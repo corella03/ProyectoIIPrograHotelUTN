@@ -53,6 +53,9 @@ public class ClienteBO {
         }
         return clientedao.seleccionarPorId(id);
     }
+    public Cliente getClientePorCedula(String cedula) {
+        return clientedao.seleccionarPorCedula(cedula);
+    }
     public boolean elmininarUsuario(Cliente cliente){
         return clientedao.eliminarCliente(cliente);
     }

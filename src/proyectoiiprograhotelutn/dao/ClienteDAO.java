@@ -112,4 +112,19 @@ public class ClienteDAO {
             throw new MiError("No se pudo Eliminar el Cliente, favor intente nuevamente");
         }
     }
+
+    public Cliente seleccionarPorCedula(String cedula) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from cliente where cedula = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, cedula);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return cargarCliente(rs);
+            }
+        } catch (Exception ex) {
+            throw new MiError("Problemas al cargar el Cliente, favor intente nuevamente");
+        }
+        return null;
+    }
 }

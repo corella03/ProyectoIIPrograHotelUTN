@@ -64,6 +64,6 @@ public class AgenciaDeViajes {
     }
     @Override
     public String toString() {
-        return "AgenciaDeViajes: " + nombre + " (" + codigo + ")";
+        return nombre;
     }
 }

@@ -158,11 +158,6 @@ public class FrmUsuario extends javax.swing.JDialog {
         }
     }
     private void cargarUsuarios(){
-//        //
-//        cbxPais.setSelectedIndex(usuario.getIdDistrito().getCanton().getProvincia().getPais().getId());
-//        cbxProvincia.setSelectedIndex(usuario.getIdDistrito().getCanton().getProvincia().getId());
-//        cbxCanton.setSelectedIndex(usuario.getIdDistrito().getCanton().getId());
-//        cbxDistrito.setSelectedIndex(usuario.getIdDistrito().getId());
         txtNombre.setText(usuario.getNombre());
         txtApellido.setText(usuario.getApellido());
         txtCedula.setText(usuario.getCedula());

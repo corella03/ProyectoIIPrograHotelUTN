@@ -35,8 +35,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         login.setVisible(true);
         dispose();
     }
-    private void irARegistro(){
-        FrmRegistro registro = new FrmRegistro();
+    private void irARegistro(Usuario usu){
+        FrmRegistro registro = new FrmRegistro(usu);
         registro.setVisible(true);
         dispose();
     }
@@ -125,7 +125,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         irAFrmLogin();
     }//GEN-LAST:event_btnSalirActionPerformed
     private void btnRegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarActionPerformed
-        irARegistro();
+        irARegistro(usuario);
     }//GEN-LAST:event_btnRegistarActionPerformed
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         irAModificar();

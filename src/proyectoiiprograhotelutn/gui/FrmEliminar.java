@@ -23,6 +23,7 @@ public class FrmEliminar extends javax.swing.JFrame {
     public FrmEliminar() {
         initComponents();
         setLocationRelativeTo(null);
+        btnRegresar.setContentAreaFilled(false);
     }
     private void irAModificarEliminarTipo(int opc){
         FrmCargarTiposHabitacion tipo = new FrmCargarTiposHabitacion(this, true, opc);

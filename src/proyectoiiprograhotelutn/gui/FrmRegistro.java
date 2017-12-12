@@ -5,9 +5,11 @@
  */
 package proyectoiiprograhotelutn.gui;
 
+import proyectoiiprograhotelutn.entities.Usuario;
 import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmTipoHabitacion;
 import proyectoiiprograhotelutn.gui.puesto.FrmPuesto;
 import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmAgenciaDeViajes;
+import proyectoiiprograhotelutn.gui.cliente.FrmCliente;
 import proyectoiiprograhotelutn.gui.habitacion.FrmHabitacion;
 import proyectoiiprograhotelutn.gui.lugar.FrmCanton;
 import proyectoiiprograhotelutn.gui.lugar.FrmDistrito;
@@ -24,9 +26,17 @@ public class FrmRegistro extends javax.swing.JFrame {
     /**
      * Creates new form FrmRegistro
      */
+    private Usuario usu;
     public FrmRegistro() {
         initComponents();
         setLocationRelativeTo(null);
+        usu = new Usuario();
+        btnRegresar.setContentAreaFilled(false);
+    }
+    public FrmRegistro(Usuario usu) {
+        initComponents();
+        setLocationRelativeTo(null);
+        this.usu = usu;
         btnRegresar.setContentAreaFilled(false);
     }
     private void irAMenuPrincipal(){
@@ -67,6 +77,10 @@ public class FrmRegistro extends javax.swing.JFrame {
         FrmHabitacion habi = new FrmHabitacion(this, true);
         habi.setVisible(true);
     }
+    public void irAFrmCliente(Usuario usu){
+        FrmCliente cli = new FrmCliente(this, true,usu);
+        cli.setVisible(true);
+    }
     public void irAFrmUsuario(){
         FrmUsuario usuario = new FrmUsuario(this, true);
         usuario.setVisible(true);
@@ -80,6 +94,7 @@ public class FrmRegistro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnCliente = new javax.swing.JButton();
         btnTipoHabitacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnPuesto = new javax.swing.JButton();
@@ -96,6 +111,17 @@ public class FrmRegistro extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnCliente.setBackground(new java.awt.Color(0, 153, 51));
+        btnCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, 90, 30));
 
         btnTipoHabitacion.setBackground(new java.awt.Color(0, 153, 51));
         btnTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -127,7 +153,7 @@ public class FrmRegistro extends javax.swing.JFrame {
                 btnPuestoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 90, 30));
+        getContentPane().add(btnPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 260, 90, 30));
 
         btnAgencia.setBackground(new java.awt.Color(0, 153, 51));
         btnAgencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -246,6 +272,9 @@ public class FrmRegistro extends javax.swing.JFrame {
     private void btnHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabitacionActionPerformed
         irAFrmHabitacion();
     }//GEN-LAST:event_btnHabitacionActionPerformed
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        irAFrmCliente(usu);
+    }//GEN-LAST:event_btnClienteActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -282,6 +311,7 @@ public class FrmRegistro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgencia;
     private javax.swing.JButton btnCanton;
+    private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnDistrito;
     private javax.swing.JButton btnHabitacion;
     private javax.swing.JButton btnLugar;
