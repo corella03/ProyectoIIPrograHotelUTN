@@ -29,6 +29,8 @@ public class FrmHabitacion extends javax.swing.JDialog {
      */
     private Habitacion habitacion;
     private DefaultComboBoxModel<TipoHabitacion> tipoHabi;
+    private Image foto;
+    
     public FrmHabitacion(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -65,6 +67,7 @@ public class FrmHabitacion extends javax.swing.JDialog {
                 ImageIcon icon = new ImageIcon(fcFoto.getSelectedFile().getAbsolutePath());
                 Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblFoto.getWidth(), lblFoto.getHeight(), Image.SCALE_DEFAULT));
                 lblFoto.setIcon(icono);
+                foto = icon.getImage();
             }
         } catch (Exception ex) {
             lblFoto.setIcon(null);
@@ -87,9 +90,7 @@ public class FrmHabitacion extends javax.swing.JDialog {
             habi.setId(this.habitacion.getId());
             habi.setCodigo(txtCodigo.getText().trim().toLowerCase());
             habi.setIdTipoHabitacion((TipoHabitacion) cbxTipoHabiacion.getSelectedItem());
-            File pathToFile = new File(fcFoto.getSelectedFile().getAbsolutePath());
-            Image image = ImageIO.read(pathToFile);
-            habi.setImagen(image);
+            habi.setImagen(foto == null ? habitacion.getImagen() : foto);
             habi.setDescripcion(txtDescripcionPuesto.getText().trim());
             if(cbxEstado.getSelectedIndex() == 0){
                 habi.setEstado(true);

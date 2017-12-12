@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
+
+import proyectoiiprograhotelutn.entities.Usuario;
+
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -13,13 +16,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmRegistro
      */
+    private Usuario usuario;
     public FrmMenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         btnSalir.setContentAreaFilled(false);
-        btnRegistar.setContentAreaFilled(false);
-        btnModificar.setContentAreaFilled(false);
-        btnElimniar.setContentAreaFilled(false);
+        usuario = new Usuario();
+    }
+    public FrmMenuPrincipal(Usuario usu) {
+        initComponents();
+        setLocationRelativeTo(null);
+        btnSalir.setContentAreaFilled(false);
+        usuario = usu;
+        System.out.println(usuario.getNombre() + " " + usuario.getCedula() );
     }
     private void irAFrmLogin(){
         FrmLogin login = new FrmLogin();
@@ -60,9 +69,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnRegistar.setBackground(new java.awt.Color(0, 153, 51));
         btnRegistar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnRegistar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgAgregar.png"))); // NOI18N
         btnRegistar.setText("Ir a Registro");
         btnRegistar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnRegistar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -71,15 +80,18 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 btnRegistarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, -1, -1));
+        getContentPane().add(btnRegistar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, 90));
 
+        btnModificar.setBackground(new java.awt.Color(153, 153, 0));
+        btnModificar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnModificar.setForeground(new java.awt.Color(255, 255, 255));
         btnModificar.setText("Modificar");
         btnModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnModificarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 90, 30));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 100, 90));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
@@ -91,9 +103,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 20, 44, 28));
 
+        btnElimniar.setBackground(new java.awt.Color(204, 0, 0));
         btnElimniar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         btnElimniar.setForeground(new java.awt.Color(255, 255, 255));
-        btnElimniar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgEliminar.png"))); // NOI18N
         btnElimniar.setText("Eliminar");
         btnElimniar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnElimniar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -102,9 +114,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
                 btnElimniarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnElimniar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 100, 90));
+        getContentPane().add(btnElimniar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 100, 90));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgMenuPrincipal.jpg"))); // NOI18N
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();

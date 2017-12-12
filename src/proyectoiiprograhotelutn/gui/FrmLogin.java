@@ -4,6 +4,11 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui;
+
+import proyectoiiprograhotelutn.bo.LoginBO;
+import proyectoiiprograhotelutn.entities.MiError;
+import proyectoiiprograhotelutn.entities.Usuario;
+
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -13,17 +18,36 @@ public class FrmLogin extends javax.swing.JFrame {
     /**
      * Creates new form FrmLogin
      */
+    private Usuario usuario;
     public FrmLogin() {
         initComponents();
         setLocationRelativeTo(null);
         btnSalir.setContentAreaFilled(false);
         btnIniciar.setContentAreaFilled(false);
+        usuario = new Usuario();
     }
-    private void irAMenuPrincipal(){
-        FrmMenuPrincipal principal = new FrmMenuPrincipal();
+    private void irAMenuPrincipal(Usuario logeado){
+        FrmMenuPrincipal principal = new FrmMenuPrincipal(logeado);
         principal.setVisible(true);
         dispose();
     } 
+    public void Login(){
+        try {
+            lblErrorLogin.setText("");
+            LoginBO lbo = new LoginBO();
+            
+            if (lbo.login(txtCedula.getText().trim().toLowerCase(), txtContra.getText().trim().toLowerCase())) {
+                usuario = lbo.getUsuarioLogeado(txtCedula.getText().trim().toLowerCase());
+                irAMenuPrincipal(usuario);
+            }else{
+                lblErrorLogin.setText("Cédula o contraseña inválida.");
+            }
+        } catch (MiError e) {
+            lblErrorLogin.setText(e.getMessage());
+        } catch (Exception e) {
+            lblErrorLogin.setText("Favor intente nuevamente");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,11 +59,12 @@ public class FrmLogin extends javax.swing.JFrame {
 
         jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtCedula = new javax.swing.JTextField();
+        txtContra = new javax.swing.JTextField();
         btnIniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblErrorLogin = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         lblImgLogin = new javax.swing.JLabel();
 
@@ -78,8 +103,8 @@ public class FrmLogin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -100,17 +125,23 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 420, 260));
+
+        lblErrorLogin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblErrorLogin.setForeground(new java.awt.Color(255, 255, 255));
+        lblErrorLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblErrorLogin.setToolTipText("");
+        getContentPane().add(lblErrorLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 400, 30));
 
         btnSalir.setBackground(new java.awt.Color(255, 255, 255));
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/salir.png"))); // NOI18N
@@ -131,9 +162,9 @@ public class FrmLogin extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
-
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        irAMenuPrincipal();
+        irAMenuPrincipal(new Usuario());
+        //Login();
     }//GEN-LAST:event_btnIniciarActionPerformed
     /**
      * @param args the command line arguments
@@ -175,8 +206,9 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSlider jSlider1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JLabel lblErrorLogin;
     private javax.swing.JLabel lblImgLogin;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtContra;
     // End of variables declaration//GEN-END:variables
 }

@@ -60,21 +60,28 @@ public class FrmEliminar extends javax.swing.JFrame {
 
         btnTipoHabitacion = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblEliminar = new javax.swing.JLabel();
         btnPuesto = new javax.swing.JButton();
         btnAgencia = new javax.swing.JButton();
         btnUsuario = new javax.swing.JButton();
         btnHabitaciones = new javax.swing.JButton();
+        btnCliente = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnTipoHabitacion.setBackground(new java.awt.Color(204, 0, 0));
+        btnTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnTipoHabitacion.setForeground(new java.awt.Color(255, 255, 255));
         btnTipoHabitacion.setText("Tipo Habitación");
         btnTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTipoHabitacionActionPerformed(evt);
             }
         });
+        getContentPane().add(btnTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 140, 30));
 
         btnRegresar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgAtras.png"))); // NOI18N
@@ -84,85 +91,70 @@ public class FrmEliminar extends javax.swing.JFrame {
                 btnRegresarActionPerformed(evt);
             }
         });
+        getContentPane().add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(728, 10, 44, 28));
 
-        jLabel1.setText("Elimniar");
+        lblEliminar.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        lblEliminar.setForeground(new java.awt.Color(204, 0, 0));
+        lblEliminar.setText("Ventana para Eliminar");
+        getContentPane().add(lblEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, -1, -1));
 
+        btnPuesto.setBackground(new java.awt.Color(204, 0, 0));
+        btnPuesto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnPuesto.setForeground(new java.awt.Color(255, 255, 255));
         btnPuesto.setText("Puesto");
         btnPuesto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPuestoActionPerformed(evt);
             }
         });
+        getContentPane().add(btnPuesto, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 90, 30));
 
+        btnAgencia.setBackground(new java.awt.Color(204, 0, 0));
+        btnAgencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAgencia.setForeground(new java.awt.Color(255, 255, 255));
         btnAgencia.setText("Agencia de Viajes");
         btnAgencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgenciaActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 140, 30));
 
+        btnUsuario.setBackground(new java.awt.Color(204, 0, 0));
+        btnUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnUsuario.setForeground(new java.awt.Color(255, 255, 255));
         btnUsuario.setText("Usuarios");
         btnUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUsuarioActionPerformed(evt);
             }
         });
+        getContentPane().add(btnUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 90, 30));
 
+        btnHabitaciones.setBackground(new java.awt.Color(204, 0, 0));
+        btnHabitaciones.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnHabitaciones.setForeground(new java.awt.Color(255, 255, 255));
         btnHabitaciones.setText("Habitaciones");
         btnHabitaciones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHabitacionesActionPerformed(evt);
             }
         });
+        getContentPane().add(btnHabitaciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 140, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(288, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(254, 254, 254)
-                .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnUsuario)
-                    .addComponent(btnTipoHabitacion))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(btnPuesto)
-                        .addGap(101, 101, 101)
-                        .addComponent(btnAgencia))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(74, 74, 74)
-                        .addComponent(btnHabitaciones)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnTipoHabitacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnPuesto)
-                            .addComponent(btnAgencia))))
-                .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnUsuario)
-                    .addComponent(btnHabitaciones))
-                .addContainerGap(206, Short.MAX_VALUE))
-        );
+        btnCliente.setBackground(new java.awt.Color(204, 0, 0));
+        btnCliente.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCliente.setForeground(new java.awt.Color(255, 255, 255));
+        btnCliente.setText("Cliente");
+        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClienteActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 90, 30));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -184,6 +176,10 @@ public class FrmEliminar extends javax.swing.JFrame {
     private void btnHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabitacionesActionPerformed
         irAModificarEliminarHabitacion(2);
     }//GEN-LAST:event_btnHabitacionesActionPerformed
+
+    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClienteActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -219,11 +215,13 @@ public class FrmEliminar extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgencia;
+    private javax.swing.JButton btnCliente;
     private javax.swing.JButton btnHabitaciones;
     private javax.swing.JButton btnPuesto;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnTipoHabitacion;
     private javax.swing.JButton btnUsuario;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblEliminar;
+    private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 }

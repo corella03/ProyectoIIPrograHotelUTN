@@ -80,9 +80,9 @@ create table cliente(
     apellido text not null,
     cedula text not null,
     direccion text not null,
-    id_distrito int not null,
     numero_tarjeta text not null,
     activo boolean not null,
+    telfono int not null,
     constraint pk_cliente primary key (id)
 );
 alter table cliente
@@ -90,20 +90,10 @@ alter table cliente
 select * from cliente;
 ---
 ---
-create table telefono_cliente(
-    id serial,
-    telefono int not null,
-    id_cliente int not null,
-    activo boolean not null,
-    constraint pk_telefono_cliente primary key (id)
-);
-select * from telefono_cliente;
----
----
 create table detalle_reservacion(
     id serial,
     id_usuario int not null,
-    id_cliente int not null,
+    id_cliente int,
     id_habitacion int not null,
     id_agencia_de_viajes int,
     fecha_reservacion date not null,
@@ -131,13 +121,15 @@ create table habitacion(
     id_tipo_habitacion int not null,
     foto bytea not null,
     descripcion text not null,
-    estado_habitacion text not null,
+    estado_habitacion boolean not null,
     cant_personas int not null,
     constraint pk_habitacion primary key (id)
 );
 alter table habitacion
 	add constraint unq_codigo_habitacion unique (id);
 select * from habitacion;
+select * from habitacion where estado_habitacion = false;
+
 ---
 ---
 create table tipo_habitacion(
@@ -213,14 +205,6 @@ alter table cliente
 		fk_cliente_distrito
 		foreign key (id_distrito)
            references distrito (id);
----
--- foreign key telefono_cliente
----
-alter table telefono_cliente
-        add constraint 
-		fk_telefono_cliente_cliente
-		foreign key (id_cliente)
-           references cliente (id);
 ---
 -- foreign key detalle_reservacion
 ---

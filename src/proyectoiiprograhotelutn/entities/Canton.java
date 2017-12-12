@@ -4,27 +4,37 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.entities;
+
+import java.util.Objects;
+
 /**
  **
- ** @author Luis Alonso Corella Chaves
- ** 01/11/2017
- **/
-public class Canton extends Lugar{
+ ** @author Luis Alonso Corella Chaves * 01/11/2017
+ *
+ */
+public class Canton extends Lugar {
+
     private Provincia provincia;
+
     public Canton() {
     }
+
     public Canton(Provincia provincia, int id, String nombre) {
         super(id, nombre);
         this.provincia = provincia;
     }
+
     public Provincia getProvincia() {
         return provincia;
     }
+
     public void setProvincia(Provincia provincia) {
         this.provincia = provincia;
     }
+
     @Override
     public String toString() {
         return getNombre();
-    } 
+    }
+
 }

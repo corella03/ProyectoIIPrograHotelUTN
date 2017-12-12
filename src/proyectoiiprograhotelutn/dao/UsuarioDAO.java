@@ -83,7 +83,7 @@ public class UsuarioDAO {
                 return cargarUsuario(rs);
             }
         } catch (Exception ex) {
-            throw new MiError("Problemas al cargar el puesto, favor intente nuevamente");
+            throw new MiError("Problemas al cargar el Usuario, favor intente nuevamente");
         }
         return null;
     }

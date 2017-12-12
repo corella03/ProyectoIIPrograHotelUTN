@@ -58,9 +58,9 @@ public class FrmUsuario extends javax.swing.JDialog {
         txtContrasena.setVisible(false);
         this.usuario = usuario;
         DatosIniciales();
-        cargarUsuarios();
         cargarPaises();
         cargarPuestos();
+        cargarUsuarios();
     }
     private void DatosIniciales(){
         paises = new DefaultComboBoxModel<>();
@@ -134,7 +134,7 @@ public class FrmUsuario extends javax.swing.JDialog {
             String telefono = txtTelefono.getText().trim() + txtTelefono2.getText().trim()
                 + txtTelefono3.getText().trim();
             usuario.setTelefono(Integer.parseInt(telefono));
-            usuario.setContrasena( new String (txtContrasena.getPassword()).trim());
+            usuario.setContrasena( new String (txtContrasena.getPassword()).trim().toLowerCase());
             usuario.setDireccion(txtDireccion.getText().trim());
             usuario.setIdDistrito((Distrito) cbxDistrito.getSelectedItem());
             usuario.setIdPuesto((Puesto) cbxPuestos.getSelectedItem());            
