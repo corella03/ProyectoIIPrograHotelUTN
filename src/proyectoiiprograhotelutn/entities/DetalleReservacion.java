@@ -4,9 +4,7 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.entities;
-
 import java.util.Date;
-
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -25,7 +23,6 @@ public class DetalleReservacion {
     private int cantPersonas;
     public DetalleReservacion() {
     }
-
     public DetalleReservacion(int id, Usuario idUsuario, Cliente idCliente,
             Habitacion idHabitacion, AgenciaDeViajes idAgencia, Date fechaReservacion, 
             String fechaEntrada, String fechaSalida, boolean desayuno, int cantPersonas) {
@@ -40,7 +37,6 @@ public class DetalleReservacion {
         this.desayuno = desayuno;
         this.cantPersonas = cantPersonas;
     }
-    
     public int getId() {
         return id;
     }
@@ -102,4 +98,3 @@ public class DetalleReservacion {
         this.cantPersonas = cantPersonas;
     }
 }
-

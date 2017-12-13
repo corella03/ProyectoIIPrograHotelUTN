@@ -62,6 +62,10 @@ public class AgenciaDeViajes {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+    /**
+     * Método toString de la clase Agencia de viajes
+     * @return String nombre
+     */
     @Override
     public String toString() {
         return nombre;

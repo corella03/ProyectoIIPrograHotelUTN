@@ -23,6 +23,10 @@ public class Distrito extends Lugar{
     public void setCanton(Canton canton) {
         this.canton = canton;
     }
+    /**
+     * Método toString de la clase Distrito
+     * @return String nombre
+     */
     @Override
     public String toString() {
         return getNombre();

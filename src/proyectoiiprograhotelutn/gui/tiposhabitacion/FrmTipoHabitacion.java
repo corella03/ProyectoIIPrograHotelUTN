@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.gui.tiposhabitacion;
+import javax.swing.JOptionPane;
 import proyectoiiprograhotelutn.bo.TipoHabitacionBO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.TipoHabitacion;
@@ -133,6 +134,11 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
         getContentPane().add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, -1, -1));
 
         txtPrecioTipoHabitacion.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtPrecioTipoHabitacion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioTipoHabitacionKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtPrecioTipoHabitacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 140, -1));
 
         lblSimbloColones.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -191,6 +197,15 @@ public class FrmTipoHabitacion extends javax.swing.JDialog {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         irAFrmRegistro();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void txtPrecioTipoHabitacionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioTipoHabitacionKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtPrecioTipoHabitacionKeyTyped
     /**
      * @param args the command line arguments
      */

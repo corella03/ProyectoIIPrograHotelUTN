@@ -15,6 +15,10 @@ public class Pais extends Lugar{
     public Pais(int id, String nombre) {
         super(id, nombre);
     }
+    /**
+     * Método toString de la clase Pais
+     * @return String nombre
+     */
     @Override
     public String toString() {
         return getNombre();

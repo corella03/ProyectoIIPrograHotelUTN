@@ -20,7 +20,6 @@ public class Habitacion {
     private int cantPersonas;
     public Habitacion() {
     }
-
     public Habitacion(int id, String codigo, TipoHabitacion idTipoHabitacion, 
             Image imagen, String descripcion, boolean estado, int cantPersonas) {
         this.id = id;
@@ -31,7 +30,6 @@ public class Habitacion {
         this.estado = estado;
         this.cantPersonas = cantPersonas;
     }
-    
     public int getId() {
         return id;
     }
@@ -74,6 +72,10 @@ public class Habitacion {
     public void setCantPersonas(int cantPersonas) {
         this.cantPersonas = cantPersonas;
     }
+    /**
+     * Método toString de la clase Habitacion
+     * @return String codigo
+     */
     @Override
     public String toString() {
         return codigo;

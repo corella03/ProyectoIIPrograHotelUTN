@@ -14,14 +14,12 @@ public class Cliente extends Persona{
     private int telefono;
     public Cliente() {
     }
-
     public Cliente(String numeroTarjeta, int telefono, int id, String nombre, String apellido, 
             String cedula, String direccion, Distrito idDistrito, boolean activo) {
         super(id, nombre, apellido, cedula, direccion, idDistrito, activo);
         this.numeroTarjeta = numeroTarjeta;
         this.telefono = telefono;
     }
-    
     public String getNumeroTarjeta() {
         return numeroTarjeta;
     }

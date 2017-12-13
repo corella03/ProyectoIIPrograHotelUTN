@@ -46,12 +46,19 @@ public class Puesto {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+    /**
+     * Método toString de la clase puesto
+     * @return String nombre
+     */
     @Override
     public String toString() {
         return nombre;
     } 
-
-  
+    /**
+     * Método para comparar objetos de la misma clase
+     * @param obj 
+     * @return true si son iguales
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -69,5 +76,4 @@ public class Puesto {
         }
         return true;
     }
-    
 }

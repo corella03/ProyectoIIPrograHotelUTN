@@ -54,6 +54,10 @@ public class TipoHabitacion {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+    /**
+     * Método toString de la clase TipoHabitacion
+     * @return String codigo, int precio
+     */
     @Override
     public String toString() {
         return "Código: " + codigo + " ₡ " + precio;

@@ -23,6 +23,10 @@ public class Provincia extends Lugar{
     public void setPais(Pais pais) {
         this.pais = pais;
     }
+    /**
+     * Método toString de la clase provincia
+     * @return String nombre
+     */
     @Override
     public String toString() {
         return getNombre();
