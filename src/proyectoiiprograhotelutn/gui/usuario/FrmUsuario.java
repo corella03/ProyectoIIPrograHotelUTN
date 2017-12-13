@@ -79,6 +79,9 @@ public class FrmUsuario extends javax.swing.JDialog {
         super.getParent().setVisible(true);
         dispose();
     } 
+    /**
+     * Se encarga de cragar paises en un combobox
+     */
     public void cargarPaises(){
         cbxPais.removeAllItems();
         PaisBO paisbo = new PaisBO();
@@ -87,16 +90,22 @@ public class FrmUsuario extends javax.swing.JDialog {
             paises.addElement(p);
         }
     }
-    public void cargarProvincias(){///Preguntar
+    /**
+     * Se encarga de cragar provincias en un combobox
+     */
+    public void cargarProvincias(){
         cbxProvincia.removeAllItems();
         ProvinciaBO provinciabo = new ProvinciaBO();
-//        ArrayList<Provincia> listaProvincias = provinciabo.cargarProvinciasDePais(((Pais) cbxPais.getSelectedItem()).getId());
         ArrayList<Provincia> listaProvincias = provinciabo.cargarProvinciasDePais(1);
         for (Provincia p : listaProvincias) {
             provincias.addElement(p);
         }
     }
-    public void cargarCantones(int numDeProvincias){///Preguntar
+    /**
+     * Se encarga de cargar  cantones en  un combobox
+     * @param numDeProvincias cantidad de provincia en el combobox
+     */
+    public void cargarCantones(int numDeProvincias){
         cbxCanton.removeAllItems();
         if(numDeProvincias > 0) {
             CantonBO cantonbo = new CantonBO();
@@ -106,7 +115,11 @@ public class FrmUsuario extends javax.swing.JDialog {
             }
         }
     }
-    public void cargarDistritos(int numDeCantones){///Preguntar
+    /**
+     * Se encarga de cargar distritos en  un combobox
+     * @param numDeCantones cantidad de cantones en el combobox
+     */
+    public void cargarDistritos(int numDeCantones){
         cbxDistrito.removeAllItems();
         if(numDeCantones > 0) {
             DistritoBO distritobo = new DistritoBO();
@@ -116,6 +129,9 @@ public class FrmUsuario extends javax.swing.JDialog {
             }
         }
     }
+    /**
+     * Se encarga de cargar puestos en un combobox
+     */
     public void cargarPuestos(){
         cbxPuestos.removeAllItems();
         PuestoBO puestobo = new PuestoBO();

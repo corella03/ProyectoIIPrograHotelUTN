@@ -56,6 +56,9 @@ public class FrmCargarAgencias extends javax.swing.JDialog {
             btnEliminar.setVisible(true);
         }
     }
+    /**
+     * cargar Agencias en una Jtable
+     */
     private void cargarAgencias(){
         limpiarTabla();
         ArrayList<AgenciaDeViajes> agencias = agenciabo.cargarAgenciasActivas();
@@ -70,6 +73,9 @@ public class FrmCargarAgencias extends javax.swing.JDialog {
             modelo.addRow(row);
         }
     }
+    /**
+     * cargar Agencias eliminadas en una Jtable
+     */
     private void cargarAgenciasEliminados(){
         limpiarTabla();
         ArrayList<AgenciaDeViajes> agencias = agenciabo.cargarAgencias();
@@ -91,6 +97,9 @@ public class FrmCargarAgencias extends javax.swing.JDialog {
             modelo.removeRow(i);
         }
     }
+    /**
+     * Selecciona una agencia para enviarla a Editar
+     */
     private void editarAgencia(){
         int row = tbAgencias.getSelectedRow();
         if (row > -1) {
@@ -100,6 +109,9 @@ public class FrmCargarAgencias extends javax.swing.JDialog {
             cargarAgencias();
         }
     }
+    /**
+     * Eliminar una agencia de la Jtable
+     */
     public void eliminarAgencia(){
         int row = tbAgencias.getSelectedRow();
         if (row > -1) {

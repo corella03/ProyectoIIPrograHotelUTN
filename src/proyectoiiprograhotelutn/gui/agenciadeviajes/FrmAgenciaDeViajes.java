@@ -41,6 +41,9 @@ public class FrmAgenciaDeViajes extends javax.swing.JDialog {
         super.getParent().setVisible(true);
         dispose();
     } 
+    /**
+     * Método que se utiliza para registar agencias
+     */
     public void registrarAgencia(){
         lblErrorAgencia.setText("");
         String telefono = txtTelefonoAgencia.getText().trim() + txtTelefonoAgencia2.getText().trim()
@@ -79,6 +82,9 @@ public class FrmAgenciaDeViajes extends javax.swing.JDialog {
             System.out.println(agenciabo.cargarAgencias().get(i).toString());
         }
     }
+    /**
+     * Se utilza para cargar en los txt los datos de la agencia
+     */
     private void cargarAgencia(){
         txtCodigoAgencia.setText(agencia.getCodigo());
         txtNombreAgencia.setText(agencia.getNombre());

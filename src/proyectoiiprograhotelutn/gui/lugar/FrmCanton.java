@@ -52,6 +52,9 @@ public class FrmCanton extends javax.swing.JDialog {
         cbxPais.setModel(paises);
         cbxProvincia.setModel(provincias);
     }
+    /**
+     * Se encarga de cragar paises en un combobox
+     */
     public void cargarPaises(){
         cbxPais.removeAllItems();
         PaisBO paisbo = new PaisBO();
@@ -60,7 +63,10 @@ public class FrmCanton extends javax.swing.JDialog {
             paises.addElement(p);
         }
     }
-    public void cargarProvincias(){///Preguntar
+    /**
+     * Se encarga de cragar provincias en un combobox
+     */
+    public void cargarProvincias(){
         cbxProvincia.removeAllItems();
         ProvinciaBO provinciabo = new ProvinciaBO();
         ArrayList<Provincia> listaProvincias = provinciabo.cargarProvinciasDePais(((Pais) cbxPais.getSelectedItem()).getId());

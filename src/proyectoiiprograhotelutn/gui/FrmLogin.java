@@ -31,6 +31,9 @@ public class FrmLogin extends javax.swing.JFrame {
         principal.setVisible(true);
         dispose();
     } 
+    /**
+     * Método que se utiliza para proceder con el login
+     */
     public void Login(){
         try {
             lblErrorLogin.setText("");

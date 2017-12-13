@@ -58,16 +58,14 @@ public class FrmCargarCliente extends javax.swing.JDialog {
             btnEliminar.setVisible(true);
         }
     }
+    /**
+     * cargar habitaciones en una Jtable
+     */
     private void cargarHabitacion(){
         limpiarTabla();
         String estado = "";
         ArrayList<Habitacion> habi = habibo.cargaHabitacionesDisponibles();
         for (Habitacion h : habi) {
-//            if(h.isEstado()){
-//                estado = "Disponible";
-//            }else{
-//                estado = "Ocupada o Fuera de Servicio";
-//            }
             Object[] row = {
                 h.getId(),
                 h.getCodigo(),
@@ -78,6 +76,9 @@ public class FrmCargarCliente extends javax.swing.JDialog {
             modelo.addRow(row);
         }
     }
+    /**
+     * cargar Habiatciones eliminadas en una Jtable
+     */
     private void cargarHabitacionEliminados(){
         limpiarTabla();
         ArrayList<Habitacion> habi = habibo.cargarHabitaciones();
@@ -99,6 +100,9 @@ public class FrmCargarCliente extends javax.swing.JDialog {
             modelo.removeRow(i);
         }
     }
+    /**
+     * Selecciona una habitacion para enviarla a Editar
+     */
     private void editarHabitacion(){
         int row = tbTipoHabitacion.getSelectedRow();
         if (row > -1) {
@@ -108,6 +112,9 @@ public class FrmCargarCliente extends javax.swing.JDialog {
             cargarHabitacion();
         }
     }
+    /**
+     * Eliminar una agencia de la Jtable
+     */
     public void eliminarHabitacion(){
         int row = tbTipoHabitacion.getSelectedRow();
         if (row > -1) {

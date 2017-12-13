@@ -32,6 +32,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         vista();
         System.out.println(usuario.getNombre() + " " + usuario.getCedula() );
     }
+    /**
+     * Vista que cambia cuando se loguea un Gerente u otro
+     */
     public void vista(){
         if(usuario.getIdPuesto().getId() != 1){
             btnRegistar.setVisible(false);

@@ -5,10 +5,8 @@
  */
 package proyectoiiprograhotelutn.gui.habitacion;
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -59,6 +57,9 @@ public class FrmHabitacion extends javax.swing.JDialog {
         super.getParent().setVisible(true);
         dispose();
     } 
+    /**
+     * Método que se utiliza para cargar una foto desde la computadora
+     */
     public void cargarFoto(){
         try {
             lblErrorHabitacion.setText("");
@@ -75,6 +76,9 @@ public class FrmHabitacion extends javax.swing.JDialog {
             lblErrorHabitacion.setText("Favor seleccione una imagen válida");
         }
     }
+    /**
+     * Cargar tipos de habitaciones en un combobox
+     */
     public void cargarTiposHabitaciones(){
         cbxTipoHabiacion.removeAllItems();
         TipoHabitacionBO habibo = new TipoHabitacionBO();
@@ -83,6 +87,10 @@ public class FrmHabitacion extends javax.swing.JDialog {
             tipoHabi.addElement(h);
         }
     }
+    /**
+     * Se utlixa para registar una habitacion
+     * @throws IOException controla errores
+     */
     public void registrarHabitacion() throws IOException{
         lblErrorHabitacion.setText("");
         try {

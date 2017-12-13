@@ -57,6 +57,9 @@ public class FrmDistrito extends javax.swing.JDialog {
         cbxCanton.setModel(cantones);
         this.distrito = distrito;
     }
+    /**
+     * Se encarga de cragar paises en un combobox
+     */
     public void cargarPaises(){
         cbxPais.removeAllItems();
         PaisBO paisbo = new PaisBO();
@@ -65,7 +68,10 @@ public class FrmDistrito extends javax.swing.JDialog {
             paises.addElement(p);
         }
     }
-    public void cargarProvincias(){///Preguntar
+    /**
+     * Se encarga de cragar provincias en un combobox
+     */
+    public void cargarProvincias(){
         cbxProvincia.removeAllItems();
         ProvinciaBO provinciabo = new ProvinciaBO();
         ArrayList<Provincia> listaProvincias = provinciabo.cargarProvinciasDePais(((Pais) cbxPais.getSelectedItem()).getId());
@@ -73,7 +79,11 @@ public class FrmDistrito extends javax.swing.JDialog {
             provincias.addElement(p);
         }
     }
-    public void cargarCantones(int numDeProvincias){///Preguntar
+    /**
+     * Se encarga de cargar Cantones un combobox
+     * @param numDeProvincias  cantidad de provincias
+     */
+    public void cargarCantones(int numDeProvincias){
         cbxCanton.removeAllItems();
         if(numDeProvincias > 0) {
             CantonBO cantonbo = new CantonBO();

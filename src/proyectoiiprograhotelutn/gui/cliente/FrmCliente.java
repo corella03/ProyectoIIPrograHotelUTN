@@ -76,6 +76,9 @@ public class FrmCliente extends javax.swing.JDialog {
         super.getParent().setVisible(true);
         dispose();
     } 
+    /**
+     * Carga la habitaciones registradas en un combobox
+     */
     public void cargarHabitaciones(){
         cbxHabitacion.removeAllItems();
         HabitacionBO habibo = new HabitacionBO();
@@ -84,6 +87,9 @@ public class FrmCliente extends javax.swing.JDialog {
             habitaciones.addElement(h);
         }
     }
+    /**
+     * Carga la agencias registradas en un combobox
+     */
     public void cargarAgencias(){
         cbxAgencia.removeAllItems();
         AgenciaDeViajesBO agenciabo = new AgenciaDeViajesBO();
@@ -92,7 +98,10 @@ public class FrmCliente extends javax.swing.JDialog {
             agencias.addElement(a);
         }
     }
-   
+   /**
+    * Se utiliza para registar clientes
+    * @throws IOException controld de errores
+    */
     public void registrarCliente() throws IOException{
         lblErrorReservaCliente.setText("");
         try {
@@ -119,6 +128,10 @@ public class FrmCliente extends javax.swing.JDialog {
             lblErrorReservaCliente.setText("Llamar a TI ...xD");
         }
     }
+    /**
+    * Se utiliza para registar reservas
+    * @throws IOException controld de errores
+    */
     public void registrarReserva() throws IOException{
         lblErrorReservaCliente.setText("");
         try {
@@ -164,6 +177,9 @@ public class FrmCliente extends javax.swing.JDialog {
             lblErrorReservaCliente.setText("Llamar a TI ...xD");
         }
     }
+    /**
+     * Se utilza para cargar en los txt los datos de la de los clientes
+     */
     public void cargarCliente(){
         ClienteBO clibo = new ClienteBO();
         cliente = clibo.getClientePorCedula(txtCedula.getText());

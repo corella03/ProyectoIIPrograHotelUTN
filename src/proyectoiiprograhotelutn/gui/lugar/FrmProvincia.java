@@ -46,6 +46,9 @@ public class FrmProvincia extends javax.swing.JDialog {
         super.getParent().setVisible(true);
         dispose();
     }
+    /**
+     * Se encarga de cragar paises en un combobox
+     */
     public void cargarPaises(){
         cbxPais.removeAllItems();
         PaisBO paisbo = new PaisBO();
