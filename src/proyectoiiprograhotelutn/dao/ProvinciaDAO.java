@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.Provincia;
  ** 26/11/2017
  **/
 public class ProvinciaDAO {
+    /**
+     * Método para registar una Provincia en la BD.
+     * @param provincia Provincia que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarProvincia(Provincia provincia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into provincia(nombre, id_pais)"
@@ -32,6 +37,10 @@ public class ProvinciaDAO {
             throw new MiError("No se pudo registrar la provincia, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar las provincias registradas en la BD.
+     * @return ArrayList: Con las provincias registardas.
+     */
     public ArrayList<Provincia> cargarProvincias() {
         ArrayList<Provincia> provincias = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -47,6 +56,12 @@ public class ProvinciaDAO {
         }
         return provincias;
     }
+    /**
+     * Método para cargar los datos de una provincia en la entidad Provinicia.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Provincia: datos de la provincia seleccionada.
+     * @throws SQLException Controla los errores.
+     */
     private Provincia cargarProvincia(ResultSet rs) throws SQLException {
         Provincia provincia = new Provincia();
         provincia.setId(rs.getInt("id"));
@@ -55,6 +70,11 @@ public class ProvinciaDAO {
         provincia.setPais(paisdao.seleccionarPorId(rs.getInt("id_pais")));
         return provincia;
     }
+    /**
+     * Método que selecciona una provincia por medio de un id.
+     * @param id que recibe un int con el id de la provincia a buscar.
+     * @return Provincia: la provincia correspondiente al id.
+     */
     public Provincia seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from provincia where id = ?";
@@ -69,6 +89,11 @@ public class ProvinciaDAO {
         }
         return null;
     }
+    /**
+     * Método para cargar las provinicas las cuales pertenecen a un pais por medio del id.
+     * @param id int id de la pais al que pertenece la provincia.
+     * @return ArrayList con las provincias del pais.
+     */
     public ArrayList<Provincia> cargarProvinciaDelPais(int id) {
         ArrayList<Provincia> provincias = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -85,6 +110,11 @@ public class ProvinciaDAO {
         }
         return provincias;
     }
+    /**
+     * Método que selecciona una provincia para modificar sus datos.
+     * @param provincia Provincia: la provincia que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarProvincia(Provincia provincia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update provincia set nombre=?, id_pais"

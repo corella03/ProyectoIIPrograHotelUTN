@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.MiError;
  ** 24/11/2017
  **/
 public class DetalleReservacionDAO {
+    /**
+     * Método para registar un DetalleReservacion en la BD.
+     * @param detalle DetalleReservacion que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarDetalle(DetalleReservacion detalle) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into detalle_reservacion(id_usuario, id_cliente, id_habitacion,"
@@ -36,14 +41,18 @@ public class DetalleReservacionDAO {
             stmt.setInt(9, detalle.getCantPersonas());
             return stmt.executeUpdate() > 0;
         }
-//        catch(SQLException e) {
-//            throw  new MiError("La cédula del usuario ya fue registrada.");
-//        } 
+        catch(SQLException e) {
+            throw  new MiError("La cédula del usuario ya fue registrada.");
+        } 
         catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar los detalles de reservación, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los detalles de reservacion en la BD.
+     * @return ArrayList Con los detalles de reservacion registardas.
+     */
     public ArrayList<DetalleReservacion> cargarDetalleReservaciones() {
         ArrayList<DetalleReservacion> reservaciones = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -59,6 +68,12 @@ public class DetalleReservacionDAO {
         }
         return reservaciones;
     }
+    /**
+     * Método para cargar los datos de el detalle de reservacion en la entidad Cliente.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return DetalleReservacion: datos del cliente seleccionada.
+     * @throws SQLException Controla los errores.
+     */
     private DetalleReservacion cargarDetalleReservacion(ResultSet rs) throws SQLException {
         DetalleReservacion dellate = new DetalleReservacion();
         dellate.setId(rs.getInt("id"));
@@ -77,6 +92,11 @@ public class DetalleReservacionDAO {
         dellate.setCantPersonas(rs.getInt("cant_personas"));
         return dellate;
     }
+    /**
+     * Método que selecciona un dellate reservacion por medio de un id.
+     * @param id que recibe un int con el id del dellate reservacion.
+     * @return DetalleReservacion: el dellate reservacion correspondiente al id.
+     */
     public DetalleReservacion seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from detalle_reservacion where id = ?";
@@ -91,6 +111,11 @@ public class DetalleReservacionDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona un dellate reservacion para modificar sus datos.
+     * @param detalle DetalleReservacion: el dellate reservacion que se desea modificar
+     * @return true si se pudo modificar.
+     */
     public boolean modificarDetalleReservacion(DetalleReservacion detalle) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update detalle_reservacion set id_usuario =?, id_cliente=?, id_habitacion=?,"

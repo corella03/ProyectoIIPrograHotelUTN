@@ -19,6 +19,10 @@ public class Conexion {
     public static final String DB = "BDPrograIIHotelUTN";
     public static final String USER = "postgres";
     public static final String PASS = "postgres";
+    /**
+     * Método que se encarga de conectar con la BD
+     * @return Connection conn
+     */
     public static Connection getConexion() {
         Connection conn = null;
         String url = DRIVER + SERVER + DB;

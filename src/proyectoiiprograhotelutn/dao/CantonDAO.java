@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.MiError;
  ** 26/11/2017
  **/
 public class CantonDAO {
+    /**
+     * Método para registar un Canton en la BD.
+     * @param canton Canton que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarCanton(Canton canton) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into canton(nombre, id_provincia)"
@@ -32,6 +37,10 @@ public class CantonDAO {
             throw new MiError("No se pudo registrar el cantón, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los contones registrados en la BD.
+     * @return ArrayList: Con los contones registardas.
+     */
     public ArrayList<Canton> cargarCantones() {
         ArrayList<Canton> cantones = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -47,6 +56,12 @@ public class CantonDAO {
         }
         return cantones;
     }
+    /**
+     * Método para cargar los datos de un canton en la entidad Canton.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Canton: datos del canton seleccionado.
+     * @throws SQLException Controla los errores.
+     */
     private Canton cargarCanton(ResultSet rs) throws SQLException {
         Canton canton = new Canton();
         canton.setId(rs.getInt("id"));
@@ -55,6 +70,11 @@ public class CantonDAO {
         canton.setProvincia(provinciadao.seleccionarPorId(rs.getInt("id_provincia")));
         return canton;
     }
+    /**
+     * Método que selecciona un canton por medio de un id.
+     * @param id que recibe un int con el id del canton a buscar.
+     * @return Canton: el canton correspondiente al id.
+     */
     public Canton seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from canton where id = ?";
@@ -69,6 +89,11 @@ public class CantonDAO {
         }
         return null;
     }
+    /**
+     * Método para cargar los cantones los cuales pertenecen a una provincia por medio del id.
+     * @param id int id de la provincia a la que pertenece el canton.
+     * @return  ArrayList con los cantones de la provincia.
+     */
     public ArrayList<Canton> cargarCantonDeProvincia(int id) {
         ArrayList<Canton> cantones = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -85,6 +110,11 @@ public class CantonDAO {
         }
         return cantones;
     }
+    /**
+     * Método que selecciona un canton para modificar sus datos.
+     * @param canton Canton: el  canton que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarCanton(Canton canton) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update canton set nombre=?, id_provincia"

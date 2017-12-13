@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.MiError;
  ** 24/11/2017
  **/
 public class AgenciaDeViajesDAO {
+    /**
+     * Método para registar una AgenciaDeViajes en la BD.
+     * @param agencia AgenciaDeViajes que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarAgencia(AgenciaDeViajes agencia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into agencia_de_viajes(codigo, nombre, telefono, comision)"
@@ -35,6 +40,11 @@ public class AgenciaDeViajesDAO {
             throw new MiError("No se pudo registrar la agencia, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar las agencias de viajes registrados en la BD segun esten activas o no.
+     * @param activo boolean activo que decide cuales agencias retornar.
+     * @return ArrayList: Con las agencias de viajes registardas.
+     */
     public ArrayList<AgenciaDeViajes> cargarAgencias(boolean activo) {
         ArrayList<AgenciaDeViajes> agencia = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -51,6 +61,12 @@ public class AgenciaDeViajesDAO {
         }
         return agencia;
     }
+    /**
+     * Método para cargar los datos de una agencia en la entidad AgenciaDeViajes.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return AgenciaDeViajes: datos de la agencia de viajes seleccionada.
+     * @throws SQLException Controla los errores.
+     */
     private AgenciaDeViajes cargarAgencia(ResultSet rs) throws SQLException {
         AgenciaDeViajes agencia = new AgenciaDeViajes();
         agencia.setId(rs.getInt("id"));
@@ -61,6 +77,11 @@ public class AgenciaDeViajesDAO {
         agencia.setActivo(rs.getBoolean("activo"));
         return agencia;    
     }
+    /**
+     * Método que selecciona una agencia por medio de un id.
+     * @param id que recibe un int con el id de la agencia a buscar.
+     * @return AgenciaDeViajes: la agencia correspondiente al id.
+     */
     public AgenciaDeViajes seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from agencia_de_viajes where id = ?";
@@ -75,6 +96,11 @@ public class AgenciaDeViajesDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona una agencia para modificar sus datos.
+     * @param agencia AgenciaDeViajes: la  agencia que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarAgencia(AgenciaDeViajes agencia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update agencia_de_viajes set codigo=?, nombre=?, telefono=?, comision=?, activo=?"
@@ -92,6 +118,11 @@ public class AgenciaDeViajesDAO {
             throw new MiError("No se pudo modificar la agencia, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que selecciona una agencia para eliminarla (desactivarla).
+     * @param agencia AgenciaDeViajes: la  agencia que se desea eliminar.
+     * @return true si se pudo eliminar.
+     */
     public boolean eliminarAgencia(AgenciaDeViajes agencia) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update agencia_de_viajes set activo = false where id =?";

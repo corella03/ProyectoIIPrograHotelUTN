@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.MiError;
  ** 26/11/2017
  **/
 public class DistritoDAO {
+    /**
+     * Método para registar un Distrito en la BD.
+     * @param distrito Distrito que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarDistrito(Distrito distrito) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into distrito(nombre, id_canton)"
@@ -32,6 +37,10 @@ public class DistritoDAO {
             throw new MiError("No se pudo registrar el distrito, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los distritos registrados en la BD.
+     * @return ArrayList: Con los distritos registardos.
+     */
     public ArrayList<Distrito> cargarDistritos() {
         ArrayList<Distrito> distritos = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -47,6 +56,12 @@ public class DistritoDAO {
         }
         return distritos;
     }
+    /**
+     * Método para cargar los datos de un distrito en la entidad Canton.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Distrito: datos del distrito seleccionado.
+     * @throws SQLException Controla los errores.
+     */
     private Distrito cargarDistrito(ResultSet rs) throws SQLException {
         Distrito distrito = new Distrito();
         distrito.setId(rs.getInt("id"));
@@ -55,6 +70,11 @@ public class DistritoDAO {
         distrito.setCanton(cantondao.seleccionarPorId(rs.getInt("id_canton")));
         return distrito;
     }
+    /**
+     * Método que selecciona un distrito por medio de un id.
+     * @param id que recibe un int con el id del distrito a buscar.
+     * @return Distrito: el distrito correspondiente al id.
+     */
     public Distrito seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from distrito where id = ?";
@@ -69,6 +89,11 @@ public class DistritoDAO {
         }
         return null;
     }
+    /**
+     * Método para cargar los distritos los cuales pertenecen a un canton por medio del id.
+     * @param id int id de la canton al que pertenece el distrito.
+     * @return ArrayList con los distritos del canton.
+     */
     public ArrayList<Distrito> cargarDistritoDeCanton(int id) {
         ArrayList<Distrito> distrito = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -85,6 +110,11 @@ public class DistritoDAO {
         }
         return distrito;
     }
+    /**
+     * Método que selecciona un distrito para modificar sus datos.
+     * @param distrito Distrito: el distrito que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarDistrito(Distrito distrito) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update distrito set nombre=?, id_canton"

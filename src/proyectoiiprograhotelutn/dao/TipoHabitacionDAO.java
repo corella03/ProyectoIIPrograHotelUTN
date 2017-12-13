@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.TipoHabitacion;
  ** 24/11/2017
  **/
 public class TipoHabitacionDAO {
+    /**
+     * Método para registar un TipoHabitacion en la BD.
+     * @param tipo TipoHabitacion que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarTipoHabitacion(TipoHabitacion tipo) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into tipo_habitacion(codigo, descripcion, precio)"
@@ -35,6 +40,11 @@ public class TipoHabitacionDAO {
             throw new MiError("No se pudo registrar el tipo de habitación, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los tipos de habitacion registrados en la BD segun esten activas o no.
+     * @param activo boolean activo que decide cuales tipos de habitacion retornar.
+     * @return ArrayList Con los tipos de habitacion registardos.
+     */
     public ArrayList<TipoHabitacion> cargarTiposDeHabitaciones(boolean activo) {
         ArrayList<TipoHabitacion> tipos = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -51,6 +61,12 @@ public class TipoHabitacionDAO {
         }
         return tipos;
     }
+    /**
+     * Método para cargar los datos de los tipos de habitacion en la entidad Cliente.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return TipoHabitacion: datos de los tipos de habitacion seleccionado.
+     * @throws SQLException Controla los errores.
+     */
     private TipoHabitacion cargarTipoDeHabitacion(ResultSet rs) throws SQLException {
         TipoHabitacion tipo = new TipoHabitacion();
         tipo.setId(rs.getInt("id"));
@@ -60,6 +76,11 @@ public class TipoHabitacionDAO {
         tipo.setActivo(rs.getBoolean("activo"));
         return tipo;
     }
+    /**
+     * Método que selecciona un tipo de habitacion por medio de un id.
+     * @param id que recibe un int con el id del tipo de habitacion.
+     * @return TipoHabitacion: el tipo de habitacion correspondiente al id.
+     */
     public TipoHabitacion seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from tipo_habitacion where id = ?";
@@ -74,6 +95,11 @@ public class TipoHabitacionDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona un tipo de habitacion para modificar sus datos.
+     * @param tipo Cliente: el tipo de habitacion que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarTipoHabitacion(TipoHabitacion tipo) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update tipo_habitacion set codigo=?, descripcion=?, precio=?, activo=?"
@@ -90,6 +116,11 @@ public class TipoHabitacionDAO {
             throw new MiError("No se pudo modificar el tipo de habitación, favor intente nuevamente");
         }
     }
+    /**
+     * Método que selecciona un tipo de habitacion para eliminarlo (desactivarla).
+     * @param tipo: el ipo de habitacion que se desea eliminar.
+     * @return true si se pudo eliminar.
+     */
     public boolean eliminarTipoHabitacion(TipoHabitacion tipo) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update tipo_habitacion set activo = false where id =?";

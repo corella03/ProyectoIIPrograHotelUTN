@@ -11,14 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Reserva;
-import proyectoiiprograhotelutn.entities.Usuario;
-
 /**
  **
  ** @author Luis Alonso Corella Chaves
  ** 24/11/2017
  **/
 public class ReservaDAO {
+    /**
+     * Método para registar una Reserva en la BD.
+     * @param usuario REserva que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarReserva(Reserva usuario) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into reservacion(id_detalle_reservacion)"
@@ -27,14 +30,19 @@ public class ReservaDAO {
             stmt.setInt(1, usuario.getIdDetalleReservacion().getId());
             return stmt.executeUpdate() > 0;
         }
-//        catch(SQLException e) {
-//            throw  new MiError("La cédula del usuario ya fue registrada.");
-//        } 
+        catch(SQLException e) {
+            throw  new MiError("La cédula del usuario ya fue registrada.");
+        } 
         catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar la Reserva, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar las reservas registradas en la BD segun esten activas o no.
+     * @param activo boolean activo que decide cuales reservas retornar.
+     * @return ArrayList Con las reservas registardas.
+     */
     public ArrayList<Reserva> cargarReservas(boolean activo) {
         ArrayList<Reserva> usuarios = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -51,6 +59,12 @@ public class ReservaDAO {
         }
         return usuarios;
     }
+    /**
+     * Método para cargar los datos de una reserva en la entidad Reserva.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Cliente: datos del reserva seleccionado.
+     * @throws SQLException Controla los errores.
+     */
     private Reserva cargarReserva(ResultSet rs) throws SQLException {
         Reserva reserva = new Reserva();
         reserva.setId(rs.getInt("id"));
@@ -59,6 +73,11 @@ public class ReservaDAO {
         reserva.setActivo(rs.getBoolean("activo"));
         return reserva;
     }
+    /**
+     * Método que selecciona una resrva por medio de un id.
+     * @param id que recibe un int con el id de la reserva.
+     * @return Reserva: el cliente correspondiente al id.
+     */
     public Reserva seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from reservacion where id = ?";
@@ -73,6 +92,11 @@ public class ReservaDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona una reserva para modificar sus datos.
+     * @param reserva  Reserva: el cliente que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarReserva(Reserva reserva) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update reservacion set id_detalle_reservacion =?, activo=?"
@@ -87,6 +111,11 @@ public class ReservaDAO {
             throw new MiError("No se pudo modificar la Reserva, favor intente nuevamente");
         }
     }
+    /**
+     * Método que selecciona una resrva para eliminarla (desactivarla).
+     * @param reserva Reserva: la reserva que se desea eliminar.
+     * @return true si se pudo eliminar.
+     */
     public boolean eliminarReserva(Reserva reserva) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update reservacion set activo = false where id =?";

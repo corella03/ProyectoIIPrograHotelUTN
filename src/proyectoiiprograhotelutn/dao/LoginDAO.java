@@ -16,6 +16,12 @@ import proyectoiiprograhotelutn.entities.Usuario;
  ** 10/12/2017
  **/
 public class LoginDAO {
+    /**
+     * Método para autentificar los datos del usuario que se esta loguando con los de los usuarios en la BD.
+     * @param cedula String cedula ingresada
+     * @param contra String contraseña ingresada
+     * @return true si los datos son iguales
+     */
     public boolean autentificar(String cedula, String contra) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from usuario where cedula = ? "
@@ -24,7 +30,6 @@ public class LoginDAO {
             stmt.setString(1, cedula);
             stmt.setString(2, contra);
             ResultSet rs = stmt.executeQuery();
-            //Usuario usuario = new Usuario();
             if (rs.next()) {
                 return true;
             }
@@ -33,6 +38,12 @@ public class LoginDAO {
         }
         return false;
     }
+    /**
+     * Método para cargar los datos de un usuario en la entidad Usuario.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Usuario: datos del usuario seleccionada.
+     * @throws SQLException Controla los errores.
+     */
     private Usuario cargarUsuario(ResultSet rs) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("id"));
@@ -49,6 +60,11 @@ public class LoginDAO {
         usuario.setActivo(rs.getBoolean("activo"));
         return usuario;
     }
+    /**
+     * Método para seleccionar al logueado.
+     * @param cedula String cedula.
+     * @return Usuario : el usuario que se logueo.
+     */
     public Usuario seleccionarLogeado(String cedula) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from usuario where cedula = ? ";

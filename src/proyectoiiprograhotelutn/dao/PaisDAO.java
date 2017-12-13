@@ -17,6 +17,11 @@ import proyectoiiprograhotelutn.entities.Pais;
  ** 24/11/2017
  **/
 public class PaisDAO {
+    /**
+     * Método para registar un pais en la BD.
+     * @param pais Pais que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarPais(Pais pais) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into pais(nombre)"
@@ -32,6 +37,10 @@ public class PaisDAO {
             throw new MiError("No se pudo registrar el país, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los paises registrados en la BD.
+     * @return ArrayList: Con los paises registardos.
+     */
     public ArrayList<Pais> cargarPaises() {
         ArrayList<Pais> paises = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -47,12 +56,23 @@ public class PaisDAO {
         }
         return paises;
     }
+    /**
+     * Método para cargar los datos de un pais en la entidad Pais.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Pais: datos del pais seleccionado.
+     * @throws SQLException Controla los errores.
+     */ 
     private Pais cargarPais(ResultSet rs) throws SQLException {
         Pais pais = new Pais();
         pais.setId(rs.getInt("id"));
         pais.setNombre(rs.getString("nombre"));
         return pais;
     }
+    /**
+     * Método que selecciona un pais por medio de un id.
+     * @param id que recibe un int con el id del pais a buscar.
+     * @return Pais: el pais correspondiente al id.
+     */
     public Pais seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from pais where id = ?";
@@ -67,6 +87,11 @@ public class PaisDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona un pais para modificar sus datos.
+     * @param pais Pais: el pais que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarPais(Pais pais) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update pais set nombre=?"

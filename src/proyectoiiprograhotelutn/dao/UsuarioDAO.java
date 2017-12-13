@@ -18,6 +18,11 @@ import proyectoiiprograhotelutn.entities.Usuario;
  ** 24/11/2017
  **/
 public class UsuarioDAO {
+    /**
+     * Método para registar un Usuario en la BD.
+     * @param usuario Usuario que se va a registar.
+     * @return true si se conecto con la BD y se Registro, throw si hubo algún tipo de Error.
+     */
     public boolean insertarUsuario(Usuario usuario) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "insert into usuario(nombre, apellido, cedula, telefono, contrasena, direccion, id_distrito, id_puesto)"
@@ -33,14 +38,19 @@ public class UsuarioDAO {
             stmt.setInt(8, usuario.getIdPuesto().getId());
             return stmt.executeUpdate() > 0;
         }
-//        catch(SQLException e) {
-//            throw  new MiError("La cédula del usuario ya fue registrada.");
-//        } 
+        catch(SQLException e) {
+            throw  new MiError("La cédula del usuario ya fue registrada.");
+        } 
         catch (Exception ex) {
             System.out.println(ex.getMessage());
             throw new MiError("No se pudo registrar el usuario, favor intente nuevamente.");
         }
     }
+    /**
+     * Método que se encarga de cargar los Usuario registrados en la BD segun esten activas o no.
+     * @param activo boolean activo que decide cuales usuarios retornar.
+     * @return ArrayList Con los usuarios registard0s.
+     */
     public ArrayList<Usuario> cargarUsuarios(boolean activo) {
         ArrayList<Usuario> usuarios = new ArrayList<>();
         try (Connection con = Conexion.getConexion()) {
@@ -57,6 +67,12 @@ public class UsuarioDAO {
         }
         return usuarios;
     }
+    /**
+     * Método para cargar los datos de un usuario en la entidad Usuario.
+     * @param rs ResultSet una sentencia que trae una consulta para BD.
+     * @return Usuario: datos del usuario seleccionada.
+     * @throws SQLException Controla los errores.
+     */
     private Usuario cargarUsuario(ResultSet rs) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("id"));
@@ -73,6 +89,11 @@ public class UsuarioDAO {
         usuario.setActivo(rs.getBoolean("activo"));
         return usuario;
     }
+    /**
+     * Método que selecciona un usuario por medio de un id.
+     * @param id que recibe un int con el id del usuario.
+     * @return Usuario: el usuario correspondiente al id.
+     */
     public Usuario seleccionarPorId(int id) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "select * from usuario where id = ?";
@@ -87,6 +108,11 @@ public class UsuarioDAO {
         }
         return null;
     }
+    /**
+     * Método que selecciona un usuario para modificar sus datos.
+     * @param usuario Usuario: el usuario que se desea modificar.
+     * @return true si se pudo modificar.
+     */
     public boolean modificarUsuario(Usuario usuario) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update usuario set nombre =?, apellido=?, cedula=?, telefono=?, "
@@ -109,6 +135,11 @@ public class UsuarioDAO {
             throw new MiError("No se pudo modificar el Usuario, favor intente nuevamente");
         }
     }
+    /**
+     * Método que selecciona un usuario para eliminarlo (desactivarla).
+     * @param usuario Usuario: el usuario que se desea eliminar.
+     * @return true si se pudo eliminar.
+     */
     public boolean eliminarUsuario(Usuario usuario) {
         try (Connection con = Conexion.getConexion()) {
             String sql = "update usuario set activo = false where id =?";
