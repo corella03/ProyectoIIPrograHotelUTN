@@ -19,15 +19,16 @@ public class DetalleReservacion {
     private Habitacion idHabitacion;
     private AgenciaDeViajes idAgencia;
     private Date fechaReservacion;
-    private Date fechaEntrada;
-    private Date fechaSalida;
+    private String fechaEntrada;
+    private String fechaSalida;
     private boolean desayuno;
     private int cantPersonas;
     public DetalleReservacion() {
     }
-    public DetalleReservacion(int id, Usuario idUsuario, Cliente idCliente, Habitacion idHabitacion,
-            AgenciaDeViajes idAgencia, Date fechaReservacion, Date fechaEntrada, Date fechaSalida,
-            boolean desayuno, int cantPersonas) {
+
+    public DetalleReservacion(int id, Usuario idUsuario, Cliente idCliente,
+            Habitacion idHabitacion, AgenciaDeViajes idAgencia, Date fechaReservacion, 
+            String fechaEntrada, String fechaSalida, boolean desayuno, int cantPersonas) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idCliente = idCliente;
@@ -39,6 +40,7 @@ public class DetalleReservacion {
         this.desayuno = desayuno;
         this.cantPersonas = cantPersonas;
     }
+    
     public int getId() {
         return id;
     }
@@ -75,16 +77,16 @@ public class DetalleReservacion {
     public void setFechaReservacion(Date fechaReservacion) {
         this.fechaReservacion = fechaReservacion;
     }
-    public Date getFechaEntrada() {
+    public String getFechaEntrada() {
         return fechaEntrada;
     }
-    public void setFechaEntrada(Date fechaEntrada) {
+    public void setFechaEntrada(String fechaEntrada) {
         this.fechaEntrada = fechaEntrada;
     }
-    public Date getFechaSalida() {
+    public String getFechaSalida() {
         return fechaSalida;
     }
-    public void setFechaSalida(Date fechaSalida) {
+    public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
     public boolean isDesayuno() {

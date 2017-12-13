@@ -25,14 +25,12 @@ public class DetalleReservacionBO {
         if (String.valueOf(detalle.getIdHabitacion().getId()).isEmpty()) {
             throw new MiError("Se Requiere que ingrese el id de la habitación.");
         }
-        if(detalle.getFechaReservacion() == null) {
-            throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
+        
+        if(detalle.getFechaEntrada().isEmpty()) {
+            throw new MiError("Se Requiere que ingrese la fecha de entrada.");
         }
-        if(detalle.getFechaEntrada() == null) {
-            throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
-        }
-        if(detalle.getFechaSalida() == null) {
-            throw new MiError("Se Requiere que ingrese la contraseña del usuario.");
+        if(detalle.getFechaSalida().isEmpty()){
+            throw new MiError("Se Requiere que ingrese la fecha de salida.");
         }
         
         if(detalle.getId() == 0) {

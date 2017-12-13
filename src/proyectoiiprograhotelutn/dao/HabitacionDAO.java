@@ -128,4 +128,18 @@ public class HabitacionDAO {
             throw new MiError("No se pudo Eliminar la habitación, favor intente nuevamente");
         }
     }
+    public Habitacion seleccionarCampos(int cupo) {
+        try (Connection con = Conexion.getConexion()) {
+            String sql = "select * from habitacion where cant_personas = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, cupo);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return cargarHabitacion(rs);
+            }
+        } catch (Exception ex) {
+            throw new MiError("Problemas al cargar la habitacion, favor intente nuevamente");
+        }
+        return null;
+    }
 }

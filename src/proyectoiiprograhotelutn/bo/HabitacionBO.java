@@ -55,4 +55,7 @@ public class HabitacionBO {
         }
         return habidao.seleccionarPorId(id);
     }
+    public Habitacion getCupo(int cupo) {
+        return habidao.seleccionarCampos(cupo);
+    }
 }

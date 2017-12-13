@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import proyectoiiprograhotelutn.dao.ClienteDAO;
 import proyectoiiprograhotelutn.entities.Cliente;
 import proyectoiiprograhotelutn.entities.MiError;
-import proyectoiiprograhotelutn.entities.Usuario;
 /**
  **
  ** @author Luis Alonso Corella Chaves

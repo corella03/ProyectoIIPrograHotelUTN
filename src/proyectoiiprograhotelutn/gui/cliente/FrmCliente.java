@@ -10,9 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.control.Spinner;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import proyectoiiprograhotelutn.bo.AgenciaDeViajesBO;
 import proyectoiiprograhotelutn.bo.ClienteBO;
+import proyectoiiprograhotelutn.bo.DetalleReservacionBO;
 import proyectoiiprograhotelutn.bo.HabitacionBO;
 import proyectoiiprograhotelutn.entities.AgenciaDeViajes;
 import proyectoiiprograhotelutn.entities.Cliente;
@@ -35,6 +39,11 @@ public class FrmCliente extends javax.swing.JDialog {
     private AgenciaDeViajes agencia;
     private DefaultComboBoxModel<Habitacion> habitaciones;
     private DefaultComboBoxModel<AgenciaDeViajes> agencias;
+    public FrmCliente(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        setLocationRelativeTo(null);
+    }
     public FrmCliente(java.awt.Frame parent, boolean modal,Usuario usu) {
         super(parent, modal);
         initComponents();
@@ -42,6 +51,7 @@ public class FrmCliente extends javax.swing.JDialog {
         btnRegresar.setContentAreaFilled(false);
         btnRegistrarResevacion.setContentAreaFilled(false);
         btnBuscar.setContentAreaFilled(false);
+        detalleReser = new DetalleReservacion();
         this.cliente = new Cliente();
         habitaciones = new DefaultComboBoxModel<>();
         cbxHabitacion.setModel(habitaciones);
@@ -88,6 +98,7 @@ public class FrmCliente extends javax.swing.JDialog {
             agencias.addElement(a);
         }
     }
+   
     public void registrarCliente() throws IOException{
         lblErrorReservaCliente.setText("");
         try {
@@ -117,9 +128,9 @@ public class FrmCliente extends javax.swing.JDialog {
     public void registrarReserva() throws IOException{
         lblErrorReservaCliente.setText("");
         try {
-            if(cliente == null){
+            if(cliente != null){
                 DetalleReservacion detalle = new DetalleReservacion();
-                detalle.setId(this.cliente.getId());
+                detalle.setId(this.detalleReser.getId());
                 detalle.setIdUsuario(usuario);
                 detalle.setIdCliente(cliente);
                 detalle.setIdHabitacion((Habitacion)cbxHabitacion.getSelectedItem());
@@ -130,30 +141,23 @@ public class FrmCliente extends javax.swing.JDialog {
                 }
                 java.util.Date d = new java.util.Date();  
                 detalle.setFechaReservacion(d);
-                detalle.setFechaEntrada(d);
                 String diaE = txtDiaEn.getText();
                 String mesE = txtMesEn.getText();
                 String añoE = txtAEn.getText();
                 String diaS = txtDiaSa.getText();
                 String mesS = txtMesSa.getText();
                 String añoS = txtAsa.getText();
-                DateFormat fechaEntrada = new SimpleDateFormat();
-                detalle.setFechaEntrada(fechaEntrada.parse(diaE+"/"+mesE+"/"+añoE));
-                DateFormat fechaSalida = new SimpleDateFormat();
-                detalle.setFechaSalida(fechaSalida.parse(diaS+"/"+mesS+"/"+añoS));
+                detalle.setFechaEntrada(diaE+"/"+mesE+"/"+añoE);
+                detalle.setFechaSalida(diaS+"/"+mesS+"/"+añoS);
                 if(cbxDesayuno.getSelectedIndex() == 0){
                     detalle.setDesayuno(true);
                 }else if(cbxDesayuno.getSelectedIndex() == 1){
                     detalle.setDesayuno(false);
                 }
                 detalle.setCantPersonas((Integer)spnCupo.getValue());
-               
-               
-                
-                ClienteBO clibo = new ClienteBO();
-                if (clibo.registrarUsuario(cli)) {
+                DetalleReservacionBO detallbo = new DetalleReservacionBO();
+                if (detallbo.registrarDetalleReservacion(detalle)) {
                     lblErrorReservaCliente.setText("Cliente registrado con éxito.");
-                    cliente =  cli;
                 } else {
                     lblErrorReservaCliente.setText("Intente nuevamente.");
                 }
@@ -348,12 +352,27 @@ public class FrmCliente extends javax.swing.JDialog {
         getContentPane().add(lblTelfonoCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 20, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, 50, -1));
 
         txtTelefono2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono2KeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 50, 40, -1));
 
         txtTelefono3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono3KeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 50, 40, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 10, 10));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 60, 10, 10));
@@ -444,6 +463,9 @@ public class FrmCliente extends javax.swing.JDialog {
             }
         });
         getContentPane().add(rdAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, -1));
+
+        spnCupo.setOpaque(false);
+        spnCupo.setRequestFocusEnabled(false);
         getContentPane().add(spnCupo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 70, 30));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgRegistros.jpg"))); // NOI18N
@@ -452,7 +474,11 @@ public class FrmCliente extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private void btnRegistrarResevacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarResevacionActionPerformed
-       
+        try {
+            registrarReserva();
+        } catch (IOException ex) {
+            lblErrorReservaCliente.setText("No se pudo regisrar la reservacion, intente de nuevo.");
+        }
     }//GEN-LAST:event_btnRegistrarResevacionActionPerformed
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         irAFrmRegistro();
@@ -480,6 +506,33 @@ public class FrmCliente extends javax.swing.JDialog {
             cbxAgencia.setVisible(false);
         }
     }//GEN-LAST:event_rdAgenciaStateChanged
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtTelefono2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono2KeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefono2KeyTyped
+
+    private void txtTelefono3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono3KeyTyped
+       char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefono3KeyTyped
     /**
      * @param args the command line arguments
      */

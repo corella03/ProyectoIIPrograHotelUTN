@@ -6,6 +6,7 @@
 package proyectoiiprograhotelutn.gui;
 
 import proyectoiiprograhotelutn.entities.Usuario;
+import proyectoiiprograhotelutn.gui.cliente.FrmCliente;
 
 /**
  **
@@ -28,7 +29,21 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         btnSalir.setContentAreaFilled(false);
         usuario = usu;
+        vista();
         System.out.println(usuario.getNombre() + " " + usuario.getCedula() );
+    }
+    public void vista(){
+        if(usuario.getIdPuesto().getId() != 1){
+            btnRegistar.setVisible(false);
+            btnModificar.setVisible(false);
+            btnElimniar.setVisible(false);
+            btnReservar.setVisible(true);
+        }else{
+            btnRegistar.setVisible(true);
+            btnModificar.setVisible(true);
+            btnElimniar.setVisible(true);
+            btnReservar.setVisible(false);
+        }
     }
     private void irAFrmLogin(){
         FrmLogin login = new FrmLogin();
@@ -50,6 +65,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         modificar.setVisible(true);
         dispose();
     }
+    public void irAFrmCliente(Usuario usu){
+        FrmCliente cli = new FrmCliente(this, true,usu);
+        cli.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,6 +82,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnElimniar = new javax.swing.JButton();
+        btnReservar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -116,6 +136,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(btnElimniar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 100, 90));
 
+        btnReservar.setBackground(new java.awt.Color(0, 153, 51));
+        btnReservar.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        btnReservar.setForeground(new java.awt.Color(255, 255, 255));
+        btnReservar.setText("Reservar");
+        btnReservar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnReservar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReservarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, -1, 90));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgFondoRegistro.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
@@ -133,6 +166,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void btnElimniarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElimniarActionPerformed
         irAFrmEliminar();
     }//GEN-LAST:event_btnElimniarActionPerformed
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+        irAFrmCliente(usuario);
+    }//GEN-LAST:event_btnReservarActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -170,6 +206,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnElimniar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnRegistar;
+    private javax.swing.JButton btnReservar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables

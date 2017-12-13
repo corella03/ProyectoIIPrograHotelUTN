@@ -36,7 +36,7 @@ public class FrmLogin extends javax.swing.JFrame {
             lblErrorLogin.setText("");
             LoginBO lbo = new LoginBO();
             
-            if (lbo.login(txtCedula.getText().trim().toLowerCase(), txtContra.getText().trim().toLowerCase())) {
+            if (lbo.login(txtCedula.getText().trim().toLowerCase(),(new String (txtContra.getPassword())))){
                 usuario = lbo.getUsuarioLogeado(txtCedula.getText().trim().toLowerCase());
                 irAMenuPrincipal(usuario);
             }else{
@@ -60,10 +60,10 @@ public class FrmLogin extends javax.swing.JFrame {
         jSlider1 = new javax.swing.JSlider();
         jPanel1 = new javax.swing.JPanel();
         txtCedula = new javax.swing.JTextField();
-        txtContra = new javax.swing.JTextField();
         btnIniciar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        txtContra = new javax.swing.JPasswordField();
         lblErrorLogin = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         lblImgLogin = new javax.swing.JLabel();
@@ -102,12 +102,12 @@ public class FrmLogin extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(102, 102, 102)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtContra)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(168, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -117,7 +117,7 @@ public class FrmLogin extends javax.swing.JFrame {
                         .addGap(166, 166, 166))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(143, 143, 143))))
+                        .addGap(151, 151, 151))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,11 +128,11 @@ public class FrmLogin extends javax.swing.JFrame {
                 .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtContra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 420, 260));
@@ -163,8 +163,8 @@ public class FrmLogin extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        irAMenuPrincipal(new Usuario());
-        //Login();
+        //irAMenuPrincipal(new Usuario());
+        Login();
     }//GEN-LAST:event_btnIniciarActionPerformed
     /**
      * @param args the command line arguments
@@ -209,6 +209,6 @@ public class FrmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblErrorLogin;
     private javax.swing.JLabel lblImgLogin;
     private javax.swing.JTextField txtCedula;
-    private javax.swing.JTextField txtContra;
+    private javax.swing.JPasswordField txtContra;
     // End of variables declaration//GEN-END:variables
 }

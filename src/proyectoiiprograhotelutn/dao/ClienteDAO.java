@@ -4,12 +4,17 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.dao;
+import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import proyectoiiprograhotelutn.entities.Cliente;
+import proyectoiiprograhotelutn.entities.Habitacion;
 import proyectoiiprograhotelutn.entities.MiError;
 
 /**
@@ -127,4 +132,5 @@ public class ClienteDAO {
         }
         return null;
     }
+    
 }

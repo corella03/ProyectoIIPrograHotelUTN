@@ -30,10 +30,8 @@ public class DetalleReservacionDAO {
             stmt.setInt(4, detalle.getIdAgencia().getId());
             java.sql.Date fechaReservacion = new java.sql.Date(detalle.getFechaReservacion().getTime());
             stmt.setDate(5, fechaReservacion);
-            java.sql.Date fechaEntrada = new java.sql.Date(detalle.getFechaEntrada().getTime());
-            stmt.setDate(6, fechaEntrada);
-            java.sql.Date fechaSalida = new java.sql.Date(detalle.getFechaSalida().getTime());
-            stmt.setDate(7, fechaSalida);
+            stmt.setString(6, detalle.getFechaEntrada());
+            stmt.setString(7, detalle.getFechaSalida());
             stmt.setBoolean(8, detalle.isDesayuno());
             stmt.setInt(9, detalle.getCantPersonas());
             return stmt.executeUpdate() > 0;
@@ -73,8 +71,8 @@ public class DetalleReservacionDAO {
         AgenciaDeViajesDAO agencia = new AgenciaDeViajesDAO();
         dellate.setIdAgencia(agencia.seleccionarPorId(rs.getInt("id_agencia_de_viajes")));
         dellate.setFechaReservacion(rs.getDate("fecha_reservacion"));
-        dellate.setFechaEntrada(rs.getDate("fecha_entrada"));
-        dellate.setFechaSalida(rs.getDate("fecha_salida"));
+        dellate.setFechaEntrada(rs.getString("fecha_entrada"));
+        dellate.setFechaSalida(rs.getString("fecha_salida"));
         dellate.setDesayuno(rs.getBoolean("desayuno"));
         dellate.setCantPersonas(rs.getInt("cant_personas"));
         return dellate;
@@ -106,10 +104,8 @@ public class DetalleReservacionDAO {
             stmt.setInt(4, detalle.getIdAgencia().getId());
             java.sql.Date fechaReservacion = new java.sql.Date(detalle.getFechaReservacion().getTime());
             stmt.setDate(5, fechaReservacion);
-            java.sql.Date fechaEntrada = new java.sql.Date(detalle.getFechaEntrada().getTime());
-            stmt.setDate(6, fechaEntrada);
-            java.sql.Date fechaSalida = new java.sql.Date(detalle.getFechaSalida().getTime());
-            stmt.setDate(7, fechaSalida);
+            stmt.setString(6, detalle.getFechaEntrada());
+            stmt.setString(7, detalle.getFechaSalida());
             stmt.setBoolean(8, detalle.isDesayuno());
             stmt.setInt(9, detalle.getCantPersonas());
             stmt.setInt(10, detalle.getId());

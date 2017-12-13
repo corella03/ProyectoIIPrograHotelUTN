@@ -6,6 +6,7 @@
 package proyectoiiprograhotelutn.gui.usuario;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import proyectoiiprograhotelutn.bo.CantonBO;
 import proyectoiiprograhotelutn.bo.DistritoBO;
 import proyectoiiprograhotelutn.bo.PaisBO;
@@ -146,8 +147,8 @@ public class FrmUsuario extends javax.swing.JDialog {
             UsuarioBO usubo = new UsuarioBO();
             if (usubo.registrarUsuario(usuario)) {
                 lblErrorUsuario.setText("Usuario registrado con éxito.");                
-//                super.getParent().setVisible(true);
-//                dispose();
+                super.getParent().setVisible(true);
+                dispose();
             } else {
                 lblErrorUsuario.setText("Intente nuevamente.");
             }
@@ -298,14 +299,29 @@ public class FrmUsuario extends javax.swing.JDialog {
         getContentPane().add(lblTelfonoAgencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
 
         txtTelefono.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefonoKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 50, -1));
         getContentPane().add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 120, 10, 10));
 
         txtTelefono2.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono2KeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 40, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 10, 10));
 
         txtTelefono3.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtTelefono3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTelefono3KeyTyped(evt);
+            }
+        });
         getContentPane().add(txtTelefono3, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 110, 40, -1));
 
         lblCedula.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -392,6 +408,33 @@ public class FrmUsuario extends javax.swing.JDialog {
     private void cbxProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvinciaActionPerformed
         cargarCantones(cbxProvincia.getItemCount());
     }//GEN-LAST:event_cbxProvinciaActionPerformed
+
+    private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefonoKeyTyped
+
+    private void txtTelefono2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono2KeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefono2KeyTyped
+
+    private void txtTelefono3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefono3KeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtTelefono3KeyTyped
     /**
      * @param args the command line arguments
      */
