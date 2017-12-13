@@ -18,6 +18,11 @@ public class DetalleReservacionBO {
     public DetalleReservacionBO() {
         detalledao = new DetalleReservacionDAO();
     }
+    /**
+     * Método para verificar datos de detalle de reservacion y enviarlo al registro de detalleReservaDAO.
+     * @param detalle DetalleReservacion que se va a verificar.
+     * @return true si los datos estan correctos.
+     */
     public boolean registrarDetalleReservacion(DetalleReservacion detalle) {
         if (String.valueOf(detalle.getIdUsuario().getId()).isEmpty()) {
             throw new MiError("Se Requiere que ingrese el id del Usuario.");
@@ -32,16 +37,24 @@ public class DetalleReservacionBO {
         if(detalle.getFechaSalida().isEmpty()){
             throw new MiError("Se Requiere que ingrese la fecha de salida.");
         }
-        
         if(detalle.getId() == 0) {
             return detalledao.insertarDetalle(detalle);
         } else {
             return detalledao.modificarDetalleReservacion(detalle);
         }
     }
+    /**
+     * Método para cargar los detalle de reservacion que vienen de la parte de DAO.
+     * @return DetalleReservacio: la lista de los detalles de reservacion.
+     */
     public ArrayList<DetalleReservacion> cargarDetalleReservacion(){
         return detalledao.cargarDetalleReservaciones();
     }
+    /**
+     * Recibe id de la interfaz para buscar el DetalleReservacion con dicho id.
+     * @param id int id del DetalleReservacion a buscar.
+     * @return DetalleReservacion encontrado.
+     */
     public DetalleReservacion getDetalleReservacion(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un cliente");

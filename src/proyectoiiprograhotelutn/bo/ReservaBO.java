@@ -18,8 +18,12 @@ public class ReservaBO {
     public ReservaBO() {
         reservadao = new ReservaDAO();
     }
+    /**
+     * Método para verificar datos de la reserva y enviarlo al registro de reservaDAO.
+     * @param reserva Reserva que se va a verificar.
+     * @return true si los datos estan correctos.
+     */
     public boolean registrarReserva(Reserva reserva) {
-        
         if(String.valueOf(reserva.getIdDetalleReservacion().getId()).isEmpty()) {
             throw new MiError("Se Requiere que ingrese el id del detalle de la reserva.");
         }
@@ -29,19 +33,37 @@ public class ReservaBO {
             return reservadao.modificarReserva(reserva);
         }
     }
+    /**
+     * Método para cargar las reservas que esten activas que vienen de la parte de DAO.
+     * @return Reserva: la lista de las reservas activas.
+     */
     public ArrayList<Reserva> cargarReservaActivos(){
         return reservadao.cargarReservas(true);
     }
+    /**
+     * Método para cargar las reservas que vienen de la parte de DAO.
+     * @return Reserva: la lista de las reservas.
+     */
     public ArrayList<Reserva> cargarReserva(){
         return reservadao.cargarReservas(false);
     }
+    /**
+     * Recibe id de la interfaz para buscar el reserva con dicho id.
+     * @param id int id de la reserva a buscar.
+     * @return Reserva encontrado.
+     */
     public Reserva getReserva(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar un usuario");
         }
         return reservadao.seleccionarPorId(id);
     }
-    public boolean elmininarReserva(Reserva usuario){
-        return reservadao.eliminarReserva(usuario);
+    /**
+     * Método para "eliminar" (desactiva) las reservas que estan en la parte de DAO.
+     * @param reserva Reserva se desea elimininar.
+     * @return Reserva desactivado.
+     */
+    public boolean elmininarReserva(Reserva reserva){
+        return reservadao.eliminarReserva(reserva);
     }
 }

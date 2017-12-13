@@ -17,6 +17,12 @@ public class LoginBO {
     public LoginBO() {
         ldao = new LoginDAO();
     }
+    /**
+     * Método para verficar datos al loguearse.
+     * @param cedula String cedula del usuario.
+     * @param contra String contraseña del usuario
+     * @return true si los datos estan correctos.
+     */
     public boolean login(String cedula, String contra) {
         if (cedula.isEmpty()) {
             throw new MiError("Favor digite la cédula del cliente");
@@ -25,9 +31,13 @@ public class LoginBO {
             throw new MiError("Favor digite la contraseña del usuario");
         }
         contra = encriptar(contra);
-        //usuario.setPassword(encriptar(usuario.getPassword()));
         return ldao.autentificar(cedula, contra);
     }
+    /**
+     * Método que se utiliza para encritar la contraseña ingresada.
+     * @param contra String con la contraseña.
+     * @return true si los datos se pudieron encryptar.
+     */
     private String encriptar(String contra) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
@@ -41,6 +51,11 @@ public class LoginBO {
             throw new MiError("Favor digitar una nueva contraseña");
         }
     }
+    /**
+     *Método para obterner el usuario con el que se loguea.
+     * @param cedula String cedula del usuario a loguearse.
+     * @return Usuario logueado.
+     */
     public Usuario getUsuarioLogeado(String cedula) {
         return ldao.seleccionarLogeado(cedula);
     }

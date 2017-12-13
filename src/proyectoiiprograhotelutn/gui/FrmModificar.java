@@ -5,9 +5,11 @@
  */
 package proyectoiiprograhotelutn.gui;
 
+import proyectoiiprograhotelutn.entities.Usuario;
 import proyectoiiprograhotelutn.gui.tiposhabitacion.FrmCargarTiposHabitacion;
 import proyectoiiprograhotelutn.gui.puesto.FrmCargarPuestos;
 import proyectoiiprograhotelutn.gui.agenciadeviajes.FrmCargarAgencias;
+import proyectoiiprograhotelutn.gui.cliente.FrmCliente;
 import proyectoiiprograhotelutn.gui.habitacion.FrmCargarHabitaciones;
 import proyectoiiprograhotelutn.gui.usuario.FrmCargarUsuarios;
 
@@ -50,6 +52,10 @@ public class FrmModificar extends javax.swing.JFrame {
         principal.setVisible(true);
         dispose();
     } 
+    public void irAFrmCliente(){
+        FrmCliente cli = new FrmCliente(this, true);
+        cli.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,9 +184,8 @@ public class FrmModificar extends javax.swing.JFrame {
     private void btnHabitacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHabitacionesActionPerformed
         irAModificarEliminarHabitacion(1);
     }//GEN-LAST:event_btnHabitacionesActionPerformed
-
     private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-        // TODO add your handling code here:
+       irAFrmCliente();
     }//GEN-LAST:event_btnClienteActionPerformed
     /**
      * @param args the command line arguments

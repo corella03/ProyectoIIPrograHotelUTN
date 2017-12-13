@@ -5,13 +5,7 @@
  */
 package proyectoiiprograhotelutn.gui.cliente;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.geometry.NodeOrientation;
-import javafx.scene.control.Spinner;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import proyectoiiprograhotelutn.bo.AgenciaDeViajesBO;
@@ -113,7 +107,7 @@ public class FrmCliente extends javax.swing.JDialog {
                 + txtTelefono3.getText().trim();
             cli.setTelefono(Integer.parseInt(telefono));
             ClienteBO clibo = new ClienteBO();
-            if (clibo.registrarUsuario(cli)) {
+            if (clibo.registrarCliente(cli)) {
                 lblErrorReservaCliente.setText("Cliente registrado con éxito.");
                 cliente =  cli;
             } else {
@@ -411,6 +405,11 @@ public class FrmCliente extends javax.swing.JDialog {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 260, 110));
 
         txtDiaSa.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtDiaSa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDiaSaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtDiaSa, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 40, -1));
 
         lblFechaSalida.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -419,12 +418,27 @@ public class FrmCliente extends javax.swing.JDialog {
         getContentPane().add(lblFechaSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 280, -1, -1));
 
         txtMesSa.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtMesSa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMesSaKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtMesSa, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 320, 40, -1));
 
         txtAsa.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        getContentPane().add(txtAsa, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 40, -1));
+        txtAsa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAsaKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtAsa, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 320, 50, -1));
 
         txtDiaEn.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtDiaEn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDiaEnKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtDiaEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, 40, -1));
 
         lblFechaEntrada.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -433,10 +447,20 @@ public class FrmCliente extends javax.swing.JDialog {
         getContentPane().add(lblFechaEntrada, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 280, -1, -1));
 
         txtMesEn.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        txtMesEn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMesEnKeyTyped(evt);
+            }
+        });
         getContentPane().add(txtMesEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 320, 40, -1));
 
         txtAEn.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        getContentPane().add(txtAEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 40, -1));
+        txtAEn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAEnKeyTyped(evt);
+            }
+        });
+        getContentPane().add(txtAEn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 320, 50, -1));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectoiiprograhotelutn/img/imgBuscar.png"))); // NOI18N
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -533,6 +557,60 @@ public class FrmCliente extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ingrese solo Números");
         }
     }//GEN-LAST:event_txtTelefono3KeyTyped
+
+    private void txtDiaEnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaEnKeyTyped
+       char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtDiaEnKeyTyped
+
+    private void txtMesEnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMesEnKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtMesEnKeyTyped
+
+    private void txtAEnKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAEnKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtAEnKeyTyped
+
+    private void txtDiaSaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiaSaKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtDiaSaKeyTyped
+
+    private void txtMesSaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMesSaKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtMesSaKeyTyped
+
+    private void txtAsaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAsaKeyTyped
+        char numero = evt.getKeyChar();
+        if (Character.isLetter(numero)) {
+            getToolkit().beep();
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Ingrese solo Números");
+        }
+    }//GEN-LAST:event_txtAsaKeyTyped
     /**
      * @param args the command line arguments
      */

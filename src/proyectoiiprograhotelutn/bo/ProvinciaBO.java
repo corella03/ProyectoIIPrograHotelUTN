@@ -4,13 +4,10 @@
  * and open the template in the editor.
  */
 package proyectoiiprograhotelutn.bo;
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import proyectoiiprograhotelutn.dao.ProvinciaDAO;
 import proyectoiiprograhotelutn.entities.MiError;
 import proyectoiiprograhotelutn.entities.Provincia;
-
 /**
  **
  ** @author Luis Alonso Corella Chaves
@@ -21,6 +18,11 @@ public class ProvinciaBO {
     public ProvinciaBO() {
         provinciadao = new ProvinciaDAO();
     }
+    /**
+     * Método para verificar datos de las provincias y enviarlo al registro de provinciasDAO.
+     * @param provincia Provincia que se va a verificar.
+     * @return true si los datos estan correctos.
+     */
     public boolean registrarProvincia(Provincia provincia) {
         if (provincia.getNombre().isEmpty()) {
             throw new MiError("Se Requiere que ingrese el nombre de la provincia.");
@@ -34,12 +36,26 @@ public class ProvinciaBO {
             return provinciadao.modificarProvincia(provincia);
         }
     }
+    /**
+     * Método para cargar los provincias que vienen de la parte de DAO
+     * @return Provincia: la lista de los provincias.
+     */
     public ArrayList<Provincia> cargarProvincias() {
         return provinciadao.cargarProvincias();
     }
+    /**
+     * Método para cargar las provincias de cada pais, vienen de la parte de DAO.
+     * @param id int del id de la pais a la que pertenece la provincia.
+     * @return Provincia: lista de provincias de dicha pais.
+     */
     public ArrayList<Provincia> cargarProvinciasDePais(int id) {
         return provinciadao.cargarProvinciaDelPais(id);
     }
+    /**
+     * Recibe id de la interfaz para buscar la provincia con dicho id.
+     * @param id int id de la Provincia a buscar.
+     * @return Provincia encontrada.
+     */
     public Provincia getProvincia(int id) {
         if (id <= 0) {
             throw new MiError("Favor seleccionar una Provincia");
